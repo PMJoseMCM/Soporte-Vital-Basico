@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signos Vitales — Módulo TUM B | VIVE</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2330;
+    --border: #21262d;
+    --teal: #2dd4bf;
+    --teal-dim: #1a7a6e;
+    --teal-glow: rgba(45,212,191,0.12);
+    --amber: #f59e0b;
+    --red: #f87171;
+    --green: #4ade80;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --text-dim: #6e7681;
+    --radius: 10px;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-display: 'DM Serif Display', serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,17,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--teal);
+    letter-spacing: 0.02em;
+  }
+  .nav-brand span { color: var(--text-muted); font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; margin-left: 0.5rem; }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.65rem;
+    border-radius: 6px;
+    transition: all .2s;
+    letter-spacing: 0.02em;
+  }
+  .nav-links a:hover { color: var(--teal); background: var(--teal-glow); }
+
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: fixed;
+      top: 56px; left: 0; right: 0;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem 1.5rem;
+      gap: 0.15rem;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 0.9rem; width: 100%; padding: 0.5rem 0.75rem; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #0f1f1e 60%, #0d1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 2rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(45,212,191,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: var(--teal-glow);
+    border: 1px solid var(--teal-dim);
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 em { color: var(--teal); font-style: italic; }
+  .hero p {
+    color: var(--text-muted);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    font-size: 0.95rem;
+  }
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  .pill {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+  .pill-teal { color: var(--teal); border-color: var(--teal-dim); background: rgba(45,212,191,0.06); }
+  .pill-amber { color: var(--amber); border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+  .pill-blue { color: var(--blue); border-color: rgba(96,165,250,0.4); background: rgba(96,165,250,0.06); }
+
+  /* ── CONTAINER ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ── SECTION ── */
+  .section {
+    padding: 3.5rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .section-number {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--teal);
+    line-height: 1;
+    min-width: 2rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .section-subtitle {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.15rem;
+  }
+
+  /* ── SIGNO CARD ── */
+  .sv-grid {
+ align-items: start; /* evita que las tarjetas vecinas se estiren cuando una se expande */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 1.25rem;
+  }
+  @media (max-width: 500px) { .sv-grid { grid-template-columns: 1fr; } }
+
+  .sv-card {
+ align-self: start; /* mantiene altura propia dentro del grid */
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .sv-card:hover {
+    border-color: var(--teal-dim);
+    box-shadow: 0 0 0 1px var(--teal-dim), 0 4px 20px rgba(45,212,191,0.07);
+  }
+  .sv-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  .sv-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+    width: 2.2rem;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .sv-card-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--text);
+    flex: 1;
+  }
+  .sv-card-header h3 small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .sv-chevron {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    transition: transform .3s;
+    flex-shrink: 0;
+  }
+  .sv-card.open .sv-chevron { transform: rotate(180deg); }
+
+  .sv-body { display: none; padding: 1.25rem; }
+  .sv-card.open .sv-body { display: block; }
+
+  .sv-def {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.1rem;
+    line-height: 1.65;
+  }
+
+  .sv-values-title {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.6rem;
+  }
+
+  .val-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.45rem 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+  }
+  .val-row:last-child { margin-bottom: 0; }
+  .val-label { color: var(--text-muted); }
+  .val-value { font-weight: 600; font-family: monospace; font-size: 0.9rem; }
+  .val-normal { background: rgba(74,222,128,0.07); }
+  .val-normal .val-value { color: var(--green); }
+  .val-warn { background: rgba(245,158,11,0.07); }
+  .val-warn .val-value { color: var(--amber); }
+  .val-danger { background: rgba(248,113,113,0.07); }
+  .val-danger .val-value { color: var(--red); }
+  .val-info { background: rgba(96,165,250,0.07); }
+  .val-info .val-value { color: var(--blue); }
+
+  .sv-note {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(45,212,191,0.05);
+    border-left: 3px solid var(--teal-dim);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .sv-note strong { color: var(--teal); }
+
+  /* ── TABLA RESUMEN ── */
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+  thead tr { background: var(--bg3); }
+  thead th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg3); }
+  tbody td { padding: 0.7rem 1rem; color: var(--text-muted); vertical-align: middle; }
+  tbody td:first-child { color: var(--text); font-weight: 600; }
+  .t-normal { color: var(--green) !important; font-weight: 600; font-family: monospace; }
+  .t-alert { color: var(--amber) !important; font-weight: 600; font-family: monospace; }
+  .t-crit { color: var(--red) !important; font-weight: 600; font-family: monospace; }
+
+  /* ── TÉCNICA ── */
+  .tecnica-grid {
+ align-items: start; /* evita estiramiento de tarjetas vecinas */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.25rem;
+  }
+  @media (max-width: 500px) { .tecnica-grid { grid-template-columns: 1fr; } }
+
+  .tecnica-card {
+ align-self: start; /* mantiene altura propia dentro del grid */
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .tecnica-header {
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .tecnica-header h4 {
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex: 1;
+    color: var(--text);
+  }
+  .tecnica-chevron { color: var(--text-dim); font-size: 0.7rem; transition: transform .3s; }
+  .tecnica-card.open .tecnica-chevron { transform: rotate(180deg); }
+  .tecnica-body { display: none; padding: 1.1rem; }
+  .tecnica-card.open .tecnica-body { display: block; }
+
+  .steps { list-style: none; counter-reset: step-counter; }
+  .steps li {
+    counter-increment: step-counter;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before {
+    content: counter(step-counter);
+    min-width: 1.5rem;
+    height: 1.5rem;
+    background: var(--teal-glow);
+    border: 1px solid var(--teal-dim);
+    color: var(--teal);
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  /* ── ERRORES ── */
+  .errores-grid {
+ align-items: start; /* evita estiramiento de items vecinos */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1rem;
+  }
+  @media (max-width: 500px) { .errores-grid { grid-template-columns: 1fr; } }
+
+  .error-item {
+ align-self: start; /* mantiene altura propia dentro del grid */
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 0.9rem 1.1rem;
+  }
+  .error-item h5 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.35rem;
+  }
+  .error-item p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+  .error-item .fix {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--green);
+    display: flex;
+    gap: 0.4rem;
+    align-items: flex-start;
+  }
+  .error-item .fix::before { content: '✓'; flex-shrink: 0; }
+
+  /* ── AUTOEVALUACIÓN ── */
+  #quiz-form { display: flex; flex-direction: column; gap: 1.75rem; }
+
+  .q-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+  }
+  .q-text {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 1rem;
+    line-height: 1.55;
+  }
+  .q-num {
+    font-family: var(--font-display);
+    color: var(--teal);
+    margin-right: 0.4rem;
+  }
+  .q-opts { display: flex; flex-direction: column; gap: 0.5rem; }
+  .q-opt {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all .2s;
+    font-size: 0.86rem;
+    color: var(--text-muted);
+  }
+  .q-opt:hover { border-color: var(--teal-dim); color: var(--text); background: var(--teal-glow); }
+  .q-opt input[type=radio] { accent-color: var(--teal); }
+  .q-opt.correct { border-color: var(--green); background: rgba(74,222,128,0.07); color: var(--green); }
+  .q-opt.incorrect { border-color: var(--red); background: rgba(248,113,113,0.07); color: var(--red); }
+  .q-explanation {
+    display: none;
+    margin-top: 0.85rem;
+    padding: 0.7rem 1rem;
+    background: rgba(45,212,191,0.05);
+    border-left: 3px solid var(--teal-dim);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .q-explanation.show { display: block; }
+  .q-explanation strong { color: var(--teal); }
+
+  .quiz-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.7rem 1.6rem;
+    border-radius: 7px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all .2s;
+    letter-spacing: 0.03em;
+  }
+  .btn-teal { background: var(--teal); color: #0d1117; }
+  .btn-teal:hover { background: #5eead4; }
+  .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--text-dim); color: var(--text); }
+
+  .quiz-result {
+    display: none;
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .quiz-result.show { display: block; }
+  .result-score {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .result-msg { font-size: 0.9rem; color: var(--text-muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    line-height: 1.8;
+  }
+  footer strong { color: var(--text-muted); }
+  footer a { color: var(--teal); text-decoration: none; }
+
+  /* ── REFS ── */
+  .refs-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .refs-list li {
+    padding: 0.65rem 1rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .refs-list li::before { content: '›'; color: var(--teal); margin-right: 0.5rem; font-weight: 700; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+  /* ── PUPIL VISUAL ── */
+  .pupil-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .pupil-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .pupil-circle {
+    border-radius: 50%;
+    background: #f0f0f0;
+    border: 2px solid #9ca3af;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
+  }
+  .pupil-inner {
+    border-radius: 50%;
+    background: #0a0a0a;
+  }
+  .pupil-label { font-size: 0.7rem; color: var(--text-dim); text-align: center; letter-spacing: 0.04em; }
+</style>
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('IhyLGxMD5wHfOWxU8');</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">VIVE <span>TUM Básico — Signos Vitales</span></div>
+  <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="nav-links">
+    <a href="#signos">Signos Vitales</a>
+    <a href="#tabla">Tabla Resumen</a>
+    <a href="#tecnica">Técnica</a>
+    <a href="#errores">Errores Frecuentes</a>
+    <a href="#autoevaluacion">Autoevaluación</a>
+    <a href="#referencias">Referencias</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Módulo Educativo · TUM Básico</div>
+  <h1>Signos <em>Vitales</em><br>en el Entorno Prehospitalario</h1>
+  <p>Parámetros fisiológicos medibles que reflejan el estado hemodinámico, ventilatorio y neurológico del paciente. Tu primera herramienta de evaluación en campo.</p>
+  <div class="hero-pills">
+    <span class="pill pill-teal">TA · Pulso · FC · FR</span>
+    <span class="pill pill-amber">Temperatura · Glucosa · Pupilas</span>
+    <span class="pill pill-blue">Instituto Educativo VIVE</span>
+  </div>
+</section>
+
+<!-- SECCIÓN 1 — SIGNOS VITALES -->
+<div class="container">
+<section class="section" id="signos">
+  <div class="section-header">
+    <div>
+      <div class="section-number">01</div>
+    </div>
+    <div>
+      <div class="section-title">Signos Vitales</div>
+      <div class="section-subtitle">Definición, valores y significado clínico</div>
+    </div>
+  </div>
+
+  <div class="sv-grid">
+
+    <!-- TENSIÓN ARTERIAL -->
+    <div class="sv-card" id="card-ta">
+      <div class="sv-card-header" onclick="toggleCard('card-ta')">
+        <div class="sv-icon">🩸</div>
+        <h3>Tensión Arterial<small>TA / PA · mmHg</small></h3>
+        <span class="sv-chevron">▼</span>
+      </div>
+      <div class="sv-body">
+        <p class="sv-def">Fuerza que ejerce la sangre sobre las paredes de las arterias durante el ciclo cardíaco. Se expresa en dos valores: la <strong>presión sistólica</strong> (contracción del ventrículo izquierdo) y la <strong>presión diastólica</strong> (relajación ventricular, resistencia vascular periférica). La diferencia entre ambas es la <em>presión de pulso</em>.</p>
+        <div class="sv-values-title">Valores de referencia — Adulto</div>
+        <div class="val-row val-normal"><span class="val-label">Normal</span><span class="val-value">90–119 / 60–79 mmHg</span></div>
+        <div class="val-row val-info"><span class="val-label">Elevada</span><span class="val-value">120–129 / &lt;80 mmHg</span></div>
+        <div class="val-row val-warn"><span class="val-label">HTA estadio 1</span><span class="val-value">130–139 / 80–89 mmHg</span></div>
+        <div class="val-row val-danger"><span class="val-label">HTA estadio 2 / Crisis</span><span class="val-value">≥140 / ≥90 mmHg</span></div>
+        <div class="val-row val-danger"><span class="val-label">Hipotensión</span><span class="val-value">&lt;90 / &lt;60 mmHg</span></div>
+        <div class="sv-note"><strong>Prehospitalario:</strong> La hipotensión en trauma es un signo de alerta de choque descompensado. Meta de reanimación: TAS ≥80 mmHg en trauma penetrante, ≥90 en TCE severo (BTF, 2023).</div>
+      </div>
+    </div>
+
+    <!-- PULSO -->
+    <div class="sv-card" id="card-pulso">
+      <div class="sv-card-header" onclick="toggleCard('card-pulso')">
+        <div class="sv-icon">💓</div>
+        <h3>Pulso<small>Frecuencia, ritmo y amplitud</small></h3>
+        <span class="sv-chevron">▼</span>
+      </div>
+      <div class="sv-body">
+        <p class="sv-def">Onda de presión que se palpa en una arteria periférica con cada sístole ventricular. Se evalúan tres cualidades: <strong>frecuencia</strong> (latidos por minuto), <strong>ritmo</strong> (regular o irregular) y <strong>amplitud</strong> (lleno/fuerte, débil o filiforme). Un pulso periférico débil o ausente puede indicar hipoperfusión distal.</p>
+        <div class="sv-values-title">Frecuencia de pulso — Adulto</div>
+        <div class="val-row val-warn"><span class="val-label">Bradicardia</span><span class="val-value">&lt;60 lpm</span></div>
+        <div class="val-row val-normal"><span class="val-label">Normal</span><span class="val-value">60–100 lpm</span></div>
+        <div class="val-row val-warn"><span class="val-label">Taquicardia leve</span><span class="val-value">101–120 lpm</span></div>
+        <div class="val-row val-danger"><span class="val-label">Taquicardia severa</span><span class="val-value">&gt;120 lpm</span></div>
+        <div class="sv-note"><strong>Puntos de palpación:</strong> Radial (primera elección), carotídeo (inconsciente), femoral (politrauma), poplíteo/pedio (extremidades). La <em>amplitud</em> es tan importante como la frecuencia: un pulso rápido y filiforme sugiere choque.</div>
+      </div>
+    </div>
+
+    <!-- FC -->
+    <div class="sv-card" id="card-fc">
+      <div class="sv-card-header" onclick="toggleCard('card-fc')">
+        <div class="sv-icon">❤️</div>
+        <h3>Frecuencia Cardíaca<small>FC · lpm</small></h3>
+        <span class="sv-chevron">▼</span>
+      </div>
+      <div class="sv-body">
+        <p class="sv-def">Número de contracciones ventriculares por minuto. En condiciones normales equivale a la frecuencia de pulso; sin embargo, en presencia de arritmias (p. ej. fibrilación auricular) puede haber <em>déficit de pulso</em>: la FC medida con estetoscopio supera al pulso palpable. En prehospitalario, la FC se obtiene principalmente por palpación de pulso o monitor cardíaco si está disponible.</p>
+        <div class="sv-values-title">Rangos por grupo de edad</div>
+        <div class="val-row val-info"><span class="val-label">Lactante (&lt;1 año)</span><span class="val-value">100–160 lpm</span></div>
+        <div class="val-row val-info"><span class="val-label">Preescolar (1–5 años)</span><span class="val-value">80–130 lpm</span></div>
+        <div class="val-row val-info"><span class="val-label">Escolar (6–12 años)</span><span class="val-value">70–110 lpm</span></div>
+        <div class="val-row val-normal"><span class="val-label">Adulto</span><span class="val-value">60–100 lpm</span></div>
+        <div class="val-row val-info"><span class="val-label">Adulto mayor (&gt;65 años)</span><span class="val-value">60–100 lpm</span></div>
+        <div class="sv-note"><strong>Contexto clínico:</strong> La taquicardia es la primera respuesta compensadora al choque hipovolémico. La bradicardia en TCE severo acompañada de HTA e irregularidad respiratoria forma la <em>Tríada de Cushing</em>, signo de herniación cerebral inminente.</div>
+      </div>
+    </div>
+
+    <!-- FR -->
+    <div class="sv-card" id="card-fr">
+      <div class="sv-card-header" onclick="toggleCard('card-fr')">
+        <div class="sv-icon">🫁</div>
+        <h3>Frecuencia Respiratoria<small>FR · rpm</small></h3>
+        <span class="sv-chevron">▼</span>
+      </div>
+      <div class="sv-body">
+        <p class="sv-def">Número de ciclos respiratorios completos (inspiración + espiración) por minuto. Se evalúa también la <strong>calidad</strong> (profundidad, esfuerzo, uso de músculos accesorios) y el <strong>ritmo</strong>. Es el signo vital que con más frecuencia se omite o se estima incorrectamente. Se mide observando el movimiento torácico sin informar al paciente.</p>
+        <div class="sv-values-title">Valores de referencia</div>
+        <div class="val-row val-danger"><span class="val-label">Bradipnea</span><span class="val-value">&lt;12 rpm</span></div>
+        <div class="val-row val-normal"><span class="val-label">Normal adulto</span><span class="val-value">12–20 rpm</span></div>
+        <div class="val-row val-warn"><span class="val-label">Taquipnea leve</span><span class="val-value">21–30 rpm</span></div>
+        <div class="val-row val-danger"><span class="val-label">Taquipnea severa</span><span class="val-value">&gt;30 rpm</span></div>
+        <div class="sv-note"><strong>Prehospitalario:</strong> FR &lt;10 o &gt;29 es criterio de activación de trauma mayor (START). Una FR &lt;8 o respiración agónica requiere ventilación asistida con BVM. No informes al paciente que estás contando: alter la FR conscientemente.</div>
+      </div>
+    </div>
+
+    <!-- TEMPERATURA -->
+    <div class="sv-card" id="card-temp">
+      <div class="sv-card-header" onclick="toggleCard('card-temp')">
+        <div class="sv-icon">🌡️</div>
+        <h3>Temperatura<small>T° · °C</small></h3>
+        <span class="sv-chevron">▼</span>
+      </div>
+      <div class="sv-body">
+        <p class="sv-def">Refleja el equilibrio entre producción y pérdida de calor corporal. En prehospitalario se obtiene preferentemente por vía <strong>axilar</strong> (práctica, aunque 0.5°C inferior a la central) o <strong>timpánica</strong> (rápida y confiable). La temperatura cutánea también aporta información valiosa sobre perfusión periférica.</p>
+        <div class="sv-values-title">Clasificación clínica</div>
+        <div class="val-row val-danger"><span class="val-label">Hipotermia severa</span><span class="val-value">&lt;30°C</span></div>
+        <div class="val-row val-warn"><span class="val-label">Hipotermia moderada</span><span class="val-value">30–34°C</span></div>
+        <div class="val-row val-info"><span class="val-label">Hipotermia leve</span><span class="val-value">34–36°C</span></div>
+        <div class="val-row val-normal"><span class="val-label">Normotermia</span><span class="val-value">36–37.5°C</span></div>
+        <div class="val-row val-warn"><span class="val-label">Febrícula</span><span class="val-value">37.6–38°C</span></div>
+        <div class="val-row val-warn"><span class="val-label">Fiebre</span><span class="val-value">38.1–41°C</span></div>
+        <div class="val-row val-danger"><span class="val-label">Hipertermia / Golpe de calor</span><span class="val-value">&gt;41°C</span></div>
+        <div class="sv-note"><strong>Triada letal del trauma:</strong> Hipotermia + coagulopatía + acidosis. La hipotermia en el paciente traumatizado agrava el sangrado al alterar la cascada de coagulación. Protege al paciente del frío desde el primer contacto.</div>
+      </div>
+    </div>
+
+    <!-- GLUCOSA CAPILAR -->
+    <div class="sv-card" id="card-gluco">
+      <div class="sv-card-header" onclick="toggleCard('card-gluco')">
+        <div class="sv-icon">🩸</div>
+        <h3>Glucosa Capilar<small>Glucemia · mg/dL</small></h3>
+        <span class="sv-chevron">▼</span>
+      </div>
+      <div class="sv-body">
+        <p class="sv-def">Concentración de glucosa en sangre capilar, medida con glucómetro. Es esencial en todo paciente con alteración del estado de consciencia (AEC), convulsiones, o comportamiento inusual. Una causa frecuente y reversible de AEC es la <strong>hipoglucemia</strong>, corregible en campo si el protocolo lo permite.</p>
+        <div class="sv-values-title">Valores de referencia</div>
+        <div class="val-row val-danger"><span class="val-label">Hipoglucemia severa</span><span class="val-value">&lt;54 mg/dL</span></div>
+        <div class="val-row val-warn"><span class="val-label">Hipoglucemia leve</span><span class="val-value">54–70 mg/dL</span></div>
+        <div class="val-row val-normal"><span class="val-label">Normal (ayuno)</span><span class="val-value">70–100 mg/dL</span></div>
+        <div class="val-row val-normal"><span class="val-label">Normal (posprandial 2h)</span><span class="val-value">&lt;140 mg/dL</span></div>
+        <div class="val-row val-warn"><span class="val-label">Prediabetes (ayuno)</span><span class="val-value">100–125 mg/dL</span></div>
+        <div class="val-row val-danger"><span class="val-label">Hiperglucemia</span><span class="val-value">&gt;180 mg/dL</span></div>
+        <div class="val-row val-danger"><span class="val-label">Crisis hiperg. / CAD</span><span class="val-value">&gt;250 mg/dL</span></div>
+        <div class="sv-note"><strong>Mnemotecnia AEIOU-TIPS:</strong> Ante cualquier AEC, la glucosa capilar descarta o confirma una causa metabólica tratable. Equipo necesario: glucómetro, lanceta, tiras reactivas, guantes.</div>
+      </div>
+    </div>
+
+    <!-- PUPILAS -->
+    <div class="sv-card" id="card-pupilas" style="grid-column: 1 / -1;">
+      <div class="sv-card-header" onclick="toggleCard('card-pupilas')">
+        <div class="sv-icon">👁️</div>
+        <h3>Pupilas<small>Tamaño, simetría y reactividad a la luz</small></h3>
+        <span class="sv-chevron">▼</span>
+      </div>
+      <div class="sv-body">
+        <p class="sv-def">Evaluación del reflejo fotomotor y del estado pupilar. Se examina con linterna directa en cada ojo, observando tamaño (<strong>normal: 2–5 mm</strong>), simetría (isocoria vs. anisocoria) y respuesta a la luz (reactivas, lentas, fijas). Refleja la integridad del sistema nervioso autónomo y, en trauma, el estado de presión intracraneal.</p>
+        <div class="sv-values-title">Hallazgos y significado clínico</div>
+        <div class="val-row val-normal"><span class="val-label">Isocóricas y reactivas (2–5 mm)</span><span class="val-value">Normal</span></div>
+        <div class="val-row val-warn"><span class="val-label">Midriasis bilateral reactiva</span><span class="val-value">Simpaticomimético / estrés</span></div>
+        <div class="val-row val-danger"><span class="val-label">Midriasis bilateral fija</span><span class="val-value">Paro cardíaco / hipoxia severa</span></div>
+        <div class="val-row val-warn"><span class="val-label">Miosis bilateral puntiforme</span><span class="val-value">Opioides / organofosfatos</span></div>
+        <div class="val-row val-danger"><span class="val-label">Anisocoria + midriasis unilateral fija</span><span class="val-value">Herniación uncal (TCE)</span></div>
+        <div class="val-row val-info"><span class="val-label">Anisocoria fisiológica (&lt;1 mm)</span><span class="val-value">Variante normal (20% población)</span></div>
+
+        <!-- Visualización de pupilas -->
+        <div style="margin-top:1.25rem;">
+          <div class="sv-values-title">Representación visual de tamaño</div>
+          <div class="pupil-examples">
+            <div class="pupil-item">
+              <div class="pupil-circle" style="width:36px;height:36px;">
+                <div class="pupil-inner" style="width:8px;height:8px;"></div>
+              </div>
+              <span class="pupil-label">Miosis<br>1–2 mm</span>
+            </div>
+            <div class="pupil-item">
+              <div class="pupil-circle" style="width:36px;height:36px;">
+                <div class="pupil-inner" style="width:14px;height:14px;"></div>
+              </div>
+              <span class="pupil-label">Normal<br>3 mm</span>
+            </div>
+            <div class="pupil-item">
+              <div class="pupil-circle" style="width:36px;height:36px;">
+                <div class="pupil-inner" style="width:20px;height:20px;"></div>
+              </div>
+              <span class="pupil-label">Normal<br>4–5 mm</span>
+            </div>
+            <div class="pupil-item">
+              <div class="pupil-circle" style="width:36px;height:36px;">
+                <div class="pupil-inner" style="width:26px;height:26px;"></div>
+              </div>
+              <span class="pupil-label">Midriasis<br>6–7 mm</span>
+            </div>
+            <div class="pupil-item">
+              <div class="pupil-circle" style="width:36px;height:36px;">
+                <div class="pupil-inner" style="width:32px;height:32px;"></div>
+              </div>
+              <span class="pupil-label">Midriasis<br>máxima ≥8 mm</span>
+            </div>
+            <div class="pupil-item" style="margin-left:1.5rem;">
+              <div style="display:flex;align-items:center;gap:0.5rem;">
+                <div class="pupil-circle" style="width:36px;height:36px;">
+                  <div class="pupil-inner" style="width:14px;height:14px;"></div>
+                </div>
+                <div class="pupil-circle" style="width:36px;height:36px;">
+                  <div class="pupil-inner" style="width:26px;height:26px;"></div>
+                </div>
+              </div>
+              <span class="pupil-label">Anisocoria<br>Asimétrica</span>
+            </div>
+          </div>
+        </div>
+        <div class="sv-note"><strong>Técnica:</strong> Evalúa en penumbra con fuente de luz directa. Observa respuesta directa y consensual. La <em>anisocoria unilateral con midriasis fija ipsilateral a la lesión</em> en TCE es signo de herniación transtentorial — emergencia neuroquirúrgica.</div>
+      </div>
+    </div>
+
+  </div><!-- /sv-grid -->
+</section>
+
+<!-- SECCIÓN 2 — TABLA RESUMEN -->
+<section class="section" id="tabla">
+  <div class="section-header">
+    <div><div class="section-number">02</div></div>
+    <div>
+      <div class="section-title">Tabla Resumen</div>
+      <div class="section-subtitle">Valores normales y alertas — Adulto</div>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Signo Vital</th>
+          <th>Unidad</th>
+          <th>Normal</th>
+          <th>Alerta (↓)</th>
+          <th>Alerta (↑)</th>
+          <th>Método prehospitalario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tensión Arterial</td>
+          <td>mmHg</td>
+          <td class="t-normal">90–119 / 60–79</td>
+          <td class="t-alert">&lt;90 / &lt;60</td>
+          <td class="t-alert">≥140 / ≥90</td>
+          <td>Esfigmomanómetro + estetoscopio</td>
+        </tr>
+        <tr>
+          <td>Pulso</td>
+          <td>lpm</td>
+          <td class="t-normal">60–100</td>
+          <td class="t-alert">&lt;60</td>
+          <td class="t-alert">&gt;100</td>
+          <td>Palpación radial / carotídea</td>
+        </tr>
+        <tr>
+          <td>Frecuencia Cardíaca</td>
+          <td>lpm</td>
+          <td class="t-normal">60–100</td>
+          <td class="t-crit">&lt;60</td>
+          <td class="t-crit">&gt;100</td>
+          <td>Auscultación / monitor cardíaco</td>
+        </tr>
+        <tr>
+          <td>Frecuencia Respiratoria</td>
+          <td>rpm</td>
+          <td class="t-normal">12–20</td>
+          <td class="t-crit">&lt;10 (START)</td>
+          <td class="t-crit">&gt;29 (START)</td>
+          <td>Observación visual (30 seg)</td>
+        </tr>
+        <tr>
+          <td>Temperatura</td>
+          <td>°C</td>
+          <td class="t-normal">36–37.5</td>
+          <td class="t-alert">&lt;36 (hipotermia)</td>
+          <td class="t-alert">&gt;38.1 (fiebre)</td>
+          <td>Termómetro axilar / timpánico</td>
+        </tr>
+        <tr>
+          <td>Glucosa Capilar</td>
+          <td>mg/dL</td>
+          <td class="t-normal">70–100 (ayuno)</td>
+          <td class="t-crit">&lt;54</td>
+          <td class="t-alert">&gt;180</td>
+          <td>Glucómetro capilar</td>
+        </tr>
+        <tr>
+          <td>Pupilas</td>
+          <td>mm / cualitativo</td>
+          <td class="t-normal">2–5 mm, isocóricas, reactivas</td>
+          <td class="t-alert">Miosis puntiforme</td>
+          <td class="t-crit">Midriasis fija / anisocoria</td>
+          <td>Linterna de exploración</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECCIÓN 3 — TÉCNICA -->
+<section class="section" id="tecnica">
+  <div class="section-header">
+    <div><div class="section-number">03</div></div>
+    <div>
+      <div class="section-title">Técnica de Medición</div>
+      <div class="section-subtitle">Procedimiento paso a paso en campo</div>
+    </div>
+  </div>
+  <div class="tecnica-grid">
+
+    <!-- TA -->
+    <div class="tecnica-card" id="tec-ta">
+      <div class="tecnica-header" onclick="toggleTecnica('tec-ta')">
+        <span>🩸</span><h4>Tensión Arterial</h4>
+        <span class="tecnica-chevron">▼</span>
+      </div>
+      <div class="tecnica-body">
+        <ol class="steps">
+          <li>Coloca al paciente sentado o en decúbito supino; brazo apoyado al nivel del corazón.</li>
+          <li>Palpa la arteria braquial (cara medial del codo).</li>
+          <li>Coloca el brazalete 2–3 cm por encima de la fosa antecubital; borde inferior sobre la arteria.</li>
+          <li>Palpa el pulso radial e infla hasta que desaparezca (+20–30 mmHg adicionales).</li>
+          <li>Coloca el estetoscopio sobre la arteria braquial (no debajo del brazalete).</li>
+          <li>Desinfla lentamente (2–3 mmHg/seg). Primer ruido de Korotkoff = sistólica.</li>
+          <li>Desaparición de los ruidos = diastólica.</li>
+          <li>Registra: PAS/PAD mmHg, brazo y posición del paciente.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Pulso -->
+    <div class="tecnica-card" id="tec-pulso">
+      <div class="tecnica-header" onclick="toggleTecnica('tec-pulso')">
+        <span>💓</span><h4>Pulso Radial</h4>
+        <span class="tecnica-chevron">▼</span>
+      </div>
+      <div class="tecnica-body">
+        <ol class="steps">
+          <li>Localiza la arteria radial en la cara anterior de la muñeca, lado del pulgar.</li>
+          <li>Usa 2.º, 3.º y 4.º dedo (nunca el pulgar — tiene pulso propio).</li>
+          <li>Presión suave; no comprimas la arteria completamente.</li>
+          <li>Cuenta los latidos durante 30 segundos y multiplica por 2 (o 15 seg × 4).</li>
+          <li>Si el ritmo es irregular, cuenta 60 segundos completos.</li>
+          <li>Registra: frecuencia, ritmo (regular/irregular), amplitud (lleno/débil/filiforme).</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- FR -->
+    <div class="tecnica-card" id="tec-fr">
+      <div class="tecnica-header" onclick="toggleTecnica('tec-fr')">
+        <span>🫁</span><h4>Frecuencia Respiratoria</h4>
+        <span class="tecnica-chevron">▼</span>
+      </div>
+      <div class="tecnica-body">
+        <ol class="steps">
+          <li>No informes al paciente que vas a contar su respiración (altera el resultado conscientemente).</li>
+          <li>Mantén los dedos sobre la muñeca como si siguieras tomando el pulso.</li>
+          <li>Observa el movimiento del tórax o abdomen sin que el paciente lo note.</li>
+          <li>Cuenta ciclos completos (inspiración + espiración) durante 30 segundos × 2.</li>
+          <li>Si la respiración es irregular o muy lenta/rápida, cuenta 60 segundos.</li>
+          <li>Registra: frecuencia, profundidad (superficial/normal/profunda), patrón, uso de músculos accesorios.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Temperatura -->
+    <div class="tecnica-card" id="tec-temp">
+      <div class="tecnica-header" onclick="toggleTecnica('tec-temp')">
+        <span>🌡️</span><h4>Temperatura Axilar</h4>
+        <span class="tecnica-chevron">▼</span>
+      </div>
+      <div class="tecnica-body">
+        <ol class="steps">
+          <li>Verifica que el termómetro esté en cero (o reiniciado si es digital).</li>
+          <li>Seca la axila con gasa si hay humedad.</li>
+          <li>Coloca el termómetro en el centro de la axila, bulbo en contacto con la piel.</li>
+          <li>El paciente aduce el brazo con firmeza sobre el tórax.</li>
+          <li>Espera el tiempo indicado por fabricante (digital: señal sonora; mercurio: 3–5 min).</li>
+          <li>Registra en °C. Recuerda: axilar es ~0.5°C inferior a la temperatura central.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Glucosa -->
+    <div class="tecnica-card" id="tec-gluco">
+      <div class="tecnica-header" onclick="toggleTecnica('tec-gluco')">
+        <span>🩸</span><h4>Glucosa Capilar</h4>
+        <span class="tecnica-chevron">▼</span>
+      </div>
+      <div class="tecnica-body">
+        <ol class="steps">
+          <li>Verifica calibración del glucómetro y fecha de caducidad de las tiras.</li>
+          <li>Colócate guantes; limpia el pulpejo del dedo con torunda alcoholada y deja secar.</li>
+          <li>Lanza la lanceta en el borde lateral del pulpejo (menos doloroso que el centro).</li>
+          <li>Descarta la primera gota (puede estar diluida con líquido tisular).</li>
+          <li>Aplica la segunda gota sobre la zona de lectura de la tira.</li>
+          <li>Lee el resultado en pantalla. Registra en mg/dL y hora de la toma.</li>
+          <li>Cubre el sitio de punción con gasa pequeña.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Pupilas -->
+    <div class="tecnica-card" id="tec-pupilas">
+      <div class="tecnica-header" onclick="toggleTecnica('tec-pupilas')">
+        <span>👁️</span><h4>Evaluación Pupilar</h4>
+        <span class="tecnica-chevron">▼</span>
+      </div>
+      <div class="tecnica-body">
+        <ol class="steps">
+          <li>Trabaja en penumbra controlada (evita iluminación ambiente excesiva).</li>
+          <li>Pide al paciente consciente que fije la mirada en un punto lejano.</li>
+          <li>Ilumina cada ojo lateralmente con linterna directa (no de frente).</li>
+          <li>Observa la pupila iluminada: respuesta directa (¿se contrae?).</li>
+          <li>Observa la pupila contralateral: respuesta consensual (¿también se contrae?).</li>
+          <li>Estima el tamaño en mm comparando con tabla de referencia.</li>
+          <li>Registra: tamaño D / I, simetría (isocórica/anisocórica), reactividad (reactiva/lenta/arreactiva).</li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECCIÓN 4 — ERRORES FRECUENTES -->
+<section class="section" id="errores">
+  <div class="section-header">
+    <div><div class="section-number">04</div></div>
+    <div>
+      <div class="section-title">Errores Frecuentes</div>
+      <div class="section-subtitle">Lo que se hace mal en campo y cómo corregirlo</div>
+    </div>
+  </div>
+  <div class="errores-grid">
+
+    <div class="error-item">
+      <h5>TA: Brazo incorrecto</h5>
+      <p>Tomar la TA en un brazo con vía intravenosa activa, lesión o restricción vascular (ej. mastectomía) puede dar lecturas falsamente bajas.</p>
+      <div class="fix">Usa siempre el brazo contralateral; si no es posible, documenta la condición.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>TA: Desinflado rápido</h5>
+      <p>Desinflar el brazalete a más de 3 mmHg/segundo hace que se pierdan los ruidos de Korotkoff, subestimando la sistólica o sobreestimando la diastólica.</p>
+      <div class="fix">Desinfla lentamente y de forma constante: 2–3 mmHg por segundo.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Pulso: Usar el pulgar</h5>
+      <p>El pulgar tiene su propia pulsación arterial (arteria digital palmar), lo que lleva a contar latidos propios del evaluador.</p>
+      <div class="fix">Siempre usar 2.º, 3.º y 4.º dedo para palpar cualquier pulso periférico.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>FR: Avisar al paciente</h5>
+      <p>Cuando el paciente sabe que se está contando su respiración, la altera voluntaria e involuntariamente, generando lecturas falsas.</p>
+      <div class="fix">Continúa sosteniendo la muñeca al terminar de tomar el pulso y observa el tórax sin avisar.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Temperatura: Axila húmeda</h5>
+      <p>La humedad en la axila disminuye la conductividad térmica y genera lecturas falsamente bajas.</p>
+      <div class="fix">Seca la axila con gasa antes de colocar el termómetro. Espera el tiempo completo indicado.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Glucosa: Primera gota</h5>
+      <p>La primera gota de sangre puede estar diluida con líquido intersticial por la presión del lancetazo, dando lecturas falsamente bajas.</p>
+      <div class="fix">Descarta siempre la primera gota. Aplica la segunda sin exprimir el dedo en exceso.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Pupilas: Luz ambiental excesiva</h5>
+      <p>Evaluar pupilas con iluminación brillante hace que ambas estén mióticas de base, ocultando diferencias de reactividad o tamaño.</p>
+      <div class="fix">Busca penumbra relativa, o crea sombra con tu cuerpo antes de iluminar con la linterna.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Pupilas: Anisocoria no interrogada</h5>
+      <p>Atribuir automáticamente una anisocoria a TCE sin preguntar si es crónica lleva a activaciones innecesarias o a la omisión de un hallazgo real.</p>
+      <div class="fix">Pregunta siempre a acompañantes: "¿Sus ojos siempre han sido así?" La anisocoria fisiológica afecta al ~20% de la población.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>General: Omitir la FR</h5>
+      <p>La FR es el signo vital que con más frecuencia se omite o se estima sin medir. Es criterio de triage START y de decisión de ventilación asistida.</p>
+      <div class="fix">Incorporar FR en cada medición de signos vitales. Nunca estimarla; siempre contarla.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>General: Documentar sin hora</h5>
+      <p>Registrar signos vitales sin la hora exacta impide evaluar la tendencia (deterioro o mejoría) durante el traslado.</p>
+      <div class="fix">Cada toma de signos vitales debe incluir la hora exacta. Repite la toma cada 5–15 min según gravedad.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECCIÓN 5 — AUTOEVALUACIÓN -->
+<section class="section" id="autoevaluacion">
+  <div class="section-header">
+    <div><div class="section-number">05</div></div>
+    <div>
+      <div class="section-title">Autoevaluación Formativa</div>
+      <div class="section-subtitle">10 preguntas · No calificable · Sin penalización</div>
+    </div>
+  </div>
+
+  <!-- Datos del estudiante -->
+  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:1.75rem;">
+    <div style="flex:1;min-width:220px;">
+      <label style="font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:0.4rem;">Nombre completo</label>
+      <input id="student-name" type="text" placeholder="Tu nombre" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:0.6rem 0.9rem;color:var(--text);font-family:var(--font-body);font-size:0.88rem;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--teal-dim)'" onblur="this.style.borderColor='var(--border)'">
+    </div>
+    <div style="flex:1;min-width:180px;">
+      <label style="font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:0.4rem;">Grupo / Generación</label>
+      <input id="student-group" type="text" placeholder="Ej. TUM B — G1 2025" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:0.6rem 0.9rem;color:var(--text);font-family:var(--font-body);font-size:0.88rem;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--teal-dim)'" onblur="this.style.borderColor='var(--border)'">
+    </div>
+  </div>
+
+  <div id="quiz-form">
+
+    <!-- Q1 -->
+    <div class="q-block" data-correct="b">
+      <div class="q-text"><span class="q-num">1.</span> Un paciente adulto tiene FC de 130 lpm, pulso radial débil y filiforme, piel pálida y fría. ¿Cuál es la interpretación más probable?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q1" value="a"> Bradicardia compensadora por hipervolemia</label>
+        <label class="q-opt"><input type="radio" name="q1" value="b"> Taquicardia como respuesta compensadora al choque hipovolémico</label>
+        <label class="q-opt"><input type="radio" name="q1" value="c"> Taquicardia por hipertermia aislada</label>
+        <label class="q-opt"><input type="radio" name="q1" value="d"> Hallazgo normal en adulto mayor activo</label>
+      </div>
+      <div class="q-explanation">
+        <strong>Correcto: B.</strong> La taquicardia (FC &gt;100 lpm) es la primera respuesta compensadora del organismo ante la pérdida de volumen. Un pulso débil y filiforme indica que el gasto cardíaco no es suficiente para mantener la presión de pulso — patrón clásico de choque clase II–III.
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-block" data-correct="c">
+      <div class="q-text"><span class="q-num">2.</span> ¿Cuál es el valor de FR que constituye criterio de triage START para activar recursos avanzados en un paciente adulto?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q2" value="a"> FR &lt;12 o &gt;25 rpm</label>
+        <label class="q-opt"><input type="radio" name="q2" value="b"> FR &lt;8 o &gt;35 rpm</label>
+        <label class="q-opt"><input type="radio" name="q2" value="c"> FR &lt;10 o &gt;29 rpm</label>
+        <label class="q-opt"><input type="radio" name="q2" value="d"> FR &lt;15 o &gt;30 rpm</label>
+      </div>
+      <div class="q-explanation">
+        <strong>Correcto: C.</strong> El sistema START define como criterio de categoría ROJA (inmediata) una FR &lt;10 o &gt;29 rpm en adulto. Fuera de este rango, la vía aérea requiere reposicionamiento o ventilación asistida.
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-block" data-correct="a">
+      <div class="q-text"><span class="q-num">3.</span> Al evaluar las pupilas de un paciente con TCE moderado encuentras midriasis unilateral (ojo derecho, 7 mm, arreactiva) con pupila izquierda normal. ¿Qué sugiere este hallazgo?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q3" value="a"> Herniación uncal ipsilateral — compresión del III par craneal derecho</label>
+        <label class="q-opt"><input type="radio" name="q3" value="b"> Anisocoria fisiológica, variante normal</label>
+        <label class="q-opt"><input type="radio" name="q3" value="c"> Intoxicación por opioides</label>
+        <label class="q-opt"><input type="radio" name="q3" value="d"> Hipoglucemia severa</label>
+      </div>
+      <div class="q-explanation">
+        <strong>Correcto: A.</strong> La midriasis unilateral fija en TCE indica compresión del nervio oculomotor (III par) por herniación uncal ipsilateral — emergencia neuroquirúrgica. La intoxicación por opioides produce <em>miosis bilateral</em>; la anisocoria fisiológica es &lt;1 mm y ambas pupilas son reactivas.
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-block" data-correct="d">
+      <div class="q-text"><span class="q-num">4.</span> ¿Por qué se descarta la primera gota de sangre al realizar una glucometría capilar?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q4" value="a"> Porque contiene más glucosa que la sangre real</label>
+        <label class="q-opt"><input type="radio" name="q4" value="b"> Porque daña la tira reactiva del glucómetro</label>
+        <label class="q-opt"><input type="radio" name="q4" value="c"> Porque siempre está contaminada con alcohol</label>
+        <label class="q-opt"><input type="radio" name="q4" value="d"> Porque puede estar diluida con líquido intersticial, dando lectura falsamente baja</label>
+      </div>
+      <div class="q-explanation">
+        <strong>Correcto: D.</strong> La presión del lancetazo expulsa primero líquido intersticial mezclado con sangre. Esta dilución reduce artificialmente la concentración de glucosa. Usar la segunda gota (sin exprimir en exceso) garantiza una muestra capilar pura.
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-block" data-correct="b">
+      <div class="q-text"><span class="q-num">5.</span> Un paciente de 45 años, víctima de accidente de tráfico, presenta: TA 88/60 mmHg, FC 118 lpm, FR 24 rpm, T° 35.2°C. ¿Qué componente de la triada letal del trauma ya se está instalando?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q5" value="a"> Hiperglucemia</label>
+        <label class="q-opt"><input type="radio" name="q5" value="b"> Hipotermia</label>
+        <label class="q-opt"><input type="radio" name="q5" value="c"> Hipertensión</label>
+        <label class="q-opt"><input type="radio" name="q5" value="d"> Bradicardia</label>
+      </div>
+      <div class="q-explanation">
+        <strong>Correcto: B.</strong> La temperatura de 35.2°C indica hipotermia leve. En trauma, la triada letal incluye hipotermia + coagulopatía + acidosis metabólica. La hipotermia agrava la coagulación y perpetúa el sangrado. Proteger al paciente del frío desde el primer contacto es prioritario.
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-block" data-correct="c">
+      <div class="q-text"><span class="q-num">6.</span> ¿Por qué NO se debe avisar al paciente que se está contando su frecuencia respiratoria?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q6" value="a"> Para ahorrar tiempo en la evaluación primaria</label>
+        <label class="q-opt"><input type="radio" name="q6" value="b"> Porque el paciente podría negarse a que se le cuente</label>
+        <label class="q-opt"><input type="radio" name="q6" value="c"> Porque el paciente puede alterar consciente o inconscientemente su patrón respiratorio</label>
+        <label class="q-opt"><input type="radio" name="q6" value="d"> Por protocolo de PHTLS, no por razón fisiológica</label>
+      </div>
+      <div class="q-explanation">
+        <strong>Correcto: C.</strong> La respiración es la única función vital voluntaria e involuntaria simultáneamente. Al centrar la atención en ella, el paciente puede hiperventilar o hipoventilar sin darse cuenta. La técnica estándar es continuar palpando la muñeca y observar el tórax sin informar al paciente.
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-block" data-correct="a">
+      <div class="q-text"><span class="q-num">7.</span> Un paciente de 68 años con diabetes llega confuso, diaforético y con temblor. Glucometría: 48 mg/dL. ¿Cómo clasificas este hallazgo?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q7" value="a"> Hipoglucemia severa</label>
+        <label class="q-opt"><input type="radio" name="q7" value="b"> Valor normal posprandial</label>
+        <label class="q-opt"><input type="radio" name="q7" value="c"> Hipoglucemia leve</label>
+        <label class="q-opt"><input type="radio" name="q7" value="d"> Prediabetes</label>
+      </div>
+      <div class="q-explanation">
+        <strong>Correcto: A.</strong> Glucosa &lt;54 mg/dL se clasifica como hipoglucemia severa. Los síntomas descritos (confusión, diaforesis, temblor) son manifestaciones neuroglucométricas clásicas. Es una causa tratable de AEC en campo: prioridad de manejo según protocolos locales.
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-block" data-correct="d">
+      <div class="q-text"><span class="q-num">8.</span> ¿Cuál es la diferencia entre <em>presión sistólica</em> y <em>presión diastólica</em>?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q8" value="a"> Sistólica mide la presión venosa; diastólica, la arterial</label>
+        <label class="q-opt"><input type="radio" name="q8" value="b"> Sistólica se mide en reposo; diastólica, en esfuerzo</label>
+        <label class="q-opt"><input type="radio" name="q8" value="c"> No hay diferencia; ambas miden lo mismo en distintas unidades</label>
+        <label class="q-opt"><input type="radio" name="q8" value="d"> Sistólica refleja la presión durante la contracción ventricular; diastólica, durante la relajación y la resistencia vascular periférica</label>
+      </div>
+      <div class="q-explanation">
+        <strong>Correcto: D.</strong> La presión sistólica es la máxima, generada por la eyección del ventrículo izquierdo. La diastólica es la mínima, que refleja la resistencia vascular periférica mientras el corazón se relaja. Su diferencia es la presión de pulso (valor normal: ~40 mmHg).
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-block" data-correct="b">
+      <div class="q-text"><span class="q-num">9.</span> En un paciente inconsciente sin causa aparente, ¿cuál es el orden correcto de evaluación de signos vitales en la evaluación primaria?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q9" value="a"> Glucosa → TA → FR → Pulso → Pupilas</label>
+        <label class="q-opt"><input type="radio" name="q9" value="b"> Respuesta / consciencia → Pulso carotídeo → FR → Pupilas → Glucosa capilar</label>
+        <label class="q-opt"><input type="radio" name="q9" value="c"> TA → FC → FR → Temperatura → Glucosa</label>
+        <label class="q-opt"><input type="radio" name="q9" value="d"> Temperatura → Pupilas → FR → Pulso → TA</label>
+      </div>
+      <div class="q-explanation">
+        <strong>Correcto: B.</strong> En la evaluación primaria (ABCDE / PHTLS), la prioridad es identificar amenazas vitales inmediatas: nivel de consciencia, circulación (pulso central), ventilación (FR y calidad), estado neurológico (pupilas, Glasgow), y en paciente con AEC sin causa aparente: glucosa capilar para descartar causa metabólica tratable.
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-block" data-correct="c">
+      <div class="q-text"><span class="q-num">10.</span> La Tríada de Cushing (hipertensión arterial, bradicardia e irregularidad respiratoria) en un paciente con TCE indica:</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q10" value="a"> Choque hipovolémico compensado</label>
+        <label class="q-opt"><input type="radio" name="q10" value="b"> Reacción vagal por dolor</label>
+        <label class="q-opt"><input type="radio" name="q10" value="c"> Hipertensión intracraneal severa con herniación cerebral inminente</label>
+        <label class="q-opt"><input type="radio" name="q10" value="d"> Efecto de medicamento antihipertensivo previo</label>
+      </div>
+      <div class="q-explanation">
+        <strong>Correcto: C.</strong> La Tríada de Cushing es la respuesta del tronco encefálico ante una presión intracraneal crítica. El organismo eleva la TA para mantener la perfusión cerebral (aumento de PPC), lo que desencadena bradicardia refleja. La irregularidad respiratoria refleja compresión del centro respiratorio bulbar. Es signo de herniación cerebral inminente — prioridad máxima de traslado.
+      </div>
+    </div>
+
+  </div><!-- /quiz-form -->
+
+  <div style="margin-top:1.5rem;">
+    <div class="quiz-actions">
+      <button class="btn btn-teal" id="btn-verificar" onclick="evaluarQuiz()">Verificar respuestas</button>
+      <button class="btn btn-ghost" id="btn-reiniciar" onclick="reiniciarQuiz()">Reiniciar</button>
+    </div>
+    <div class="quiz-result" id="quiz-result"></div>
+  </div>
+</section>
+
+<!-- SECCIÓN 6 — REFERENCIAS -->
+<section class="section" id="referencias">
+  <div class="section-header">
+    <div><div class="section-number">06</div></div>
+    <div>
+      <div class="section-title">Referencias</div>
+      <div class="section-subtitle">Formato APA 7.ª edición</div>
+    </div>
+  </div>
+  <ul class="refs-list">
+    <li>American Heart Association. (2020). <em>2020 American Heart Association Guidelines for CPR and Emergency Cardiovascular Care.</em> Circulation, 142(Suppl 2). https://doi.org/10.1161/CIR.0000000000000916</li>
+    <li>NAEMSP & ACEP. (2023). <em>Prehospital Trauma Life Support (PHTLS), 9.ª edición.</em> Jones & Bartlett Learning.</li>
+    <li>Brain Trauma Foundation. (2023). <em>Guidelines for the Management of Severe Traumatic Brain Injury, 4th Edition.</em> Neurosurgery, 80(S1). https://doi.org/10.1093/neuros/nyx509</li>
+    <li>Secretaría de Salud. (2014). <em>Norma Oficial Mexicana NOM-034-SSA3-2013: Regulación de los servicios de salud. Atención médica prehospitalaria.</em> Diario Oficial de la Federación.</li>
+    <li>American Diabetes Association. (2024). <em>Standards of Medical Care in Diabetes — 2024.</em> Diabetes Care, 47(Suppl 1). https://doi.org/10.2337/dc24-Sint</li>
+    <li>Whelton, P. K., et al. (2018). <em>2017 ACC/AHA/AAPA/ABC Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults.</em> Journal of the American College of Cardiology, 71(19), e127–e248.</li>
+    <li>Cruz Roja Mexicana. (2022). <em>Manual de Técnicas en Urgencias Médicas (TUM Básico).</em> Dirección Nacional de Servicios de Emergencia.</li>
+  </ul>
+</section>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+  <strong>Instituto Educativo VIVE</strong> — Módulo Educativo: Signos Vitales en el Entorno Prehospitalario<br>
+  Revisión, validación y edición de contenidos: <strong>José Manuel Caballero Martínez</strong>
+  <span style="color:var(--text-dim); font-size:0.72rem; margin-top:0.4rem; display:block;">
+    Este material fue desarrollado revisado por personal certificado. Para uso educativo interno exclusivo.
+  </span>
+</footer>
+
+<script>
+  /* ── Nav móvil ── */
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('nav-links').classList.remove('open');
+    });
+  });
+
+  /* ── Tarjetas signos vitales ── */
+  function toggleCard(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  /* ── Tarjetas técnica ── */
+  function toggleTecnica(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  /* ── Autoevaluación ── */
+  let quizEnviado = false;
+
+  // Textos de preguntas y opciones para el reporte
+  const PREGUNTAS = [
+    {
+      texto: 'FC 130 lpm, pulso débil/filiforme, piel pálida y fría',
+      opciones: { a:'Bradicardia compensadora por hipervolemia', b:'Taquicardia como respuesta compensadora al choque hipovolémico', c:'Taquicardia por hipertermia aislada', d:'Hallazgo normal en adulto mayor activo' }
+    },
+    {
+      texto: 'Criterio de FR en triage START (adulto)',
+      opciones: { a:'FR <12 o >25 rpm', b:'FR <8 o >35 rpm', c:'FR <10 o >29 rpm', d:'FR <15 o >30 rpm' }
+    },
+    {
+      texto: 'Midriasis unilateral derecha fija (7 mm) en TCE',
+      opciones: { a:'Herniación uncal ipsilateral — compresión del III par craneal derecho', b:'Anisocoria fisiológica', c:'Intoxicación por opioides', d:'Hipoglucemia severa' }
+    },
+    {
+      texto: '¿Por qué se descarta la primera gota en glucometría?',
+      opciones: { a:'Contiene más glucosa', b:'Daña la tira reactiva', c:'Está contaminada con alcohol', d:'Puede estar diluida con líquido intersticial' }
+    },
+    {
+      texto: 'Paciente con T° 35.2°C en trauma — triada letal',
+      opciones: { a:'Hiperglucemia', b:'Hipotermia', c:'Hipertensión', d:'Bradicardia' }
+    },
+    {
+      texto: '¿Por qué NO avisar al paciente al contar FR?',
+      opciones: { a:'Para ahorrar tiempo', b:'El paciente podría negarse', c:'Puede alterar consciente/inconscientemente el patrón respiratorio', d:'Por protocolo PHTLS únicamente' }
+    },
+    {
+      texto: 'Paciente confuso, diaforético, glucosa 48 mg/dL',
+      opciones: { a:'Hipoglucemia severa', b:'Valor normal posprandial', c:'Hipoglucemia leve', d:'Prediabetes' }
+    },
+    {
+      texto: 'Diferencia entre presión sistólica y diastólica',
+      opciones: { a:'Sistólica mide presión venosa', b:'Sistólica en reposo / diastólica en esfuerzo', c:'No hay diferencia', d:'Sistólica = contracción ventricular; diastólica = relajación/resistencia vascular' }
+    },
+    {
+      texto: 'Orden correcto de evaluación en paciente inconsciente',
+      opciones: { a:'Glucosa → TA → FR → Pulso → Pupilas', b:'Respuesta/consciencia → Pulso carotídeo → FR → Pupilas → Glucosa capilar', c:'TA → FC → FR → Temperatura → Glucosa', d:'Temperatura → Pupilas → FR → Pulso → TA' }
+    },
+    {
+      texto: 'Tríada de Cushing en TCE',
+      opciones: { a:'Choque hipovolémico compensado', b:'Reacción vagal por dolor', c:'HIC severa con herniación cerebral inminente', d:'Efecto de antihipertensivo previo' }
+    }
+  ];
+
+  function evaluarQuiz() {
+    if (quizEnviado) return;
+
+    const nombre = document.getElementById('student-name').value.trim();
+    const grupo  = document.getElementById('student-group').value.trim();
+
+    if (!nombre) {
+      alert('Por favor ingresa tu nombre antes de verificar.');
+      document.getElementById('student-name').focus();
+      return;
+    }
+
+    const blocks = document.querySelectorAll('.q-block');
+    let correctas = 0;
+    let respondidas = 0;
+    const detalles = [];
+
+    blocks.forEach((block, idx) => {
+      const correct  = block.dataset.correct;
+      const selected = block.querySelector('input[type=radio]:checked');
+      const explanation = block.querySelector('.q-explanation');
+      const opts = block.querySelectorAll('.q-opt');
+
+      const respuestaTexto = selected
+        ? PREGUNTAS[idx].opciones[selected.value]
+        : '— Sin respuesta —';
+      const correctaTexto  = PREGUNTAS[idx].opciones[correct];
+      const esCorrecta     = selected && selected.value === correct;
+
+      detalles.push({
+        num: idx + 1,
+        pregunta: PREGUNTAS[idx].texto,
+        respuesta: respuestaTexto,
+        correcta: correctaTexto,
+        ok: esCorrecta
+      });
+
+      if (!selected) return;
+      respondidas++;
+
+      opts.forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+        const val = opt.querySelector('input').value;
+        if (val === correct) opt.classList.add('correct');
+        else if (opt.querySelector('input').checked && val !== correct) opt.classList.add('incorrect');
+        opt.querySelector('input').disabled = true;
+      });
+
+      explanation.classList.add('show');
+      if (esCorrecta) correctas++;
+    });
+
+    if (respondidas < blocks.length) {
+      alert(`Faltan ${blocks.length - respondidas} pregunta(s) por responder.`);
+      return;
+    }
+
+    // Bloquear nombre y grupo
+    document.getElementById('student-name').disabled = true;
+    document.getElementById('student-group').disabled = true;
+
+    const pct = Math.round((correctas / blocks.length) * 100);
+    let color, msg;
+    if (pct >= 80)      { color = 'var(--green)'; msg = '¡Dominio sólido del tema! Sigue así.'; }
+    else if (pct >= 60) { color = 'var(--amber)'; msg = 'Buen avance. Repasa los conceptos marcados en rojo.'; }
+    else                { color = 'var(--red)';   msg = 'Revisa el material y vuelve a intentarlo. Cada error es una oportunidad de aprendizaje.'; }
+
+    const result = document.getElementById('quiz-result');
+    const colorRGB = color === 'var(--green)' ? '74,222,128' : color === 'var(--amber)' ? '245,158,11' : '248,113,113';
+    const borderC  = color === 'var(--green)' ? 'rgba(74,222,128,0.3)' : color === 'var(--amber)' ? 'rgba(245,158,11,0.3)' : 'rgba(248,113,113,0.3)';
+    result.style.background = `rgba(${colorRGB},0.06)`;
+    result.style.border = `1px solid ${borderC}`;
+    result.innerHTML = `
+      <div class="result-score" style="color:${color}">${correctas} / ${blocks.length}</div>
+      <div class="result-msg">${pct}% de aciertos — ${msg}</div>
+      <div id="email-status" style="margin-top:0.75rem;font-size:0.8rem;color:var(--text-dim);">Enviando resultados…</div>
+    `;
+    result.classList.add('show');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    // Deshabilitar ambos botones
+    document.getElementById('btn-verificar').disabled = true;
+    document.getElementById('btn-verificar').style.opacity = '0.5';
+    document.getElementById('btn-reiniciar').disabled = true;
+    document.getElementById('btn-reiniciar').style.opacity = '0.4';
+    document.getElementById('btn-reiniciar').title = 'No disponible tras el envío';
+    quizEnviado = true;
+
+    // Construir tabla HTML de respuestas
+    const filas = detalles.map(d => `
+      <tr style="border-bottom:1px solid #21262d;">
+        <td style="padding:6px 10px;color:#8b949e;">${d.num}</td>
+        <td style="padding:6px 10px;color:#e6edf3;">${d.pregunta}</td>
+        <td style="padding:6px 10px;color:${d.ok ? '#4ade80' : '#f87171'};">${d.respuesta} ${d.ok ? '✓' : '✗'}</td>
+        <td style="padding:6px 10px;color:#4ade80;">${d.correcta}</td>
+      </tr>`).join('');
+
+    const tablaHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:13px;font-family:sans-serif;">
+        <thead>
+          <tr style="background:#161b22;">
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">#</th>
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">Pregunta (resumen)</th>
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">Respuesta del alumno</th>
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">Respuesta correcta</th>
+          </tr>
+        </thead>
+        <tbody>${filas}</tbody>
+      </table>`;
+
+    const ahora = new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City', dateStyle: 'full', timeStyle: 'short' });
+
+    emailjs.send('service_vxatras', 'template_w703bqs', {
+      student_name:  nombre || 'No especificado',
+      student_group: grupo  || 'No especificado',
+      module_name:   'Signos Vitales — TUM Básico',
+      score:         `${correctas} / ${blocks.length} (${pct}%)`,
+      timestamp:     ahora,
+      details_table: tablaHTML
+    }).then(() => {
+      document.getElementById('email-status').style.color = '#4ade80';
+      document.getElementById('email-status').textContent = '✓ Resultados enviados al instructor.';
+    }).catch(err => {
+      console.error('EmailJS error:', err);
+      document.getElementById('email-status').style.color = '#f87171';
+      document.getElementById('email-status').textContent = '⚠ No se pudo enviar el reporte. Toma captura de pantalla.';
+    });
+  }
+
+  function reiniciarQuiz() {
+    if (quizEnviado) return; // bloquea reinicio tras envío
+    document.querySelectorAll('.q-block').forEach(block => {
+      block.querySelectorAll('input[type=radio]').forEach(inp => {
+        inp.checked = false;
+        inp.disabled = false;
+      });
+      block.querySelectorAll('.q-opt').forEach(opt => opt.classList.remove('correct', 'incorrect'));
+      block.querySelector('.q-explanation').classList.remove('show');
+    });
+    const result = document.getElementById('quiz-result');
+    result.classList.remove('show');
+    result.innerHTML = '';
+  }
+
+  /* ── Abrir primeras tarjetas por defecto ── */
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('card-ta')?.classList.add('open');
+  });
+</script>
+</body>
+</html>
