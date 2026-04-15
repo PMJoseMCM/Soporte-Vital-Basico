@@ -5,7 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RCP en SVB — Profesionales de la Salud Extrahospitalario · TAMP Básico</title>
 <link href="./RCP en SVB — Profesionales de la Salud Extrahospitalario · TAMP Básico_files/css2" rel="stylesheet">
-<style>
+<style> 
+.btn-home {
+  display: inline-block;
+  margin: 1rem 0;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--teal);
+  border: 1px solid var(--teal-dim);
+  border-radius: 20px;
+  background: rgba(45,212,191,0.08);
+  text-decoration: none;
+  transition: all .2s;
+}
+
+.btn-home:hover {
+  background: rgba(45,212,191,0.18);
+}
+
   :root {
     --bg: #0d0f12;
     --surface: #141720;
@@ -25,7 +45,8 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
+  body { <a href="../" class="btn-home">⬅ Inicio</a>
+
     background: var(--bg);
     color: var(--text);
     font-family: 'IBM Plex Sans', sans-serif;
