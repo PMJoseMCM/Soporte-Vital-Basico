@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soporte Vital Básico — Módulo TUM B | VIVE</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2330;
+    --border: #21262d;
+    --teal: #2dd4bf;
+    --teal-dim: #1a7a6e;
+    --teal-glow: rgba(45,212,191,0.12);
+    --amber: #f59e0b;
+    --red: #f87171;
+    --green: #4ade80;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --text-dim: #6e7681;
+    --radius: 10px;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-display: 'DM Serif Display', serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HOME BUTTON ── */
+  .btn-home {
+    display: inline-block;
+    margin: 0.25rem 0.75rem 0.25rem 0;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid var(--teal-dim);
+    border-radius: 999px;
+    background: var(--teal-glow);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-home:hover { background: rgba(45,212,191,0.18); }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,17,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--teal);
+    letter-spacing: 0.02em;
+  }
+  .nav-brand span { color: var(--text-muted); font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; margin-left: 0.5rem; }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
+  .nav-links {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.3rem 0.65rem;
+    border-radius: 6px;
+    transition: all .2s;
+    letter-spacing: 0.02em;
+  }
+  .nav-links a:hover { color: var(--teal); background: var(--teal-glow); }
+
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: fixed;
+      top: 56px; left: 0; right: 0;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem 1.5rem;
+      gap: 0.15rem;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 0.9rem; width: 100%; padding: 0.5rem 0.75rem; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #0f1f1e 60%, #0d1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 2rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(45,212,191,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: var(--teal-glow);
+    border: 1px solid var(--teal-dim);
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 em { color: var(--teal); font-style: italic; }
+  .hero p {
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 0 auto 2rem;
+    font-size: 0.95rem;
+  }
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  .pill {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+  .pill-teal  { color: var(--teal);   border-color: var(--teal-dim);           background: rgba(45,212,191,0.06); }
+  .pill-amber { color: var(--amber);  border-color: rgba(245,158,11,0.4);       background: rgba(245,158,11,0.06); }
+  .pill-blue  { color: var(--blue);   border-color: rgba(96,165,250,0.4);       background: rgba(96,165,250,0.06); }
+  .pill-red   { color: var(--red);    border-color: rgba(248,113,113,0.4);      background: rgba(248,113,113,0.06); }
+
+  /* ── CONTAINER ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ── SECTION ── */
+  .section {
+    padding: 3.5rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .section-number {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--teal);
+    line-height: 1;
+    min-width: 2rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .section-subtitle {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.15rem;
+  }
+
+  /* ── VALOR ROWS ── */
+  .val-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.45rem 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+  }
+  .val-row:last-child { margin-bottom: 0; }
+  .val-label { color: var(--text-muted); }
+  .val-value { font-weight: 600; font-family: monospace; font-size: 0.88rem; text-align: right; }
+  .val-normal { background: rgba(74,222,128,0.07); }
+  .val-normal .val-value { color: var(--green); }
+  .val-warn { background: rgba(245,158,11,0.07); }
+  .val-warn .val-value { color: var(--amber); }
+  .val-danger { background: rgba(248,113,113,0.07); }
+  .val-danger .val-value { color: var(--red); }
+  .val-info { background: rgba(96,165,250,0.07); }
+  .val-info .val-value { color: var(--blue); }
+  .val-purple { background: rgba(167,139,250,0.07); }
+  .val-purple .val-value { color: var(--purple); }
+
+  /* ── NOTE BLOCKS ── */
+  .disp-note {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(45,212,191,0.05);
+    border-left: 3px solid var(--teal-dim);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .disp-note strong { color: var(--teal); }
+
+  .disp-note-warn {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(245,158,11,0.05);
+    border-left: 3px solid rgba(245,158,11,0.5);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .disp-note-warn strong { color: var(--amber); }
+
+  .disp-note-danger {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(248,113,113,0.05);
+    border-left: 3px solid rgba(248,113,113,0.4);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .disp-note-danger strong { color: var(--red); }
+
+  /* ── TABLA ── */
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+  thead tr { background: var(--bg3); }
+  thead th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg3); }
+  tbody td { padding: 0.7rem 1rem; color: var(--text-muted); vertical-align: middle; }
+  tbody td:first-child { color: var(--text); font-weight: 600; }
+  .t-yes    { color: var(--green)  !important; font-weight: 600; }
+  .t-no     { color: var(--red)    !important; font-weight: 600; }
+  .t-parcial { color: var(--amber) !important; font-weight: 600; }
+  .t-info   { color: var(--blue)   !important; font-weight: 600; }
+  .t-teal   { color: var(--teal)   !important; font-weight: 600; }
+
+  /* ── CADENA CARDS (expandibles) ── */
+  .eslabones-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .eslabon-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .eslabon-card:hover {
+    border-color: var(--teal-dim);
+    box-shadow: 0 0 0 1px var(--teal-dim), 0 4px 20px rgba(45,212,191,0.07);
+  }
+  .eslabon-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  .eslabon-num {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--teal);
+    line-height: 1;
+    min-width: 1.8rem;
+    flex-shrink: 0;
+  }
+  .eslabon-header h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--text);
+    flex: 1;
+  }
+  .eslabon-header h3 small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .eslabon-chevron { color: var(--text-dim); font-size: 0.75rem; transition: transform .3s; flex-shrink: 0; }
+  .eslabon-card.open .eslabon-chevron { transform: rotate(180deg); }
+  .eslabon-body { display: none; padding: 1.25rem; }
+  .eslabon-card.open .eslabon-body { display: block; }
+  .eslabon-def {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.1rem;
+    line-height: 1.65;
+  }
+
+  /* ── TÉCNICA (pasos numerados) ── */
+  .tecnica-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    align-self: start;
+  }
+  .tecnica-card:last-child { margin-bottom: 0; }
+  .tecnica-header {
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .tecnica-header h4 {
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex: 1;
+    color: var(--text);
+  }
+  .tecnica-chevron { color: var(--text-dim); font-size: 0.72rem; transition: transform .3s; }
+  .tecnica-card.open .tecnica-chevron { transform: rotate(180deg); }
+  .tecnica-body { display: none; padding: 1rem 1.25rem; }
+  .tecnica-card.open .tecnica-body { display: block; }
+
+  .steps {
+    padding-left: 1.2rem;
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+  .steps li { margin-bottom: 0.3rem; }
+  .steps li:last-child { margin-bottom: 0; }
+  .steps li strong { color: var(--teal); }
+
+  /* ── IC GRID (indicaciones / contraindicaciones) ── */
+  .ic-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  @media (max-width: 580px) { .ic-grid { grid-template-columns: 1fr; } }
+  .ic-box { border-radius: var(--radius); padding: 1rem 1.1rem; }
+  .ic-box-yes { background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.2); }
+  .ic-box-no  { background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.2); }
+  .ic-box-amber { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2); }
+  .ic-box-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.65rem; }
+  .ic-box-yes .ic-box-title   { color: var(--green); }
+  .ic-box-no  .ic-box-title   { color: var(--red); }
+  .ic-box-amber .ic-box-title { color: var(--amber); }
+  .ic-list { list-style: none; font-size: 0.83rem; color: var(--text-muted); line-height: 1.65; padding: 0; }
+  .ic-list li { padding: 0.2rem 0; display: flex; gap: 0.5rem; }
+  .ic-list li::before { flex-shrink: 0; margin-top: 0.15rem; }
+  .ic-box-yes   .ic-list li::before { content: '✓'; color: var(--green);  font-weight: 700; }
+  .ic-box-no    .ic-list li::before { content: '✗'; color: var(--red);    font-weight: 700; }
+  .ic-box-amber .ic-list li::before { content: '⚠'; color: var(--amber);  font-weight: 700; }
+
+  /* ── ERRORES FRECUENTES ── */
+  .errores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+  .error-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid rgba(248,113,113,0.5);
+    border-radius: var(--radius);
+    padding: 1rem 1.1rem;
+  }
+  .error-item h5 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--red);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.02em;
+  }
+  .error-item p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.65rem; line-height: 1.6; }
+  .fix {
+    font-size: 0.8rem;
+    color: var(--green);
+    padding: 0.4rem 0.75rem;
+    background: rgba(74,222,128,0.06);
+    border-radius: 6px;
+    border: 1px solid rgba(74,222,128,0.18);
+  }
+  .fix::before { content: '✓ '; font-weight: 700; }
+
+  /* ── CASOS CLÍNICOS ── */
+  .caso-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+  }
+  .caso-card:last-child { margin-bottom: 0; }
+  .caso-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    background: var(--bg3);
+  }
+  .caso-num {
+    background: var(--teal-glow);
+    border: 1px solid var(--teal-dim);
+    color: var(--teal);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    flex-shrink: 0;
+  }
+  .caso-header h4 { font-weight: 600; font-size: 0.9rem; flex: 1; color: var(--text); }
+  .caso-chevron { color: var(--text-dim); font-size: 0.72rem; transition: transform .3s; }
+  .caso-card.open .caso-chevron { transform: rotate(180deg); }
+  .caso-body { display: none; padding: 1.25rem; }
+  .caso-card.open .caso-body { display: block; }
+  .caso-escenario {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    padding: 0.85rem 1rem;
+    background: rgba(96,165,250,0.05);
+    border: 1px solid rgba(96,165,250,0.15);
+    border-radius: 8px;
+  }
+  .caso-escenario strong { color: var(--blue); }
+  .caso-respuesta { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+  .caso-respuesta strong { color: var(--teal); }
+
+  /* ── REFLEXIÓN SOCRÁTICA ── */
+  .reflexion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  .reflexion-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid rgba(167,139,250,0.5);
+    border-radius: var(--radius);
+    padding: 1rem 1.1rem;
+  }
+  .reflexion-item p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    font-style: italic;
+  }
+  .reflexion-item p::before { content: '"'; color: var(--purple); font-family: var(--font-display); font-size: 1.4rem; line-height: 0; vertical-align: -0.25em; margin-right: 0.2rem; }
+
+  /* ── MATERIAL DE REFUERZO ── */
+  .refuerzo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .refuerzo-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.1rem;
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+  .refuerzo-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .refuerzo-item h5 { font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 0.25rem; }
+  .refuerzo-item p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
+
+  /* ── AUTOEVALUACIÓN ── */
+  .quiz-wrap { max-width: 720px; }
+  .student-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+  @media (max-width: 560px) { .student-fields { grid-template-columns: 1fr; } }
+  .field-group label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.35rem;
+  }
+  .field-group input {
+    width: 100%;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 0.55rem 0.85rem;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color .2s;
+  }
+  .field-group input:focus { border-color: var(--teal-dim); }
+  .field-group input:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .q-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .q-num { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.45rem; }
+  .q-text { font-size: 0.9rem; font-weight: 500; color: var(--text); line-height: 1.55; margin-bottom: 0.9rem; }
+  .q-opts { display: flex; flex-direction: column; gap: 0.45rem; }
+  .q-opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: all .15s;
+    background: var(--bg3);
+  }
+  .q-opt:hover { border-color: var(--teal-dim); color: var(--text); background: var(--teal-glow); }
+  .q-opt input { margin-top: 0.18rem; flex-shrink: 0; accent-color: var(--teal); }
+  .q-opt.correct   { border-color: rgba(74,222,128,0.5);   background: rgba(74,222,128,0.08);   color: var(--green); }
+  .q-opt.incorrect  { border-color: rgba(248,113,113,0.5); background: rgba(248,113,113,0.08);  color: var(--red); }
+
+  .q-explanation {
+    display: none;
+    margin-top: 0.85rem;
+    padding: 0.7rem 1rem;
+    background: rgba(45,212,191,0.05);
+    border-left: 3px solid var(--teal-dim);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .q-explanation.show { display: block; }
+  .q-explanation strong { color: var(--teal); }
+
+  .quiz-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .btn-verificar, .btn-reiniciar {
+    padding: 0.65rem 1.5rem;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all .2s;
+  }
+  .btn-verificar { background: var(--teal); color: #0d1117; }
+  .btn-verificar:hover:not(:disabled) { background: #5eead4; }
+  .btn-verificar:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-reiniciar { background: var(--bg3); color: var(--text-muted); border: 1px solid var(--border); }
+  .btn-reiniciar:hover:not(:disabled) { background: var(--bg2); color: var(--text); }
+  .btn-reiniciar:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .quiz-result {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    text-align: center;
+  }
+  .quiz-result.show { display: block; }
+  .result-score { font-family: var(--font-display); font-size: 2.5rem; line-height: 1; margin-bottom: 0.5rem; }
+  .result-msg { font-size: 0.88rem; color: var(--text-muted); }
+
+  /* ── REFERENCIAS ── */
+  .ref-list { list-style: none; padding: 0; font-size: 0.83rem; color: var(--text-muted); line-height: 1.8; }
+  .ref-list li { padding: 0.6rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 0.75rem; }
+  .ref-list li:last-child { border-bottom: none; }
+  .ref-num { color: var(--teal); font-weight: 600; font-size: 0.78rem; flex-shrink: 0; padding-top: 0.1rem; min-width: 1.5rem; }
+  .ref-list a { color: var(--blue); text-decoration: none; }
+  .ref-list a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.9;
+  }
+  footer strong { color: var(--text-muted); }
+  footer .ai-disclosure {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.5rem 1rem;
+    background: rgba(167,139,250,0.07);
+    border: 1px solid rgba(167,139,250,0.25);
+    border-radius: 8px;
+    color: var(--purple);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    max-width: 700px;
+  }
+
+  /* ── DIAGRAMA SVG CADENA DE SUPERVIVENCIA ── */
+  .svb-diagram {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+  }
+  .svb-diagram svg { width: 100%; max-width: 720px; display: block; margin: 0 auto; }
+
+  /* ── COUNTER STATS ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .stat-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    text-align: center;
+  }
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--teal);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+
+  @media (max-width: 500px) {
+    .errores-grid { grid-template-columns: 1fr; }
+    .reflexion-grid { grid-template-columns: 1fr; }
+    .refuerzo-grid { grid-template-columns: 1fr; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('IhyLGxMD5wHfOWxU8');</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">VIVE <span>TUM Básico — Soporte Vital Básico</span></div>
+  <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="nav-links">
+    <a class="btn-home" href="/Soporte-Vital-Basico/">🏠 Home</a>
+    <a href="#conceptos">Conceptos clave</a>
+    <a href="#cadena">Cadena de supervivencia</a>
+    <a href="#comparativa">Comparativa</a>
+    <a href="#tecnica">Técnica RCP</a>
+    <a href="#errores">Errores</a>
+    <a href="#casos">Casos clínicos</a>
+    <a href="#autoevaluacion">Autoevaluación</a>
+    <a href="#referencias">Referencias</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Módulo Educativo · TUM Básico</div>
+  <a class="btn-home" href="/Soporte-Vital-Basico/">🏠 Home</a>
+  <h1>Soporte <em>Vital Básico</em><br>en el Entorno Prehospitalario</h1>
+  <p>Fundamentos del reconocimiento del paro cardiorrespiratorio, activación del sistema de emergencias y reanimación cardiopulmonar de alta calidad según AHA 2020.</p>
+  <div class="hero-pills">
+    <span class="pill pill-teal">RCP · Compresiones · BVM</span>
+    <span class="pill pill-amber">DAE · Desfibrilación</span>
+    <span class="pill pill-red">PCR · Reconocimiento</span>
+    <span class="pill pill-blue">Instituto Educativo VIVE</span>
+  </div>
+</section>
+
+<div class="container">
+
+<!-- SECCIÓN 1 — CONCEPTOS CLAVE -->
+<section class="section" id="conceptos">
+  <div class="section-header">
+    <div><div class="section-number">01</div></div>
+    <div>
+      <div class="section-title">Conceptos Clave</div>
+      <div class="section-subtitle">PCR, SVB y epidemiología del paro cardíaco extrahospitalario</div>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-value">&lt;10%</div>
+      <div class="stat-label">Supervivencia global del PCR extrahospitalario sin intervención inmediata</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">2–3×</div>
+      <div class="stat-label">Aumento en sobrevida cuando un testigo inicia RCP antes de la llegada de SEM</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">7–10%</div>
+      <div class="stat-label">Reducción de supervivencia por cada minuto sin desfibrilación en FV</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value">4–6 min</div>
+      <div class="stat-label">Tiempo a daño neurológico irreversible sin flujo cerebral</div>
+    </div>
+  </div>
+
+  <!-- Diagrama conceptual PCR -->
+  <div class="svb-diagram">
+    <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" aria-label="Diagrama conceptual de paro cardiorrespiratorio: cese de función cardíaca y respiratoria simultáneas">
+      <rect width="720" height="200" fill="#161b22" rx="8"/>
+
+      <!-- Corazón — nodo central -->
+      <ellipse cx="360" cy="100" rx="60" ry="48" fill="#1c2330" stroke="#1a7a6e" stroke-width="1.5"/>
+      <text x="360" y="95" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#2dd4bf">PARO</text>
+      <text x="360" y="112" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#2dd4bf">CARDIO-</text>
+      <text x="360" y="129" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#2dd4bf">RESPIRATORIO</text>
+
+      <!-- Nodo izquierdo — función cardíaca -->
+      <rect x="20" y="65" width="150" height="70" rx="8" fill="#1c2330" stroke="rgba(248,113,113,0.4)" stroke-width="1.5"/>
+      <text x="95" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#f87171">FUNCIÓN CARDÍACA</text>
+      <text x="95" y="106" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#8b949e">Cese de bomba</text>
+      <text x="95" y="120" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#8b949e">→ sin gasto cardíaco</text>
+      <line x1="170" y1="100" x2="298" y2="100" stroke="rgba(248,113,113,0.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <polygon points="295,95 305,100 295,105" fill="rgba(248,113,113,0.5)"/>
+
+      <!-- Nodo derecho — función respiratoria -->
+      <rect x="550" y="65" width="150" height="70" rx="8" fill="#1c2330" stroke="rgba(96,165,250,0.4)" stroke-width="1.5"/>
+      <text x="625" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#60a5fa">FUNCIÓN RESP.</text>
+      <text x="625" y="106" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#8b949e">Cese ventilación</text>
+      <text x="625" y="120" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#8b949e">→ apnea / gasping</text>
+      <line x1="422" y1="100" x2="548" y2="100" stroke="rgba(96,165,250,0.5)" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <polygon points="545,95 555,100 545,105" fill="rgba(96,165,250,0.5)"/>
+
+      <!-- Consecuencia inferior -->
+      <rect x="260" y="162" width="200" height="28" rx="6" fill="rgba(245,158,11,0.10)" stroke="rgba(245,158,11,0.35)" stroke-width="1"/>
+      <text x="360" y="181" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#f59e0b">Hipoxia tisular → muerte celular</text>
+      <line x1="360" y1="148" x2="360" y2="162" stroke="rgba(245,158,11,0.4)" stroke-width="1.5" stroke-dasharray="4,2"/>
+    </svg>
+  </div>
+
+  <p style="font-size:0.9rem;color:var(--text-muted);line-height:1.7;margin-bottom:1rem;">
+    El <strong style="color:var(--text)">paro cardiorrespiratorio (PCR)</strong> es el cese simultáneo de la función cardíaca y la función respiratoria eficaces. Sin circulación, el oxígeno deja de llegar a los tejidos; sin ventilación, no hay oxígeno que transportar. El daño neurológico irreversible comienza entre los 4 y 6 minutos de anoxia cerebral, por lo que el tiempo de respuesta es el factor pronóstico más crítico.
+  </p>
+
+  <div class="val-row val-danger"><span class="val-label">Ritmo desfibrilable más frecuente en PCR adulto</span><span class="val-value">Fibrilación ventricular (FV)</span></div>
+  <div class="val-row val-warn"><span class="val-label">Ritmo no desfibrilable</span><span class="val-value">Asistolia · AESP</span></div>
+  <div class="val-row val-info"><span class="val-label">Causa prehospitalaria más frecuente (adulto)</span><span class="val-value">Enfermedad coronaria</span></div>
+  <div class="val-row val-normal"><span class="val-label">SVB — objetivo inmediato</span><span class="val-value">Perfusión coronaria y cerebral mínima hasta DAE/SEM</span></div>
+
+  <div class="disp-note">
+    <strong>SVB vs. SVA:</strong> El Soporte Vital Básico (SVB) abarca el reconocimiento del PCR, activación de emergencias, RCP de calidad y desfibrilación temprana con DAE. No requiere fármacos ni vía aérea avanzada — es la intervención más temprana y la que mayor impacto tiene en la supervivencia.
+  </div>
+</section>
+
+<!-- SECCIÓN 2 — CADENA DE SUPERVIVENCIA -->
+<section class="section" id="cadena">
+  <div class="section-header">
+    <div><div class="section-number">02</div></div>
+    <div>
+      <div class="section-title">Cadena de Supervivencia</div>
+      <div class="section-subtitle">AHA 2020 — eslabones en PCR extrahospitalario</div>
+    </div>
+  </div>
+
+  <div class="disp-note-warn" style="margin-bottom:1.75rem;">
+    <strong>Actualización AHA 2020:</strong> La cadena extrahospitalaria se amplió a <strong>6 eslabones</strong>, agregando la recuperación y rehabilitación post-PCR como eslabón final. Cada eslabón es interdependiente — la ruptura de cualquiera reduce drásticamente la supervivencia.
+  </div>
+
+  <div class="eslabones-grid">
+
+    <div class="eslabon-card" id="eslabon-1">
+      <div class="eslabon-header" onclick="toggleEslabon('eslabon-1')">
+        <div class="eslabon-num">1</div>
+        <h3>Reconocimiento inmediato y activación del SEM<small>Primer eslabón · Tiempo cero</small></h3>
+        <span class="eslabon-chevron">▼</span>
+      </div>
+      <div class="eslabon-body">
+        <p class="eslabon-def">El eslabón inicial exige reconocer el PCR en menos de 10 segundos y activar el Sistema de Emergencias Médicas (SEM) de manera simultánea — no secuencial. El testigo no debe buscar el pulso prolongadamente; la ausencia de respuesta y respiración normal es suficiente para actuar.</p>
+        <div class="val-row val-info"><span class="val-label">Verificación de respuesta</span><span class="val-value">Estimulación verbal + esternal</span></div>
+        <div class="val-row val-warn"><span class="val-label">Verificación de respiración</span><span class="val-value">Ver, escuchar, sentir ≤10 s</span></div>
+        <div class="val-row val-danger"><span class="val-label">Gasping (respiración agónica)</span><span class="val-value">Tratar como PCR — iniciar RCP</span></div>
+        <div class="val-row val-normal"><span class="val-label">Activación SEM (México)</span><span class="val-value">911 — simultáneo a inicio de RCP</span></div>
+        <div class="disp-note"><strong>Clave clínica:</strong> Si hay un segundo rescatador, uno activa el SEM mientras el otro inicia compresiones. Si estás solo, activa primero (30 s) y después comienza RCP — excepto en ahogamiento o PCR pediátrico, donde se realizan 2 minutos de RCP antes de activar.</div>
+      </div>
+    </div>
+
+    <div class="eslabon-card" id="eslabon-2">
+      <div class="eslabon-header" onclick="toggleEslabon('eslabon-2')">
+        <div class="eslabon-num">2</div>
+        <h3>RCP de alta calidad por testigos<small>Compresiones inmediatas · Menor interrupción posible</small></h3>
+        <span class="eslabon-chevron">▼</span>
+      </div>
+      <div class="eslabon-body">
+        <p class="eslabon-def">La RCP realizada por testigos antes de la llegada del SEM es el eslabón con mayor impacto demostrado en supervivencia neurológicamente favorable. Duplica o triplica las posibilidades de supervivencia. La AHA 2020 enfatiza minimizar las interrupciones y garantizar la profundidad y frecuencia adecuadas.</p>
+        <div class="val-row val-normal"><span class="val-label">Frecuencia de compresiones</span><span class="val-value">100–120 compresiones/min</span></div>
+        <div class="val-row val-normal"><span class="val-label">Profundidad — adulto</span><span class="val-value">5–6 cm (≥ 2 pulgadas)</span></div>
+        <div class="val-row val-warn"><span class="val-label">Retroceso torácico completo</span><span class="val-value">Obligatorio entre compresiones</span></div>
+        <div class="val-row val-info"><span class="val-label">Relación compresión-ventilación (SV básico)</span><span class="val-value">30 : 2</span></div>
+        <div class="val-row val-danger"><span class="val-label">Interrupción máxima permitida</span><span class="val-value">&lt;10 s</span></div>
+        <div class="disp-note-warn"><strong>Hiperventilación:</strong> Es uno de los errores más frecuentes. Cada ventilación debe durar ~1 segundo y producir elevación torácica visible — ni más, ni menos. La hiperventilación aumenta la presión intratorácica y reduce el retorno venoso, disminuyendo el gasto cardíaco durante la RCP.</div>
+      </div>
+    </div>
+
+    <div class="eslabon-card" id="eslabon-3">
+      <div class="eslabon-header" onclick="toggleEslabon('eslabon-3')">
+        <div class="eslabon-num">3</div>
+        <h3>Desfibrilación temprana con DAE<small>Por cada minuto sin desfibrilación en FV: −7–10% supervivencia</small></h3>
+        <span class="eslabon-chevron">▼</span>
+      </div>
+      <div class="eslabon-body">
+        <p class="eslabon-def">La Fibrilación Ventricular (FV) es el ritmo de paro más frecuente y el único reversible mediante desfibrilación. El Desfibrilador Automático Externo (DAE) analiza el ritmo, carga y descarga con mínima intervención del operador. Las compresiones deben reanudarse inmediatamente tras la descarga, sin verificar pulso.</p>
+        <div class="val-row val-danger"><span class="val-label">Ritmo que responde al DAE</span><span class="val-value">FV · TV sin pulso</span></div>
+        <div class="val-row val-warn"><span class="val-label">Ritmo que NO responde al DAE</span><span class="val-value">Asistolia · AESP</span></div>
+        <div class="val-row val-info"><span class="val-label">Pausa para análisis de ritmo</span><span class="val-value">Minimizar — &lt;5 s idealmente</span></div>
+        <div class="val-row val-normal"><span class="val-label">Acción tras descarga</span><span class="val-value">Reanudar RCP de inmediato (sin verificar pulso)</span></div>
+        <div class="disp-note"><strong>DAE en TUM Básico:</strong> Dentro del alcance del TUM Básico bajo NOM-034-SSA3-2013. El TUM aplica el DAE, sigue las instrucciones de voz del equipo y coordina la secuencia con el equipo de RCP.</div>
+      </div>
+    </div>
+
+    <div class="eslabon-card" id="eslabon-4">
+      <div class="eslabon-header" onclick="toggleEslabon('eslabon-4')">
+        <div class="eslabon-num">4</div>
+        <h3>SVA y cuidados de reanimación<small>Llegada del SEM — manejo avanzado</small></h3>
+        <span class="eslabon-chevron">▼</span>
+      </div>
+      <div class="eslabon-body">
+        <p class="eslabon-def">La llegada del Soporte Vital Avanzado (SVA) incluye manejo avanzado de vía aérea, acceso vascular, administración de fármacos (epinefrina, amiodarona) e interpretación de ECG. El TUM Básico no aplica fármacos ni realiza intubación, pero debe garantizar una transición sin interrupción de la RCP al llegar el SVA.</p>
+        <div class="ic-grid">
+          <div class="ic-box ic-box-yes">
+            <div class="ic-box-title">TUM Básico — intervenciones</div>
+            <ul class="ic-list">
+              <li>RCP de alta calidad continua</li>
+              <li>Manejo de vía aérea con COF / cánula nasofaríngea</li>
+              <li>Ventilación con BVM + O₂ suplementario</li>
+              <li>Aplicación de DAE</li>
+              <li>Inmovilización y traslado coordinado</li>
+            </ul>
+          </div>
+          <div class="ic-box ic-box-no">
+            <div class="ic-box-title">Fuera del alcance TUM Básico</div>
+            <ul class="ic-list">
+              <li>Intubación orotraqueal</li>
+              <li>Administración de fármacos IV/IO</li>
+              <li>Interpretación de ECG de 12 derivaciones</li>
+              <li>Marcapasos externo</li>
+              <li>Cardioversión sincronizada</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eslabon-card" id="eslabon-5">
+      <div class="eslabon-header" onclick="toggleEslabon('eslabon-5')">
+        <div class="eslabon-num">5</div>
+        <h3>Cuidados post-paro cardíaco<small>Hospitalarios — ROSC y cuidados intensivos</small></h3>
+        <span class="eslabon-chevron">▼</span>
+      </div>
+      <div class="eslabon-body">
+        <p class="eslabon-def">El Retorno de la Circulación Espontánea (ROSC) no es el punto final: los cuidados post-paro determinan el pronóstico neurológico. Incluyen manejo de temperatura objetivo (hipotermia terapéutica 32–36 °C), control hemodinámico, prevención de hipoxia e hiperoxia, y rehabilitación. Este eslabón es hospitalario — el TUM Básico identifica el ROSC y comunica al hospital receptor.</p>
+        <div class="val-row val-normal"><span class="val-label">Signos de ROSC en campo</span><span class="val-value">Pulso central, respiración espontánea, movimiento</span></div>
+        <div class="val-row val-info"><span class="val-label">Saturación objetivo post-ROSC (campo)</span><span class="val-value">SpO₂ 94–98% — evitar hiperoxia</span></div>
+        <div class="val-row val-warn"><span class="val-label">Posición post-ROSC (sin trauma)</span><span class="val-value">Decúbito lateral de seguridad o semiFowler</span></div>
+        <div class="disp-note-danger"><strong>Alerta:</strong> Detectar ROSC no significa suspender la monitorización. El re-paro (re-arrest) puede ocurrir minutos después. Mantener vigilancia continua y preparación para reiniciar RCP durante el traslado.</div>
+      </div>
+    </div>
+
+    <div class="eslabon-card" id="eslabon-6">
+      <div class="eslabon-header" onclick="toggleEslabon('eslabon-6')">
+        <div class="eslabon-num">6</div>
+        <h3>Recuperación y rehabilitación<small>Eslabón nuevo AHA 2020 — impacto a largo plazo</small></h3>
+        <span class="eslabon-chevron">▼</span>
+      </div>
+      <div class="eslabon-body">
+        <p class="eslabon-def">Incorporado por primera vez en las guías AHA 2020, este eslabón reconoce que los sobrevivientes de PCR frecuentemente presentan secuelas físicas, cognitivas y psicológicas que requieren seguimiento estructurado. Incluye rehabilitación cardíaca, apoyo psicológico, evaluación neurológica y reintegración laboral y social.</p>
+        <div class="val-row val-info"><span class="val-label">Secuela más frecuente en sobrevivientes</span><span class="val-value">Deterioro cognitivo / ansiedad post-PCR</span></div>
+        <div class="val-row val-warn"><span class="val-label">Síndrome post-cuidados intensivos (PICS)</span><span class="val-value">Debilidad, TEPT, deterioro cognitivo</span></div>
+        <div class="disp-note"><strong>Relevancia prehospitalaria:</strong> La calidad de la RCP que el TUM provee en los primeros minutos determina directamente la severidad de las secuelas neurológicas. Un cerebro mejor perfundido equivale a un mejor pronóstico en este eslabón.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECCIÓN 3 — COMPARATIVA RCP con vs sin vía aérea avanzada -->
+<section class="section" id="comparativa">
+  <div class="section-header">
+    <div><div class="section-number">03</div></div>
+    <div>
+      <div class="section-title">Comparativa</div>
+      <div class="section-subtitle">RCP con y sin vía aérea avanzada — parámetros AHA 2020</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Parámetro</th>
+          <th>RCP sin DAV (30:2)</th>
+          <th>RCP con DAV (ventilación asíncrona)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Relación compresión-ventilación</td>
+          <td class="t-teal">30 : 2</td>
+          <td class="t-info">Continua — 10 vent/min</td>
+        </tr>
+        <tr>
+          <td>Pausas para ventilación</td>
+          <td class="t-no">Sí (breve)</td>
+          <td class="t-yes">No</td>
+        </tr>
+        <tr>
+          <td>Fracción de compresión (CC)</td>
+          <td class="t-parcial">&gt; 60% (meta: &gt;80%)</td>
+          <td class="t-yes">&gt; 80%</td>
+        </tr>
+        <tr>
+          <td>Sincronización requerida</td>
+          <td class="t-yes">Sí</td>
+          <td class="t-no">No</td>
+        </tr>
+        <tr>
+          <td>Aplicable TUM Básico</td>
+          <td class="t-yes">Sí — contexto principal</td>
+          <td class="t-parcial">Sí, con dispositivo supraglótico</td>
+        </tr>
+        <tr>
+          <td>Frecuencia compresiones</td>
+          <td>100–120 /min</td>
+          <td>100–120 /min</td>
+        </tr>
+        <tr>
+          <td>Profundidad compresiones (adulto)</td>
+          <td>5–6 cm</td>
+          <td>5–6 cm</td>
+        </tr>
+        <tr>
+          <td>Ventilaciones / minuto</td>
+          <td class="t-info">~10 (cada 30 comp.)</td>
+          <td class="t-info">10 (1 cada 6 s)</td>
+        </tr>
+        <tr>
+          <td>Duración por ventilación</td>
+          <td>~1 segundo</td>
+          <td>~1 segundo</td>
+        </tr>
+        <tr>
+          <td>Riesgo de hiperventilación</td>
+          <td class="t-parcial">Moderado</td>
+          <td class="t-yes">Alto — requiere disciplina</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="disp-note" style="margin-top:1.25rem;">
+    <strong>Nota clínica:</strong> En el contexto del TUM Básico, la secuencia 30:2 con BVM es el estándar. La ventilación asíncrona aplica únicamente cuando existe un dispositivo avanzado de vía aérea en posición correcta. En ambos casos, la calidad de las compresiones es el determinante más crítico del pronóstico.
+  </div>
+</section>
+
+<!-- SECCIÓN 4 — TÉCNICA RCP -->
+<section class="section" id="tecnica">
+  <div class="section-header">
+    <div><div class="section-number">04</div></div>
+    <div>
+      <div class="section-title">Técnica de RCP</div>
+      <div class="section-subtitle">Secuencia paso a paso por escenario clínico</div>
+    </div>
+  </div>
+
+  <div class="tecnica-card" id="tec-adulto">
+    <div class="tecnica-header" onclick="toggleTecnica('tec-adulto')">
+      <h4>👤 RCP en adulto — 1 rescatador</h4>
+      <span class="tecnica-chevron">▼</span>
+    </div>
+    <div class="tecnica-body">
+      <ol class="steps">
+        <li><strong>Verificar seguridad de la escena.</strong> Antes de acercarte, confirma que el entorno no represente riesgo para el rescatador.</li>
+        <li><strong>Verificar respuesta.</strong> Estimulación verbal ("¿Estás bien?") + esternal. Máximo 10 segundos.</li>
+        <li><strong>Gritar por ayuda y activar SEM.</strong> Llama al 911. Si hay DAE disponible, solicita que lo traigan mientras inicias RCP.</li>
+        <li><strong>Verificar respiración y pulso simultáneamente ≤10 s.</strong> Carotídeo (adulto). Si ausencia de pulso o gasping: iniciar compresiones.</li>
+        <li><strong>Posicionar manos.</strong> Talón de la mano dominante en la mitad inferior del esternón; mano contraria encima con dedos entrelazados. Brazos extendidos, hombros sobre el esternón.</li>
+        <li><strong>Comprimir 30 veces</strong> a 100–120 /min, 5–6 cm de profundidad, permitiendo retroceso torácico completo entre cada compresión.</li>
+        <li><strong>Abrir vía aérea.</strong> Maniobra frente-mentón (sin trauma) o tracción mandibular (con sospecha de trauma cervical).</li>
+        <li><strong>Proporcionar 2 ventilaciones</strong> de ~1 segundo con BVM; observar elevación torácica. Aplicar presión cricoidea si se sospecha riesgo de aspiración.</li>
+        <li><strong>Continuar ciclos 30:2</strong> hasta llegada del DAE, llegada del SEM o signos de ROSC.</li>
+        <li><strong>Aplicar DAE en cuanto esté disponible.</strong> Encender, colocar parches, análisis de ritmo, descarga si indicada, reiniciar RCP de inmediato.</li>
+      </ol>
+      <div class="disp-note" style="margin-top:1rem;"><strong>Rotación de rescatadores:</strong> Cuando hay dos o más rescatadores, rotar al compresor cada 2 minutos para mantener la calidad de las compresiones. El cambio debe realizarse en menos de 5 segundos.</div>
+    </div>
+  </div>
+
+  <div class="tecnica-card" id="tec-dos">
+    <div class="tecnica-header" onclick="toggleTecnica('tec-dos')">
+      <h4>👥 RCP en adulto — 2 rescatadores (TUM)</h4>
+      <span class="tecnica-chevron">▼</span>
+    </div>
+    <div class="tecnica-body">
+      <ol class="steps">
+        <li><strong>Asignación de roles inmediata.</strong> Rescatador 1 → compresiones. Rescatador 2 → vía aérea + BVM + comunicación con SEM.</li>
+        <li><strong>Verificación y activación simultánea.</strong> Uno verifica respuesta y pulso, el otro activa el SEM y recupera el DAE.</li>
+        <li><strong>Compresiones continuas 100–120 /min.</strong> R1 inicia compresiones de inmediato sin esperar a R2.</li>
+        <li><strong>R2 prepara la BVM</strong> con O₂ al 100% (15 L/min) y coloca COF o cánula nasofaríngea si el paciente lo tolera.</li>
+        <li><strong>Pausa de 1–1.5 s tras cada 30 compresiones</strong> para que R2 proporcione 2 ventilaciones con BVM a doble mano (técnica EC).</li>
+        <li><strong>Rotación cada 2 minutos</strong> durante el cambio de análisis del DAE. El cambio no debe superar 5 s.</li>
+        <li><strong>Comunicación constante.</strong> Contar compresiones en voz alta. Avisar antes de cada pausa para ventilación.</li>
+        <li><strong>DAE disponible → aplicar</strong> sin interrumpir más de 5–10 s. Reiniciar compresiones inmediatamente tras la descarga.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="tecnica-card" id="tec-bvm">
+    <div class="tecnica-header" onclick="toggleTecnica('tec-bvm')">
+      <h4>🫁 Ventilación con BVM — técnica correcta</h4>
+      <span class="tecnica-chevron">▼</span>
+    </div>
+    <div class="tecnica-body">
+      <ol class="steps">
+        <li><strong>Seleccionar talla de mascarilla adecuada.</strong> Debe cubrir nariz y boca sin comprimir los ojos ni quedar por debajo del mentón.</li>
+        <li><strong>Posicionar la mascarilla.</strong> Ápice en el puente nasal, base entre el labio inferior y el mentón.</li>
+        <li><strong>Técnica EC con 1 mano (1 rescatador).</strong> Dedos índice y pulgar forman la "C" alrededor del conector; dedos 3-4-5 forman la "E" sobre la mandíbula, elevando el mentón.</li>
+        <li><strong>Técnica doble mano (2 rescatadores).</strong> Ambas manos sobre la mascarilla con técnica EC, un segundo rescatador comprime la bolsa. Mayor sello y menor fatiga.</li>
+        <li><strong>Comprimir la bolsa suavemente</strong> durante ~1 segundo. Volumen corriente suficiente para observar elevación torácica (≈ 500–600 mL en adulto).</li>
+        <li><strong>Permitir exhalación pasiva completa</strong> antes de la siguiente ventilación.</li>
+        <li><strong>Verificar sello</strong> entre ventilaciones. Si hay fuga visible, reposicionar la mascarilla o considerar COF/cánula nasofaríngea.</li>
+      </ol>
+      <div class="disp-note-danger" style="margin-top:1rem;"><strong>Volumen excesivo:</strong> El volumen corriente en SVB debe ser suficiente para ver elevación torácica — aproximadamente 500–600 mL. Ventilaciones excesivas generan distensión gástrica y favorecen la broncoaspiración durante la reanimación.</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- SECCIÓN 5 — ERRORES FRECUENTES -->
+<section class="section" id="errores">
+  <div class="section-header">
+    <div><div class="section-number">05</div></div>
+    <div>
+      <div class="section-title">Errores Frecuentes</div>
+      <div class="section-subtitle">Fallas más comunes en la práctica del SVB</div>
+    </div>
+  </div>
+
+  <div class="errores-grid">
+
+    <div class="error-item">
+      <h5>Pausas de compresión prolongadas</h5>
+      <p>Interrumpir compresiones para verificar pulso o ritmo durante más de 10 segundos reduce la fracción de compresión por debajo del 60%, comprometiendo la perfusión coronaria.</p>
+      <div class="fix">Limitar toda pausa a &lt;10 s. Análisis de ritmo con DAE ≤5 s de pausa.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Compresiones insuficientes en profundidad</h5>
+      <p>Comprimir menos de 5 cm en el adulto genera un gasto cardíaco subóptimo. Es el error de compresión más frecuente, especialmente en rescatadores que temen lesionar al paciente.</p>
+      <div class="fix">5–6 cm en adulto. Contar presión y verificar depresión torácica visible.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>No permitir el retroceso torácico completo</h5>
+      <p>Apoyarse sobre el tórax entre compresiones impide el llenado ventricular, reduciendo el gasto cardíaco generado por cada compresión.</p>
+      <div class="fix">Levantar completamente el talón de la mano entre compresiones sin perder posición.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Hiperventilación</h5>
+      <p>Ventilar demasiado rápido o con demasiado volumen durante la RCP aumenta la presión intratorácica, reduce el retorno venoso y deteriora el gasto cardíaco. Frecuente cuando el rescatador está ansioso.</p>
+      <div class="fix">10 ventilaciones/min máximo. Una ventilación suave de ~1 s que eleve el tórax — no más.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Frecuencia de compresión incorrecta</h5>
+      <p>Frecuencias &lt;100 /min reducen el flujo. Frecuencias &gt;120 /min reducen la profundidad (menor tiempo por compresión) y favorecen la fatiga muscular.</p>
+      <div class="fix">100–120 /min. Usar metrónomo, canción de referencia (100 bpm) o la función de metrónomo del DAE.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Retrasar el DAE por continuar RCP</h5>
+      <p>Cuando el DAE ya está en el lugar, retrasar su aplicación para continuar compresiones es un error. La desfibrilación temprana es el único tratamiento definitivo para FV.</p>
+      <div class="fix">Aplicar el DAE en cuanto esté disponible. La pausa de análisis es breve — los beneficios superan el costo.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Posición de manos incorrecta</h5>
+      <p>Comprimir en el tercio superior del esternón o sobre el proceso xifoides genera menor efectividad y mayor riesgo de fractura de xifoides y laceración hepática.</p>
+      <div class="fix">Mitad inferior del esternón. Verificar posición antes de iniciar cada ciclo.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Verificación de pulso prolongada</h5>
+      <p>Buscar el pulso carotídeo durante más de 10 segundos no mejora la precisión diagnóstica y retrasa el inicio de compresiones. En PCR, cada segundo cuenta.</p>
+      <div class="fix">Verificación simultánea respiración + pulso en ≤10 s. Ante duda: iniciar compresiones.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECCIÓN 6 — CASOS CLÍNICOS -->
+<section class="section" id="casos">
+  <div class="section-header">
+    <div><div class="section-number">06</div></div>
+    <div>
+      <div class="section-title">Casos Clínicos Integrativos</div>
+      <div class="section-subtitle">Escenarios de dificultad progresiva — razonamiento clínico aplicado</div>
+    </div>
+  </div>
+
+  <!-- Caso 1 — básico -->
+  <div class="caso-card" id="caso-1">
+    <div class="caso-header" onclick="toggleCaso('caso-1')">
+      <span class="caso-num">Caso 01 · Básico</span>
+      <h4>Colapso en vía pública — hombre adulto mayor</h4>
+      <span class="caso-chevron">▼</span>
+    </div>
+    <div class="caso-body">
+      <div class="caso-escenario">
+        <strong>Escenario:</strong> Unidad TUM responde a reporte de "persona caída". Al llegar encuentran a <strong>Aurelio, 68 años</strong>, en decúbito supino sobre la banqueta. No responde a estímulos verbales ni dolorosos. Respiración ausente. No se palpa pulso carotídeo en 8 segundos. Un ciudadano está presente pero no ha iniciado ninguna intervención. No hay DAE en la unidad — el servicio informa que una segunda unidad con DAE llega en 4 minutos.
+      </div>
+      <div class="caso-respuesta">
+        <strong>Análisis:</strong><br>
+        El diagnóstico es claro: PCR con criterios de inicio de RCP (sin respuesta, sin respiración eficaz, sin pulso). La secuencia correcta:<br><br>
+        <strong>1.</strong> TUM-1 inicia compresiones de inmediato (posición correcta, 100–120 /min, 5–6 cm). <strong>2.</strong> TUM-2 solicita el DAE por radio y prepara la BVM con O₂ al 15 L/min. <strong>3.</strong> RCP 30:2 con BVM. <strong>4.</strong> Al llegar la segunda unidad (~4 min = 2 ciclos de DAE), aplicar inmediatamente. Si el ritmo es FV/TVSP: descargar y reiniciar compresiones de inmediato. <strong>5.</strong> Continuar hasta ROSC, llegada del SVA o decisión médica de suspensión.
+        <div class="disp-note" style="margin-top:1rem;"><strong>Punto clave:</strong> No esperar el DAE para iniciar compresiones. Cada minuto sin RCP reduce la supervivencia independientemente de la disponibilidad del DAE.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Caso 2 — intermedio -->
+  <div class="caso-card" id="caso-2">
+    <div class="caso-header" onclick="toggleCaso('caso-2')">
+      <span class="caso-num">Caso 02 · Intermedio</span>
+      <h4>Gasping post-colapso — mujer en restaurante</h4>
+      <span class="caso-chevron">▼</span>
+    </div>
+    <div class="caso-body">
+      <div class="caso-escenario">
+        <strong>Escenario:</strong> <strong>Kenia, 55 años</strong>, cae de su silla en un restaurante. Un mesero que realizó un curso de RCP el año anterior la encuentra con movimientos respiratorios lentos, irregulares y ruidosos (~3–4 por minuto). "Todavía respira", dice el mesero, y duda en iniciar compresiones. El TUM llega 3 minutos después y encuentra el mismo patrón.
+      </div>
+      <div class="caso-respuesta">
+        <strong>Análisis:</strong><br>
+        El patrón descrito es <strong>gasping (respiración agónica)</strong> — reflejo del tronco encefálico que persiste brevemente tras el PCR, sin capacidad real de oxigenación. La AHA 2020 es explícita: el gasping debe tratarse como PCR e iniciar RCP de inmediato.<br><br>
+        El error del mesero fue confundir gasping con respiración eficaz. El TUM verifica pulso en ≤10 s: ausente. Inicia compresiones, solicita DAE, prepara BVM. <strong>La dilación de 3 minutos es equivalente a una pérdida irreversible de supervivencia del 21–30%</strong> en caso de FV subyacente.
+        <div class="disp-note-danger" style="margin-top:1rem;"><strong>Para el instructor:</strong> Este caso ilustra la importancia de capacitar a la comunidad para reconocer el gasping. "Todavía respira" es una de las frases que más frecuentemente retrasa la RCP extrahospitalaria por testigos.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Caso 3 — avanzado -->
+  <div class="caso-card" id="caso-3">
+    <div class="caso-header" onclick="toggleCaso('caso-3')">
+      <span class="caso-num">Caso 03 · Avanzado</span>
+      <h4>PCR durante traslado — toma de decisiones en movimiento</h4>
+      <span class="caso-chevron">▼</span>
+    </div>
+    <div class="caso-body">
+      <div class="caso-escenario">
+        <strong>Escenario:</strong> Trasladan a <strong>Ramón, 72 años</strong>, con dolor torácico 8/10 de 45 minutos de evolución, diaforesis y disnea. A 6 minutos del hospital, el monitor del DAE alarma. TUM-2 (acompañante) constata pérdida de consciencia y ausencia de pulso. La unidad circula a 70 km/h en autopista.
+      </div>
+      <div class="caso-respuesta">
+        <strong>Análisis:</strong><br>
+        El PCR durante el traslado obliga a una decisión logística inmediata: <strong>detener la unidad para realizar RCP de calidad</strong> vs. continuar hacia el hospital (6 min).<br><br>
+        <strong>Decisión correcta:</strong> Detener la unidad. La RCP efectiva es imposible con el vehículo en movimiento — la inestabilidad impide profundidad y posición adecuadas. TUM-2 inicia compresiones. El conductor detiene la unidad, activa DAE, comunica al hospital. RCP 30:2 con BVM. Si hay ROSC, traslado inmediato con monitorización continua. Si no hay ROSC en 2 ciclos (4 min), solicitar SVA de interceptación.
+        <div class="disp-note-warn" style="margin-top:1rem;"><strong>Reflexión:</strong> La urgencia de llegar al hospital no justifica comprometer la calidad de la RCP. 6 minutos de compresiones de alta calidad con posibilidad de desfibrilación a bordo supera el traslado sin RCP efectiva.</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- SECCIÓN 7 — REFLEXIÓN SOCRÁTICA -->
+<section class="section" id="reflexion">
+  <div class="section-header">
+    <div><div class="section-number">07</div></div>
+    <div>
+      <div class="section-title">Reflexión Socrática</div>
+      <div class="section-subtitle">Preguntas para el análisis crítico — sin respuesta única</div>
+    </div>
+  </div>
+
+  <div class="reflexion-grid">
+    <div class="reflexion-item">
+      <p>Si la RCP sólo mantiene el 30% del gasto cardíaco normal, ¿por qué duplica o triplica la supervivencia? ¿Qué es lo que realmente le estamos comprando al paciente?</p>
+    </div>
+    <div class="reflexion-item">
+      <p>¿Por qué la AHA recomienda iniciar compresiones <em>antes</em> de ventilaciones en el adulto, pero en ahogamiento o PCR pediátrico se recomienda lo opuesto? ¿Qué mecanismo fisiopatológico explica esa diferencia?</p>
+    </div>
+    <div class="reflexion-item">
+      <p>Un DAE indica "no se recomienda descarga" en un paciente sin pulso. ¿Qué ritmos pueden generar ese mensaje? ¿Cambia en algo la conducta del TUM en ese momento?</p>
+    </div>
+    <div class="reflexion-item">
+      <p>La fracción de compresión (FC) es el porcentaje de tiempo en PCR que se dedica a compresiones. ¿Qué intervenciones del TUM —por bien intencionadas que sean— pueden reducirla sin que el equipo lo perciba?</p>
+    </div>
+    <div class="reflexion-item">
+      <p>¿En qué circunstancias el TUM Básico podría (o debería) considerar no iniciar la RCP? ¿Qué criterios aplican en el contexto prehospitalario mexicano?</p>
+    </div>
+    <div class="reflexion-item">
+      <p>Si el retorno de la circulación espontánea (ROSC) se logra pero el paciente queda con daño neurológico severo, ¿considera que la reanimación fue un éxito? ¿Qué cambia esa perspectiva en cómo practicamos el SVB?</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 8 — MATERIAL DE REFUERZO -->
+<section class="section" id="refuerzo">
+  <div class="section-header">
+    <div><div class="section-number">08</div></div>
+    <div>
+      <div class="section-title">Material de Refuerzo</div>
+      <div class="section-subtitle">Recursos para profundizar el estudio</div>
+    </div>
+  </div>
+
+  <div class="refuerzo-grid">
+    <div class="refuerzo-item">
+      <div class="refuerzo-icon">📄</div>
+      <div>
+        <h5>AHA Guidelines 2020 — CPR & ECC</h5>
+        <p>Documento base de las recomendaciones actuales. Disponible en Circulation (2020, Supplement 2). Acceso libre en PubMed.</p>
+      </div>
+    </div>
+    <div class="refuerzo-item">
+      <div class="refuerzo-icon">📖</div>
+      <div>
+        <h5>PHTLS 9ª Edición</h5>
+        <p>Capítulos sobre SVB y manejo del paro cardíaco en el entorno prehospitalario traumatológico. Complementa la perspectiva AHA con fisiología del trauma.</p>
+      </div>
+    </div>
+    <div class="refuerzo-item">
+      <div class="refuerzo-icon">⚖️</div>
+      <div>
+        <h5>NOM-034-SSA3-2013</h5>
+        <p>Norma Oficial Mexicana que regula el alcance del TUM Básico. Define qué intervenciones son legalmente permitidas en el SVB prehospitalario.</p>
+      </div>
+    </div>
+    <div class="refuerzo-item">
+      <div class="refuerzo-icon">🎓</div>
+      <div>
+        <h5>ILCOR — International Consensus 2022</h5>
+        <p>Revisiones sistemáticas que fundamentan las guías AHA/ERC. Útil para comprender la evidencia detrás de cada recomendación del SVB.</p>
+      </div>
+    </div>
+    <div class="refuerzo-item">
+      <div class="refuerzo-icon">🎯</div>
+      <div>
+        <h5>Metrónomo de compresiones (100 bpm)</h5>
+        <p>Disponible en YouTube ("CPR metronome 100 bpm") y como app móvil. Imprescindible para entrenamiento de frecuencia de compresiones.</p>
+      </div>
+    </div>
+    <div class="refuerzo-item">
+      <div class="refuerzo-icon">🔬</div>
+      <div>
+        <h5>Paradis et al. — Aortic pressure during CPR</h5>
+        <p>Evidencia clásica sobre perfusión coronaria durante RCP y su relación con ROSC. Referencia fisiopatológica fundamental para comprender la importancia de la calidad de compresiones.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 9 — AUTOEVALUACIÓN -->
+<section class="section" id="autoevaluacion">
+  <div class="section-header">
+    <div><div class="section-number">09</div></div>
+    <div>
+      <div class="section-title">Autoevaluación Formativa</div>
+      <div class="section-subtitle">10 preguntas · Basadas en AHA 2020 · Los resultados se envían al instructor</div>
+    </div>
+  </div>
+
+  <div class="quiz-wrap">
+    <div class="student-fields">
+      <div class="field-group">
+        <label for="student-name">Nombre completo</label>
+        <input type="text" id="student-name" placeholder="Tu nombre y apellidos">
+      </div>
+      <div class="field-group">
+        <label for="student-group">Grupo / Generación</label>
+        <input type="text" id="student-group" placeholder="Ej. TUM B — G2 2025">
+      </div>
+    </div>
+
+    <!-- P1 -->
+    <div class="q-block" data-correct="b">
+      <div class="q-num">Pregunta 1 de 10</div>
+      <div class="q-text">¿Cuál es la frecuencia correcta de compresiones torácicas en SVB para adulto según AHA 2020?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q1" value="a"> 60–80 compresiones por minuto</label>
+        <label class="q-opt"><input type="radio" name="q1" value="b"> 100–120 compresiones por minuto</label>
+        <label class="q-opt"><input type="radio" name="q1" value="c"> 120–140 compresiones por minuto</label>
+        <label class="q-opt"><input type="radio" name="q1" value="d"> Cualquier frecuencia que mantenga la profundidad</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: 100–120 /min.</strong> Frecuencias menores reducen el gasto cardíaco generado. Frecuencias mayores reducen la profundidad y el llenado ventricular. El rango 100–120 optimiza el balance entre flujo y llenado.</div>
+    </div>
+
+    <!-- P2 -->
+    <div class="q-block" data-correct="c">
+      <div class="q-num">Pregunta 2 de 10</div>
+      <div class="q-text">Un paciente adulto presenta movimientos respiratorios lentos, irregulares y ruidosos (~3 por minuto) tras colapsar. No responde y no se palpa pulso. ¿Cuál es la conducta correcta?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q2" value="a"> Observarlo y esperar para confirmar si pierde la respiración</label>
+        <label class="q-opt"><input type="radio" name="q2" value="b"> Iniciar solo ventilaciones de rescate, sin compresiones</label>
+        <label class="q-opt"><input type="radio" name="q2" value="c"> Tratar como PCR e iniciar RCP de inmediato — el gasping no es ventilación eficaz</label>
+        <label class="q-opt"><input type="radio" name="q2" value="d"> Colocar en posición de recuperación y trasladar sin RCP</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: iniciar RCP.</strong> El gasping (respiración agónica) es un reflejo del tronco encefálico sin capacidad de oxigenación. La AHA 2020 lo clasifica explícitamente como criterio de inicio de RCP.</div>
+    </div>
+
+    <!-- P3 -->
+    <div class="q-block" data-correct="a">
+      <div class="q-num">Pregunta 3 de 10</div>
+      <div class="q-text">¿Cuál es la profundidad correcta de compresión torácica en el adulto?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q3" value="a"> 5–6 cm (al menos 2 pulgadas)</label>
+        <label class="q-opt"><input type="radio" name="q3" value="b"> 3–4 cm</label>
+        <label class="q-opt"><input type="radio" name="q3" value="c"> 7–8 cm para maximizar el gasto cardíaco</label>
+        <label class="q-opt"><input type="radio" name="q3" value="d"> Depende del peso estimado del paciente</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: 5–6 cm.</strong> Menos de 5 cm es insuficiente para generar gasto cardíaco adecuado. Más de 6 cm aumenta el riesgo de lesiones (costillas, hígado) sin beneficio adicional demostrado.</div>
+    </div>
+
+    <!-- P4 -->
+    <div class="q-block" data-correct="d">
+      <div class="q-num">Pregunta 4 de 10</div>
+      <div class="q-text">Tras aplicar una descarga con el DAE, ¿cuál es la acción inmediata correcta?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q4" value="a"> Verificar pulso durante 10 segundos antes de continuar</label>
+        <label class="q-opt"><input type="radio" name="q4" value="b"> Esperar el análisis del DAE para confirmar conversión del ritmo</label>
+        <label class="q-opt"><input type="radio" name="q4" value="c"> Verificar respiración y nivel de consciencia</label>
+        <label class="q-opt"><input type="radio" name="q4" value="d"> Reiniciar compresiones de inmediato — sin verificar pulso</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: reiniciar compresiones de inmediato.</strong> Incluso si la desfibrilación fue exitosa, el corazón requiere varios segundos para recuperar función mecánica efectiva. Las compresiones inmediatas mantienen la perfusión coronaria durante ese período crítico.</div>
+    </div>
+
+    <!-- P5 -->
+    <div class="q-block" data-correct="b">
+      <div class="q-num">Pregunta 5 de 10</div>
+      <div class="q-text">¿Cuál es la interrupción máxima permitida de las compresiones torácicas durante la RCP?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q5" value="a"> 20 segundos</label>
+        <label class="q-opt"><input type="radio" name="q5" value="b"> 10 segundos</label>
+        <label class="q-opt"><input type="radio" name="q5" value="c"> 5 segundos</label>
+        <label class="q-opt"><input type="radio" name="q5" value="d"> No existe límite definido si la interrupción es justificada</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: 10 segundos.</strong> La AHA 2020 establece que toda pausa en compresiones debe ser menor a 10 s. Las interrupciones repetidas reducen la fracción de compresión y deterioran la perfusión coronaria y cerebral.</div>
+    </div>
+
+    <!-- P6 -->
+    <div class="q-block" data-correct="c">
+      <div class="q-num">Pregunta 6 de 10</div>
+      <div class="q-text">En RCP sin dispositivo avanzado de vía aérea, ¿cuál es la relación correcta compresión-ventilación?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q6" value="a"> 15 : 2</label>
+        <label class="q-opt"><input type="radio" name="q6" value="b"> 15 : 1</label>
+        <label class="q-opt"><input type="radio" name="q6" value="c"> 30 : 2</label>
+        <label class="q-opt"><input type="radio" name="q6" value="d"> 30 : 1</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: 30 : 2.</strong> Esta relación aplica tanto para 1 como para 2 rescatadores en adulto sin vía aérea avanzada. La relación 15:2 aplica en RCP pediátrica con 2 rescatadores de salud.</div>
+    </div>
+
+    <!-- P7 -->
+    <div class="q-block" data-correct="a">
+      <div class="q-num">Pregunta 7 de 10</div>
+      <div class="q-text">¿Cuál de los siguientes ritmos responde al choque del DAE?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q7" value="a"> Fibrilación ventricular (FV)</label>
+        <label class="q-opt"><input type="radio" name="q7" value="b"> Asistolia</label>
+        <label class="q-opt"><input type="radio" name="q7" value="c"> Actividad eléctrica sin pulso (AESP)</label>
+        <label class="q-opt"><input type="radio" name="q7" value="d"> Bloqueo auriculoventricular completo</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: FV.</strong> Los ritmos desfibrilables son la Fibrilación Ventricular (FV) y la Taquicardia Ventricular sin pulso (TVSP). La asistolia y la AESP no responden al choque — en ellas la RCP y el tratamiento de causas reversibles son la única intervención.</div>
+    </div>
+
+    <!-- P8 -->
+    <div class="q-block" data-correct="d">
+      <div class="q-num">Pregunta 8 de 10</div>
+      <div class="q-text">¿Cuántos eslabones tiene la Cadena de Supervivencia extrahospitalaria según AHA 2020?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q8" value="a"> 4 eslabones</label>
+        <label class="q-opt"><input type="radio" name="q8" value="b"> 5 eslabones</label>
+        <label class="q-opt"><input type="radio" name="q8" value="c"> 7 eslabones</label>
+        <label class="q-opt"><input type="radio" name="q8" value="d"> 6 eslabones</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: 6 eslabones.</strong> La actualización AHA 2020 agregó la recuperación y rehabilitación como sexto eslabón, reconociendo que el impacto del PCR trasciende el episodio agudo y requiere seguimiento a largo plazo.</div>
+    </div>
+
+    <!-- P9 -->
+    <div class="q-block" data-correct="b">
+      <div class="q-num">Pregunta 9 de 10</div>
+      <div class="q-text">Paciente post-ROSC durante traslado, SpO₂ 99% con O₂ a 15 L/min. ¿Cuál es la conducta correcta según AHA 2020?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q9" value="a"> Mantener O₂ a 15 L/min para garantizar máxima oxigenación</label>
+        <label class="q-opt"><input type="radio" name="q9" value="b"> Titular O₂ para mantener SpO₂ 94–98%, evitando hiperoxia</label>
+        <label class="q-opt"><input type="radio" name="q9" value="c"> Suspender O₂ suplementario si el paciente respira espontáneamente</label>
+        <label class="q-opt"><input type="radio" name="q9" value="d"> No existe recomendación específica de SpO₂ en el período post-ROSC</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: titular a SpO₂ 94–98%.</strong> La hiperoxia post-ROSC genera radicales libres de oxígeno con toxicidad neurológica adicional. La AHA 2020 recomienda explícitamente evitar SpO₂ >98% una vez recuperado el ROSC.</div>
+    </div>
+
+    <!-- P10 -->
+    <div class="q-block" data-correct="c">
+      <div class="q-num">Pregunta 10 de 10</div>
+      <div class="q-text">Dos TUMs atienden un PCR en adulto. Llevan 90 segundos de RCP. TUM-1 (compresor) comienza a perder profundidad de compresión. ¿Cuál es la conducta correcta?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q10" value="a"> Continuar hasta el análisis del DAE a los 2 minutos sin interrumpir</label>
+        <label class="q-opt"><input type="radio" name="q10" value="b"> Hacer una pausa de 30 s para que TUM-1 descanse antes de continuar</label>
+        <label class="q-opt"><input type="radio" name="q10" value="c"> Intercambiar roles de inmediato (&lt;5 s de pausa) — la profundidad no puede comprometerse</label>
+        <label class="q-opt"><input type="radio" name="q10" value="d"> TUM-2 toma el lugar de TUM-1 y ambos comprimen simultáneamente para aumentar la fuerza</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: intercambiar roles de inmediato.</strong> La fatiga muscular ocurre antes de los 2 minutos cuando el compresor no está entrenado. La pérdida de profundidad compromete más el pronóstico que una pausa de transición de 5 s. No existe beneficio de compresiones simultáneas.</div>
+    </div>
+
+    <div class="quiz-actions">
+      <button class="btn-verificar" id="btn-verificar" onclick="evaluarQuiz()">Verificar respuestas</button>
+      <button class="btn-reiniciar" id="btn-reiniciar" onclick="reiniciarQuiz()">Reiniciar</button>
+    </div>
+
+    <div class="quiz-result" id="quiz-result"></div>
+  </div>
+</section>
+
+<!-- SECCIÓN 10 — REFERENCIAS -->
+<section class="section" id="referencias">
+  <div class="section-header">
+    <div><div class="section-number">10</div></div>
+    <div>
+      <div class="section-title">Referencias</div>
+      <div class="section-subtitle">Fuentes primarias — formato APA 7ª edición</div>
+    </div>
+  </div>
+
+  <ul class="ref-list">
+    <li>
+      <span class="ref-num">1</span>
+      <span>Panchal, A. R., Bartos, J. A., Cabañas, J. G., Donnino, M. W., Drennan, I. R., Hirsch, K. G., Kudenchuk, P. J., Kurz, M. C., Link, M. S., Morley, P. T., O'Neil, B. J., Peberdy, M. A., Rittenberger, J. C., Rodriguez, A. J., Sawyer, K. N., Berg, K. M., &amp; Adult Basic and Advanced Life Support Writing Group. (2020). Part 3: Adult basic and advanced life support: 2020 American Heart Association guidelines for cardiopulmonary resuscitation and emergency cardiovascular care. <em>Circulation, 142</em>(16_suppl_2), S366–S468. <a href="https://doi.org/10.1161/CIR.0000000000000916" target="_blank">https://doi.org/10.1161/CIR.0000000000000916</a></span>
+    </li>
+    <li>
+      <span class="ref-num">2</span>
+      <span>National Association of Emergency Medical Technicians (NAEMT). (2022). <em>PHTLS: Prehospital trauma life support</em> (9.ª ed.). Jones &amp; Bartlett Learning.</span>
+    </li>
+    <li>
+      <span class="ref-num">3</span>
+      <span>Secretaría de Salud. (2014). <em>Norma Oficial Mexicana NOM-034-SSA3-2013: Regulación de los servicios de salud. Atención médica prehospitalaria.</em> Diario Oficial de la Federación. <a href="https://www.dof.gob.mx" target="_blank">https://www.dof.gob.mx</a></span>
+    </li>
+    <li>
+      <span class="ref-num">4</span>
+      <span>Olasveengen, T. M., Semeraro, F., Ristagno, G., Castren, M., Handley, A., Kuzovlev, A., Monsieurs, K. G., Raffay, V., Smyth, M., Soar, J., Svavarsdóttir, H., &amp; Nolan, J. P. (2021). European Resuscitation Council guidelines 2021: Basic life support. <em>Resuscitation, 161</em>, 98–114. <a href="https://doi.org/10.1016/j.resuscitation.2021.02.009" target="_blank">https://doi.org/10.1016/j.resuscitation.2021.02.009</a></span>
+    </li>
+    <li>
+      <span class="ref-num">5</span>
+      <span>Paradis, N. A., Martin, G. B., Rivers, E. P., Goetting, M. G., Appleton, T. J., Feingold, M., &amp; Nowak, R. M. (1990). Coronary perfusion pressure and the return of spontaneous circulation in human cardiopulmonary resuscitation. <em>JAMA, 263</em>(8), 1106–1113. <a href="https://doi.org/10.1001/jama.1990.03440080082027" target="_blank">https://doi.org/10.1001/jama.1990.03440080082027</a></span>
+    </li>
+    <li>
+      <span class="ref-num">6</span>
+      <span>Meaney, P. A., Bobrow, B. J., Mancini, M. E., Christenson, J., de Caen, A. R., Bhanji, F., Abella, B. S., Kleinman, M. E., Edelson, D. P., Berg, R. A., &amp; CPR Quality Summit Investigators. (2013). Cardiopulmonary resuscitation quality: Improving cardiac resuscitation outcomes both inside and outside the hospital. <em>Circulation, 128</em>(4), 417–435. <a href="https://doi.org/10.1161/CIR.0b013e31829d8654" target="_blank">https://doi.org/10.1161/CIR.0b013e31829d8654</a></span>
+    </li>
+  </ul>
+</section>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+  <strong>Instituto Educativo VIVE</strong> · Módulo TUM Básico — Soporte Vital Básico<br>
+  Revisión, validación y edición de contenidos: <strong>José Manuel Caballero Martínez</strong><br>
+  TUM Básico Certificado · Cruz Roja Mexicana, Delegación Morelia · Instructor SVB y TUM Básico, Instituto Educativo VIVE
+  <br><br>
+  <div class="ai-disclosure">
+    ⚠ Declaración de uso de IA: Los contenidos de este módulo fueron desarrollados con el apoyo de herramientas de inteligencia artificial (Claude, Anthropic). Todo el material fue revisado, validado y editado por el instructor responsable. La IA asistió en la estructuración y redacción pedagógica; las decisiones clínicas y pedagógicas finales son responsabilidad del instructor humano. Basado en AHA 2020, NOM-034-SSA3-2013 y PHTLS 9.ª edición.
+  </div>
+</footer>
+
+<script>
+  /* ── Nav móvil ── */
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('nav-links').classList.remove('open');
+    });
+  });
+
+  /* ── Eslabones ── */
+  function toggleEslabon(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  /* ── Técnica ── */
+  function toggleTecnica(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  /* ── Casos ── */
+  function toggleCaso(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  /* ── Autoevaluación ── */
+  let quizEnviado = false;
+
+  const PREGUNTAS = [
+    {
+      texto: 'Frecuencia correcta de compresiones torácicas en SVB adulto (AHA 2020)',
+      opciones: { a:'60–80 /min', b:'100–120 /min', c:'120–140 /min', d:'Cualquier frecuencia que mantenga la profundidad' }
+    },
+    {
+      texto: 'Paciente con gasping, sin respuesta, sin pulso — conducta correcta',
+      opciones: { a:'Observar y esperar confirmación de PCR', b:'Solo ventilaciones, sin compresiones', c:'Tratar como PCR — iniciar RCP de inmediato', d:'Decúbito lateral y traslado sin RCP' }
+    },
+    {
+      texto: 'Profundidad correcta de compresión en adulto',
+      opciones: { a:'5–6 cm (≥2 pulgadas)', b:'3–4 cm', c:'7–8 cm', d:'Depende del peso estimado' }
+    },
+    {
+      texto: 'Acción inmediata tras descarga del DAE',
+      opciones: { a:'Verificar pulso 10 s', b:'Esperar análisis del DAE', c:'Verificar respiración y consciencia', d:'Reiniciar compresiones de inmediato — sin verificar pulso' }
+    },
+    {
+      texto: 'Interrupción máxima permitida de compresiones durante RCP',
+      opciones: { a:'20 segundos', b:'10 segundos', c:'5 segundos', d:'Sin límite si es justificada' }
+    },
+    {
+      texto: 'Relación compresión-ventilación en SVB adulto sin vía aérea avanzada',
+      opciones: { a:'15 : 2', b:'15 : 1', c:'30 : 2', d:'30 : 1' }
+    },
+    {
+      texto: 'Ritmo que responde al choque del DAE',
+      opciones: { a:'Fibrilación ventricular (FV)', b:'Asistolia', c:'AESP', d:'BAV completo' }
+    },
+    {
+      texto: 'Número de eslabones en la Cadena de Supervivencia extrahospitalaria (AHA 2020)',
+      opciones: { a:'4 eslabones', b:'5 eslabones', c:'7 eslabones', d:'6 eslabones' }
+    },
+    {
+      texto: 'SpO₂ objetivo en paciente post-ROSC durante traslado (AHA 2020)',
+      opciones: { a:'Máxima con O₂ a 15 L/min', b:'94–98% — evitar hiperoxia', c:'Suspender O₂ si respira espontáneamente', d:'No existe recomendación específica' }
+    },
+    {
+      texto: 'TUM-1 pierde profundidad de compresión a los 90 s de RCP — conducta correcta',
+      opciones: { a:'Continuar hasta análisis DAE a los 2 min', b:'Pausa de 30 s para descanso', c:'Intercambiar roles de inmediato (<5 s pausa)', d:'Comprimir simultáneamente ambos TUMs' }
+    }
+  ];
+
+  function evaluarQuiz() {
+    if (quizEnviado) return;
+
+    const nombre = document.getElementById('student-name').value.trim();
+    const grupo  = document.getElementById('student-group').value.trim();
+
+    if (!nombre) {
+      alert('Por favor ingresa tu nombre antes de verificar.');
+      document.getElementById('student-name').focus();
+      return;
+    }
+
+    const blocks = document.querySelectorAll('.q-block');
+    let correctas = 0;
+    let respondidas = 0;
+    const detalles = [];
+
+    blocks.forEach((block, idx) => {
+      const correct  = block.dataset.correct;
+      const selected = block.querySelector('input[type=radio]:checked');
+      const explanation = block.querySelector('.q-explanation');
+      const opts = block.querySelectorAll('.q-opt');
+
+      const respuestaTexto = selected ? PREGUNTAS[idx].opciones[selected.value] : '— Sin respuesta —';
+      const correctaTexto  = PREGUNTAS[idx].opciones[correct];
+      const esCorrecta     = selected && selected.value === correct;
+
+      detalles.push({
+        num: idx + 1,
+        pregunta: PREGUNTAS[idx].texto,
+        respuesta: respuestaTexto,
+        correcta: correctaTexto,
+        ok: esCorrecta
+      });
+
+      if (!selected) return;
+      respondidas++;
+
+      opts.forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+        const val = opt.querySelector('input').value;
+        if (val === correct) opt.classList.add('correct');
+        else if (opt.querySelector('input').checked && val !== correct) opt.classList.add('incorrect');
+        opt.querySelector('input').disabled = true;
+      });
+
+      explanation.classList.add('show');
+      if (esCorrecta) correctas++;
+    });
+
+    if (respondidas < blocks.length) {
+      alert(`Faltan ${blocks.length - respondidas} pregunta(s) por responder.`);
+      return;
+    }
+
+    document.getElementById('student-name').disabled = true;
+    document.getElementById('student-group').disabled = true;
+
+    const pct = Math.round((correctas / blocks.length) * 100);
+    let color, msg;
+    if (pct >= 80)      { color = 'var(--green)'; msg = '¡Dominio sólido del tema! Estás listo para la práctica de RCP.'; }
+    else if (pct >= 60) { color = 'var(--amber)'; msg = 'Buen avance. Repasa los conceptos marcados en rojo y vuelve a intentarlo.'; }
+    else                { color = 'var(--red)';   msg = 'Revisa el material completo y repite la autoevaluación. Cada error señala dónde enfocar el estudio.'; }
+
+    const result = document.getElementById('quiz-result');
+    const colorRGB = color === 'var(--green)' ? '74,222,128' : color === 'var(--amber)' ? '245,158,11' : '248,113,113';
+    const borderC  = color === 'var(--green)' ? 'rgba(74,222,128,0.3)' : color === 'var(--amber)' ? 'rgba(245,158,11,0.3)' : 'rgba(248,113,113,0.3)';
+    result.style.background = `rgba(${colorRGB},0.06)`;
+    result.style.border = `1px solid ${borderC}`;
+    result.innerHTML = `
+      <div class="result-score" style="color:${color}">${correctas} / ${blocks.length}</div>
+      <div class="result-msg">${pct}% de aciertos — ${msg}</div>
+      <div id="email-status" style="margin-top:0.75rem;font-size:0.8rem;color:var(--text-dim);">Enviando resultados…</div>
+    `;
+    result.classList.add('show');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    document.getElementById('btn-verificar').disabled = true;
+    document.getElementById('btn-verificar').style.opacity = '0.5';
+    document.getElementById('btn-reiniciar').disabled = true;
+    document.getElementById('btn-reiniciar').style.opacity = '0.4';
+    document.getElementById('btn-reiniciar').title = 'No disponible tras el envío';
+    quizEnviado = true;
+
+    const filas = detalles.map(d => `
+      <tr style="border-bottom:1px solid #21262d;">
+        <td style="padding:6px 10px;color:#8b949e;">${d.num}</td>
+        <td style="padding:6px 10px;color:#e6edf3;">${d.pregunta}</td>
+        <td style="padding:6px 10px;color:${d.ok ? '#4ade80' : '#f87171'};">${d.respuesta} ${d.ok ? '✓' : '✗'}</td>
+        <td style="padding:6px 10px;color:#4ade80;">${d.correcta}</td>
+      </tr>`).join('');
+
+    const tablaHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:13px;font-family:sans-serif;">
+        <thead>
+          <tr style="background:#161b22;">
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">#</th>
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">Pregunta (resumen)</th>
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">Respuesta del alumno</th>
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">Respuesta correcta</th>
+          </tr>
+        </thead>
+        <tbody>${filas}</tbody>
+      </table>`;
+
+    const ahora = new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City', dateStyle: 'full', timeStyle: 'short' });
+
+    emailjs.send('service_vxatras', 'template_w703bqs', {
+      student_name:  nombre || 'No especificado',
+      student_group: grupo  || 'No especificado',
+      module_name:   'Soporte Vital Básico — TUM Básico',
+      score:         `${correctas} / ${blocks.length} (${pct}%)`,
+      timestamp:     ahora,
+      details_table: tablaHTML
+    }).then(() => {
+      document.getElementById('email-status').style.color = '#4ade80';
+      document.getElementById('email-status').textContent = '✓ Resultados enviados al instructor.';
+    }).catch(err => {
+      console.error('EmailJS error:', err);
+      document.getElementById('email-status').style.color = '#f87171';
+      document.getElementById('email-status').textContent = '⚠ No se pudo enviar el reporte. Toma captura de pantalla.';
+    });
+  }
+
+  function reiniciarQuiz() {
+    if (quizEnviado) return;
+    document.querySelectorAll('.q-block').forEach(block => {
+      block.querySelectorAll('input[type=radio]').forEach(inp => {
+        inp.checked = false;
+        inp.disabled = false;
+      });
+      block.querySelectorAll('.q-opt').forEach(opt => opt.classList.remove('correct', 'incorrect'));
+      block.querySelector('.q-explanation').classList.remove('show');
+    });
+    const result = document.getElementById('quiz-result');
+    result.classList.remove('show');
+    result.innerHTML = '';
+  }
+
+  /* ── Abrir primer eslabón por defecto ── */
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('eslabon-1')?.classList.add('open');
+    document.getElementById('tec-adulto')?.classList.add('open');
+    document.getElementById('caso-1')?.classList.add('open');
+  });
+</script>
+</body>
+</html>
