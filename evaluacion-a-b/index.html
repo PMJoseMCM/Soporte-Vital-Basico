@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<!-- saved from url=(0187)file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/RCP%20SVB%20alumno.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluación Primaria: Seguridad de Escena, A y B — TAMP Básico</title>
+<link href="./Evaluación Primaria_ Seguridad de Escena, A y B — TAMP Básico_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f12;
+    --surface: #141720;
+    --surface2: #1c2030;
+    --border: #2a3045;
+    --accent: #4fd1c5;
+    --accent2: #f6ad55;
+    --accent3: #fc8181;
+    --accent4: #68d391;
+    --text: #e2e8f0;
+    --text-muted: #718096;
+    --text-dim: #4a5568;
+    --warn: #f6ad55;
+    --danger: #fc8181;
+    --safe: #68d391;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0d0f12 0%, #0f1a1e 50%, #0d0f12 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(79,209,197,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(79,209,197,0.1);
+    border: 1px solid rgba(79,209,197,0.3);
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    color: #fff;
+    max-width: 700px;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    color: var(--text-muted);
+    font-size: 14px;
+    max-width: 600px;
+    margin-bottom: 30px;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 12px;
+    color: var(--text-dim);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .hero-meta span { color: var(--text-muted); }
+
+  
+/* ── HOME BUTTON ── */
+.btn-home{
+  display:inline-block;
+  margin:.25rem .75rem .25rem 0;
+  padding:.35rem .85rem;
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--accent);
+  border:1px solid rgba(79,209,197,.4);
+  border-radius:999px;
+  background:rgba(79,209,197,.08);
+  text-decoration:none;
+  transition:all .2s;
+}
+.btn-home:hover{background:rgba(79,209,197,.18)}
+
+/* NAV */
+  .nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.5px;
+    padding: 14px 16px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* HAMBURGER NAV */
+  .nav-hamburger {
+    display: none;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-title-small {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+
+  .hamburger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hamburger-btn span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text-muted);
+    transition: all 0.2s;
+  }
+
+  .hamburger-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+  .hamburger-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 99;
+    flex-direction: column;
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+
+  .mobile-menu a:hover { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .nav { display: none; }
+    .nav-hamburger { display: flex; }
+    .hero { padding: 40px 20px 36px; }
+    .container { padding: 0 20px; }
+    .footer { padding: 32px 20px; }
+    .grid-2 { grid-template-columns: 1fr !important; }
+    .abcde-row { flex-direction: column !important; }
+    .abcde-arrow { transform: rotate(90deg); }
+  }
+
+  /* LAYOUT */
+  .container { max-width: 90%; margin: 0 auto; padding: 0 40px; }
+
+  /* SECTIONS */
+  .section {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  /* CONDITIONAL BOX */
+  .conditional {
+    background: rgba(246,173,85,0.05);
+    border: 1px solid rgba(246,173,85,0.25);
+    border-left: 3px solid var(--warn);
+    border-radius: 4px;
+    padding: 24px;
+    margin: 20px 0;
+  }
+
+  .conditional-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--warn);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* INSTRUCTOR BOX */
+  .instructor-box {
+    background: rgba(79,209,197,0.05);
+    border: 1px solid rgba(79,209,197,0.2);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    border-radius: 2px;
+  }
+
+  .instructor-box .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .instructor-box p { color: var(--text-muted); font-size: 14px; }
+
+  /* SOCRATIC */
+  .socratic {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    position: relative;
+  }
+
+  .socratic::before {
+    content: '?';
+    position: absolute;
+    top: -12px; left: 20px;
+    background: var(--accent2);
+    color: var(--bg);
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px;
+    font-weight: bold;
+    width: 24px; height: 24px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+  }
+
+  .socratic .q {
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .socratic .hint { font-size: 13px; color: var(--text-muted); }
+
+  /* TOGGLE HINT */
+  .toggle-hint {
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    background: none;
+    border: 1px solid rgba(79,209,197,0.3);
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-top: 10px;
+    transition: all 0.2s;
+  }
+
+  .toggle-hint:hover { background: rgba(79,209,197,0.1); }
+
+  .hint-content { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .hint-content.open { display: block; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin: 20px 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  th {
+    background: var(--surface2);
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(42,48,69,0.5);
+    color: var(--text-muted);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  td:first-child { color: var(--text); font-weight: 500; }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin: 2px;
+  }
+
+  .tag-green { background: rgba(104,211,145,0.1); color: var(--safe); border: 1px solid rgba(104,211,145,0.3); }
+  .tag-red { background: rgba(252,129,129,0.1); color: var(--danger); border: 1px solid rgba(252,129,129,0.3); }
+  .tag-yellow { background: rgba(246,173,85,0.1); color: var(--warn); border: 1px solid rgba(246,173,85,0.3); }
+  .tag-blue { background: rgba(79,209,197,0.1); color: var(--accent); border: 1px solid rgba(79,209,197,0.3); }
+
+  /* STEPS */
+  .steps { counter-reset: step; }
+
+  .step {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    counter-increment: step;
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  .step-body { flex: 1; }
+  .step-title { font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .step-desc { color: var(--text-muted); font-size: 14px; }
+
+  /* WARNING BOXES */
+  .warn-box {
+    background: rgba(252,129,129,0.05);
+    border: 1px solid rgba(252,129,129,0.25);
+    border-left: 3px solid var(--danger);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 2px;
+  }
+
+  .warn-box .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--danger);
+    margin-bottom: 6px;
+  }
+
+  .ok-box {
+    background: rgba(104,211,145,0.05);
+    border: 1px solid rgba(104,211,145,0.25);
+    border-left: 3px solid var(--safe);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 2px;
+  }
+
+  .ok-box .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--safe);
+    margin-bottom: 6px;
+  }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* CASE CLINICAL */
+  .case-level {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .case-header {
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+  }
+
+  .case-header:hover { background: var(--surface2); }
+
+  .case-header-left { display: flex; align-items: center; gap: 14px; }
+
+  .case-level-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--accent2);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .case-title { font-weight: 500; color: var(--text); font-size: 14px; }
+
+  .case-chevron {
+    color: var(--text-dim);
+    transition: transform 0.2s;
+    font-size: 12px;
+  }
+
+  .case-chevron.open { transform: rotate(180deg); }
+
+  .case-body {
+    display: none;
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .case-body.open { display: block; }
+
+  .case-scenario {
+    background: var(--surface2);
+    border-radius: 3px;
+    padding: 16px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--text-muted);
+    font-style: italic;
+    border-left: 2px solid var(--accent2);
+  }
+
+  .case-question {
+    font-weight: 500;
+    color: var(--accent2);
+    font-size: 14px;
+    margin: 16px 0 8px;
+  }
+
+  .reveal-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 2px;
+    margin-top: 12px;
+    transition: all 0.2s;
+  }
+
+  .reveal-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .reveal-content { display: none; margin-top: 14px; }
+  .reveal-content.open { display: block; }
+
+  /* QUIZ */
+  .quiz-q {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .quiz-q-text {
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--text);
+    font-size: 15px;
+  }
+
+  .quiz-q-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+
+  .quiz-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--surface2);
+  }
+
+  .quiz-option:hover { border-color: var(--text-dim); }
+
+  .quiz-option.correct { border-color: var(--safe); background: rgba(104,211,145,0.05); }
+  .quiz-option.incorrect { border-color: var(--danger); background: rgba(252,129,129,0.05); }
+  .quiz-option.disabled { pointer-events: none; }
+
+  .quiz-option-letter {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .quiz-option.correct .quiz-option-letter { color: var(--safe); }
+  .quiz-option.incorrect .quiz-option-letter { color: var(--danger); }
+
+  .quiz-option-text { font-size: 14px; color: var(--text-muted); }
+  .quiz-option.correct .quiz-option-text { color: var(--text); }
+
+  .quiz-feedback {
+    display: none;
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+
+  .quiz-feedback.correct-fb {
+    display: block;
+    background: rgba(104,211,145,0.08);
+    border: 1px solid rgba(104,211,145,0.2);
+    color: var(--safe);
+  }
+
+  .quiz-feedback.incorrect-fb {
+    display: block;
+    background: rgba(252,129,129,0.08);
+    border: 1px solid rgba(252,129,129,0.2);
+    color: var(--danger);
+  }
+
+  /* SCORE */
+  .score-box {
+    display: none;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .score-box.show { display: block; }
+
+  .score-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 4rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .score-label { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+
+  .reset-btn {
+    background: none;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .reset-btn:hover { background: rgba(79,209,197,0.1); }
+
+  /* LIST STYLES */
+  ul, ol { padding-left: 20px; color: var(--text-muted); }
+  li { margin-bottom: 6px; font-size: 14px; }
+  li strong { color: var(--text); font-weight: 600; }
+
+  p { color: var(--text-muted); font-size: 14px; margin-bottom: 12px; }
+  p strong { color: var(--text); }
+
+  h3 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 24px 0 12px;
+    letter-spacing: 0.3px;
+  }
+
+  h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 20px 0 8px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 40px;
+    margin-top: 0;
+  }
+
+  .footer-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .footer p { font-size: 13px; color: var(--text-dim); margin-bottom: 6px; }
+
+  .refs { margin-top: 16px; }
+  .ref-item {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(42,48,69,0.4);
+    line-height: 1.6;
+  }
+
+  .ref-item:last-child { border-bottom: none; }
+
+  /* ABCDE BANNER */
+  .abcde-row {
+    display: flex;
+    gap: 0;
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .abcde-cell {
+    flex: 1;
+    padding: 16px 12px;
+    text-align: center;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .abcde-cell:last-child { border-right: none; }
+
+  .abcde-cell.active {
+    background: rgba(79,209,197,0.07);
+    border-bottom: 3px solid var(--accent);
+  }
+
+  .abcde-cell.dim { opacity: 0.4; }
+
+  .abcde-letter {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .abcde-cell.dim .abcde-letter { color: var(--text-dim); }
+
+  .abcde-word {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .abcde-cell.dim .abcde-word { color: var(--text-dim); }
+
+  /* SCENE SAFETY VISUAL */
+  .safety-phases {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 24px 0;
+  }
+
+  .safety-phase {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .safety-phase:last-child { border-bottom: none; }
+
+  .safety-phase-num {
+    width: 56px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface2);
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--accent);
+    border-right: 1px solid var(--border);
+  }
+
+  .safety-phase-body {
+    flex: 1;
+    padding: 16px 20px;
+    background: var(--surface);
+  }
+
+  .safety-phase-title {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .safety-phase-desc { color: var(--text-muted); font-size: 13px; }
+
+  /* TECHNIQUE BLOCK */
+  .technique-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .technique-header {
+    padding: 14px 20px;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .technique-icon {
+    width: 28px; height: 28px;
+    background: rgba(79,209,197,0.1);
+    border: 1px solid rgba(79,209,197,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .technique-title {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 14px;
+  }
+
+  .technique-body { padding: 16px 20px; }
+
+  /* FLOW DECISION */
+  .flow-decision {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
+    position: relative;
+  }
+
+  .flow-decision-q {
+    font-weight: 600;
+    color: var(--accent2);
+    font-size: 14px;
+    margin-bottom: 16px;
+    padding-left: 20px;
+    border-left: 3px solid var(--accent2);
+  }
+
+  .flow-branches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .flow-branch {
+    padding: 12px 14px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+
+  .flow-branch.yes {
+    background: rgba(104,211,145,0.05);
+    border: 1px solid rgba(104,211,145,0.25);
+  }
+
+  .flow-branch.no {
+    background: rgba(252,129,129,0.05);
+    border: 1px solid rgba(252,129,129,0.25);
+  }
+
+  .flow-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .flow-branch.yes .flow-label { color: var(--safe); }
+  .flow-branch.no .flow-label { color: var(--danger); }
+  .flow-branch-text { color: var(--text-muted); font-size: 13px; }
+
+  /* O2 DEVICE CARDS */
+  .o2-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+
+  .o2-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .o2-card-name {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 14px;
+  }
+
+  .o2-flow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    background: rgba(79,209,197,0.1);
+    border: 1px solid rgba(79,209,197,0.25);
+    padding: 2px 10px;
+    border-radius: 2px;
+  }
+
+  /* BVM STEPS */
+  .bvm-step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: var(--surface2);
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+
+  .bvm-step-num {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+  }
+
+  .bvm-step-content { flex: 1; }
+  .bvm-step-title { font-weight: 600; color: var(--text); font-size: 14px; margin-bottom: 3px; }
+  .bvm-step-detail { color: var(--text-muted); font-size: 13px; }
+
+  /* MODULE LINK */
+  .module-link {
+    background: rgba(79,209,197,0.04);
+    border: 1px solid rgba(79,209,197,0.2);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .module-link-icon {
+    width: 36px; height: 36px;
+    background: rgba(79,209,197,0.1);
+    border: 1px solid rgba(79,209,197,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .module-link-text { flex: 1; }
+  .module-link-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 3px;
+  }
+  .module-link-title { font-size: 13px; color: var(--text-muted); }
+
+/* ── NAV Signos Vitales ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(13,17,23,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-brand{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--accent)}
+.nav-brand span{font-family:'IBM Plex Sans',sans-serif;font-size:.75rem;color:var(--text-muted);margin-left:.4rem}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer}
+.hamburger span{width:22px;height:2px;background:var(--text)}
+.nav-links{display:flex;gap:.5rem;align-items:center}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:.75rem;padding:.35rem .6rem;border-radius:6px}
+.nav-links a:hover{color:var(--accent);background:rgba(79,209,197,.08)}
+@media(max-width:768px){.hamburger{display:flex}.nav-links{display:none;position:fixed;top:56px;left:0;right:0;background:var(--surface2);flex-direction:column;padding:1rem}.nav-links.open{display:flex}}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">VIVE <span>TAMP Básico — Evaluación Primaria</span></div>
+  <button class="hamburger" aria-label="Menú" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="nav-links">
+    <a class="btn-home" href="/Soporte-Vital-Basico/">🏠 Home</a>
+    <a href="#intro">Introducción</a>
+    <a href="#escena">Escena</a>
+    <a href="#abcde">ABCDE</a>
+    <a href="#via-aerea">A</a>
+    <a href="#ventilacion">B</a>
+    <a href="#errores">Errores</a>
+    <a href="#caso">Caso</a>
+    <a href="#autoevaluacion">Autoevaluación</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">TAMP Básico · Módulo 2</div>
+  <h1>Evaluación primaria:<br><em>Escena, A y B</em></h1>
+  <p class="hero-sub">Seguridad de la escena, tamaño del incidente y los primeros dos eslabones de la cadena de supervivencia prehospitalaria: vía aérea y ventilación.</p>
+  <div class="hero-meta">
+    <div>Nivel — <span>TAMP Básico</span></div>
+    <div>Marco — <span>NOM-034-SSA3-2013 · PHTLS</span></div>
+    <div>Uso — <span>Instituto Educativo VIVE</span></div>
+  </div>
+</div>
+
+<!-- SECCIÓN 1: INTRODUCCIÓN -->
+<div id="intro" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title">Introducción conceptual</div>
+    </div>
+
+    <p>La atención prehospitalaria no comienza con el contacto físico con el paciente. Comienza antes de descender de la unidad. El TAMP Básico que se acerca a una escena sin haberla evaluado primero es un potencial segundo paciente. Esta premisa, que parece simple, concentra uno de los errores más frecuentes y más graves en la práctica prehospitalaria.</p>
+
+    <p>La evaluación primaria sigue una secuencia sistemática, ordenada por prioridad fisiológica: lo que mata más rápido, se evalúa y trata primero. La nemotecnia <strong>ABCDE</strong> es el mapa de esa secuencia. Este módulo cubre los dos primeros eslabones: <strong>A (Airway — Vía aérea)</strong> y <strong>B (Breathing — Ventilación/Respiración)</strong>, precedidos por la evaluación de la escena que los hace posibles.</p>
+
+    <div class="abcde-row">
+      <div class="abcde-cell dim">
+        <div class="abcde-letter">E</div>
+        <div class="abcde-word">Escena</div>
+      </div>
+      <div class="abcde-cell active">
+        <div class="abcde-letter">A</div>
+        <div class="abcde-word">Airway</div>
+      </div>
+      <div class="abcde-cell active">
+        <div class="abcde-letter">B</div>
+        <div class="abcde-word">Breathing</div>
+      </div>
+      <div class="abcde-cell dim">
+        <div class="abcde-letter">C</div>
+        <div class="abcde-word">Circulation</div>
+      </div>
+      <div class="abcde-cell dim">
+        <div class="abcde-letter">D</div>
+        <div class="abcde-word">Disability</div>
+      </div>
+      <div class="abcde-cell dim">
+        <div class="abcde-letter">E</div>
+        <div class="abcde-word">Exposure</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Principio rector</div>
+      <p style="margin:0; font-size:15px; color:var(--text);">"Lo que la mente no sabe, los ojos no ven." — Una evaluación sistemática no es opcional: es la única forma de no perder información crítica bajo presión.</p>
+    </div>
+
+    <div class="socratic">
+      <p class="q">¿Por qué la evaluación de la escena no forma parte del ABCDE, pero la NOM-034 la coloca como paso previo obligatorio antes de cualquier contacto con el paciente?</p>
+      <button class="toggle-hint" onclick="toggleHint(this)">Ver respuesta esperada</button>
+      <div class="hint-content">
+        <p>Porque el ABCDE es un algoritmo de evaluación del <em>paciente</em>. La escena no es el paciente: es el entorno que puede anular cualquier maniobra si no está controlado. Un rescatador lesionado o un equipo expuesto al mismo mecanismo que dañó al paciente se convierte en una carga operativa, no en un recurso. La NOM-034-SSA3-2013 establece la evaluación de la escena como condición previa que habilita el acceso al paciente, no como parte de la fisiología del mismo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 2: SEGURIDAD DE ESCENA -->
+<div id="escena" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title">Seguridad de la escena</div>
+    </div>
+
+    <p>La evaluación de la escena ocurre de forma continua: antes de llegar, al llegar, durante la atención y al retirarse. No es un evento puntual. La NOM-034-SSA3-2013 y el modelo PHTLS coinciden en los elementos esenciales, con diferencias de énfasis que son complementarias.</p>
+
+    <div class="safety-phases">
+      <div class="safety-phase">
+        <div class="safety-phase-num">1</div>
+        <div class="safety-phase-body">
+          <div class="safety-phase-title">
+            Evaluación en aproximación
+            <span class="tag tag-blue">Desde la unidad</span>
+          </div>
+          <div class="safety-phase-desc">Observar desde lejos antes de detenerse. Identificar el mecanismo visible, número aproximado de víctimas, riesgos ambientales (humo, derrames, cables caídos, multitud hostil), posición de la unidad (no bloquear la vía de escape). No ingresar hasta tener un panorama inicial.</div>
+        </div>
+      </div>
+      <div class="safety-phase">
+        <div class="safety-phase-num">2</div>
+        <div class="safety-phase-body">
+          <div class="safety-phase-title">
+            EPP antes de bajar
+            <span class="tag tag-yellow">Obligatorio</span>
+          </div>
+          <div class="safety-phase-desc">Colocarse el equipo de protección personal <em>antes</em> de descender de la unidad. El EPP mínimo para un incidente de trauma incluye guantes, cubrebocas y protección ocular. Adaptarlo al mecanismo: material biológico, químico, incendio. No ponerse los guantes en la escena.</div>
+        </div>
+      </div>
+      <div class="safety-phase">
+        <div class="safety-phase-num">3</div>
+        <div class="safety-phase-body">
+          <div class="safety-phase-title">
+            Tamaño del incidente y número de víctimas
+            <span class="tag tag-blue">PHTLS + NOM-034</span>
+          </div>
+          <div class="safety-phase-desc">Estimar cuántos pacientes hay y si los recursos disponibles son suficientes. Si hay más víctimas de las que el equipo puede manejar de forma simultánea, activar el protocolo de triage y solicitar refuerzos <em>antes</em> de iniciar atención individual. Un error común es comenzar atención intensiva a la primera víctima encontrada sin evaluar el total.</div>
+        </div>
+      </div>
+      <div class="safety-phase">
+        <div class="safety-phase-num">4</div>
+        <div class="safety-phase-body">
+          <div class="safety-phase-title">
+            Mecanismo de lesión / Naturaleza de la enfermedad
+            <span class="tag tag-blue">MOI / NOI</span>
+          </div>
+          <div class="safety-phase-desc">En trauma: identificar el mecanismo (cinética de la energía). En urgencia médica: identificar la naturaleza probable de la enfermedad (cardiovascular, respiratoria, neurológica). Esta información orienta la evaluación primaria y permite anticipar hallazgos críticos antes de llegar al paciente.</div>
+        </div>
+      </div>
+      <div class="safety-phase">
+        <div class="safety-phase-num">5</div>
+        <div class="safety-phase-body">
+          <div class="safety-phase-title">
+            Control de la escena y recursos adicionales
+            <span class="tag tag-yellow">NOM-034</span>
+          </div>
+          <div class="safety-phase-desc">Coordinar con otras instituciones presentes (seguridad pública, bomberos, protección civil). Solicitar recursos adicionales de forma oportuna — no al momento del deterioro del paciente. Una escena controlada es condición necesaria para una atención segura y efectiva.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <div class="label">⚠ Peligro de la falsa seguridad</div>
+      <p style="margin:0;">Una escena puede volverse insegura en cualquier momento: condiciones del tráfico, cambios en la multitud, fugas que se expanden, estructuras inestables. La evaluación de la escena no termina hasta que el equipo y el paciente están fuera de ella.</p>
+    </div>
+
+    <div class="flow-decision">
+      <div class="flow-decision-q">¿Es seguro acercarse al paciente?</div>
+      <div class="flow-branches">
+        <div class="flow-branch yes">
+          <div class="flow-label">Sí — Proceder</div>
+          <div class="flow-branch-text">EPP puesto, escena evaluada, número de víctimas conocido, recursos suficientes o en camino. Iniciar contacto e impresión general del paciente.</div>
+        </div>
+        <div class="flow-branch no">
+          <div class="flow-label">No — Detenerse</div>
+          <div class="flow-branch-text">Peligro activo no controlado. Solicitar el recurso que controla ese peligro (policía, bomberos, CFE, etc.) antes de ingresar. No ingresar aunque el paciente sea visible y crítico.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="socratic">
+      <p class="q">En una escena con dos vehículos con impacto frontal, al llegar identificas 4 personas dentro de los autos. Tienes una unidad de básico con dos personas. ¿Qué haces primero?</p>
+      <button class="toggle-hint" onclick="toggleHint(this)">Ver respuesta esperada</button>
+      <div class="hint-content">
+        <p>Antes de acercarte a cualquier paciente, solicitas refuerzo. Cuatro pacientes potencialmente críticos exceden la capacidad de manejo simultáneo de una unidad básica con dos rescatadores. Si inicias atención intensiva sobre el primer paciente que encuentras sin evaluar el total, puedes perder a los que pudieran haber sobrevivido con intervención oportuna. La activación de recursos adicionales debe ser lo primero, no lo último.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 3: MARCO ABCDE -->
+<div id="abcde" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title">Marco ABCDE: lógica de la secuencia</div>
+    </div>
+
+    <p>La evaluación primaria (<strong>Primary Survey</strong> en PHTLS) busca identificar y tratar condiciones que amenazan la vida de forma inmediata. Su principio ordenador es simple: se atiende lo que mata más rápido primero. Una vía aérea obstruida mata en minutos; una fractura cerrada de fémur, aunque grave, puede esperar.</p>
+
+    <p>La secuencia ABCDE fue desarrollada por ATLS (Advanced Trauma Life Support) y adoptada con variaciones por PHTLS, AMLS y los protocolos de la NOM-034. En el contexto prehospitalario, la evaluación y el tratamiento son <strong>simultáneos</strong>: no terminas de evaluar A para tratar A antes de pasar a B.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Letra</th>
+            <th>Componente</th>
+            <th>Pregunta clave</th>
+            <th>Amenaza si falla</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A</td>
+            <td>Airway — Vía aérea</td>
+            <td>¿Está permeable?</td>
+            <td>Hipoxia en minutos</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>Breathing — Ventilación</td>
+            <td>¿Está respirando adecuadamente?</td>
+            <td>Hipoxia / hipercapnia</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>Circulation — Circulación</td>
+            <td>¿Tiene pulso? ¿Hay hemorragia?</td>
+            <td>Choque hemorrágico</td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>Disability — Estado neurológico</td>
+            <td>¿Cuál es su AVDI / Glasgow?</td>
+            <td>Herniación / deterioro</td>
+          </tr>
+          <tr>
+            <td>E</td>
+            <td>Exposure — Exposición</td>
+            <td>¿Hay lesiones ocultas?</td>
+            <td>Lesiones no identificadas</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="conditional">
+      <div class="conditional-label">⚡ Impresión general antes del ABCDE</div>
+      <p style="margin:0;">Al llegar al paciente, antes de iniciar la secuencia, se obtiene una <strong>impresión general</strong> en los primeros 10–15 segundos: apariencia, trabajo respiratorio y color/perfusión (Pediatric Assessment Triangle en pediátrico; en adulto, el mismo principio aplica). Esta impresión determina si el paciente es crítico y si el ABCDE se realiza con urgencia máxima o de forma más ordenada.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 4: A — VÍA AÉREA -->
+<div id="via-aerea" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title">A — Vía aérea</div>
+    </div>
+
+    <p>La evaluación de la vía aérea responde una sola pregunta: <strong>¿está permeable?</strong> Si no lo está, todo lo demás es irrelevante. La secuencia de manejo va de menor a mayor invasividad: primero maniobras manuales, luego adjuntos, y si todo eso falla, dispositivos de vía aérea avanzada.</p>
+
+    <h3>Evaluación inicial de la vía aérea</h3>
+    <p>En un paciente <strong>consciente que habla con voz clara</strong>: la vía aérea está permeable. No se necesita maniobra adicional en ese momento — pasar a B.<br>
+    En un paciente <strong>inconsciente o con alteración del estado de alerta</strong>: evaluar activamente la permeabilidad.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Signo</th>
+            <th>Significado</th>
+            <th>Acción inmediata</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Habla con voz clara</td>
+            <td>Vía aérea permeable</td>
+            <td>Pasar a B</td>
+          </tr>
+          <tr>
+            <td>Ronquido (snoring)</td>
+            <td>Obstrucción parcial por tejidos blandos</td>
+            <td>Maniobra manual inmediata</td>
+          </tr>
+          <tr>
+            <td>Gorgoteo (gurgling)</td>
+            <td>Secreciones / sangre / vómito en vía aérea</td>
+            <td>Aspiración de secreciones urgente</td>
+          </tr>
+          <tr>
+            <td>Estridor inspiratorio</td>
+            <td>Obstrucción parcial alta (cuerpo extraño, edema)</td>
+            <td>Maniobra + evaluación urgente</td>
+          </tr>
+          <tr>
+            <td>Silencio / apnea</td>
+            <td>Obstrucción total o apnea</td>
+            <td>Maniobra + ventilación con BVM</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+    <h3>Maniobras manuales de apertura de vía aérea</h3>
+
+    <div class="technique-block">
+      <div class="technique-header">
+        <div class="technique-icon">◎</div>
+        <div class="technique-title">Head-tilt chin-lift — Extensión de cabeza y elevación de mentón</div>
+      </div>
+      <div class="technique-body">
+        <p>Técnica de elección en pacientes <strong>sin sospecha de lesión de columna cervical</strong>. Coloca una mano en la frente, los dedos de la otra bajo el mentón óseo (no en tejidos blandos del cuello), e inclina la cabeza hacia atrás mientras eleva el mentón. Desplaza la lengua hacia anterior y despeja la hipofaringe.</p>
+        <div class="warn-box">
+          <div class="label">Contraindicación</div>
+          <p style="margin:0;">Sospecha de trauma de columna cervical. En ese caso, usar jaw thrust.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="technique-block">
+      <div class="technique-header">
+        <div class="technique-icon">◎</div>
+        <div class="technique-title">Jaw thrust — Desplazamiento mandibular</div>
+      </div>
+      <div class="technique-body">
+        <p>Técnica de elección cuando existe <strong>sospecha de lesión de columna cervical</strong>. Se colocan los dedos índice y medio de ambas manos detrás de los ángulos mandibulares y se desplaza la mandíbula hacia anterior y superior, sin extender el cuello. Requiere más fuerza que el head-tilt y suele necesitar dos manos libres.</p>
+        <div class="conditional">
+          <div class="conditional-label">Nota clínica</div>
+          <p style="margin:0;">Si el jaw thrust no logra abrir la vía aérea y el paciente está en paro o en riesgo vital inminente, la apertura manual (head-tilt) está justificada. Una vía aérea permeable tiene prioridad sobre el riesgo teórico de lesión adicional en un paciente ya inconsciente.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <h3>Cánulas de vía aérea</h3>
+
+    <div class="grid-2">
+      <div class="o2-card">
+        <div class="o2-card-header">
+          <div class="o2-card-name">Cánula orofaríngea</div>
+          <span class="tag tag-yellow">Inconsciente</span>
+        </div>
+        <ul>
+          <li><strong>Función:</strong> Mantiene la lengua desplazada y evita la oclusión de la hipofaringe</li>
+          <li><strong>Indicación:</strong> Paciente sin reflejo nauseoso (inconsciente / AVDI &lt; V)</li>
+          <li><strong>Contraindicación absoluta:</strong> Reflejo nauseoso presente</li>
+          <li><strong>Talla:</strong> Comisura labial al lóbulo del oído o ángulo mandibular</li>
+          <li><strong>Inserción:</strong> Con depresor o rotación de 180° en adulto; directa con depresor en pediátrico</li>
+        </ul>
+        <div class="warn-box">
+          <div class="label">Error frecuente</div>
+          <p style="margin:0;">Talla incorrecta: demasiado pequeña no despeja la lengua; demasiado grande puede empujar la epiglotis.</p>
+        </div>
+      </div>
+      <div class="o2-card">
+        <div class="o2-card-header">
+          <div class="o2-card-name">Cánula nasofaríngea</div>
+          <span class="tag tag-green">Con o sin reflejo</span>
+        </div>
+        <ul>
+          <li><strong>Función:</strong> Crea un canal entre la narina y la nasofaringe, por encima de la lengua</li>
+          <li><strong>Indicación:</strong> Paciente con estado de alerta intermedio, con reflejo nauseoso presente o trismus</li>
+          <li><strong>Contraindicación relativa:</strong> Fractura de base de cráneo (signos: ojos de mapache, signo de Battle, licuorrea)</li>
+          <li><strong>Talla:</strong> Punta de la nariz al lóbulo de la oreja (longitud); diámetro del dedo meñique del paciente (calibre)</li>
+          <li><strong>Lubricación:</strong> Con gel hidrosoluble; inserción perpendicular al plano de la cara hacia el pabellón auricular</li>
+        </ul>
+        <div class="ok-box">
+          <div class="label">Ventaja clave</div>
+          <p style="margin:0;">Tolerada por pacientes semiconscientes. Primera opción cuando hay reflejo nauseoso activo.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <h3>Aspiración de secreciones</h3>
+
+    <p>La aspiración de secreciones es el manejo específico cuando el signo es <strong>gorgoteo</strong>: líquidos (sangre, vómito, secreciones) en la vía aérea. Sin aspiración, ninguna otra maniobra ni dispositivo resolverá la obstrucción.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Encender el aspirador y verificar succión</div>
+          <div class="step-desc">Confirmar presión de succión adecuada antes de introducir el catéter. En adulto: 80–120 mmHg (según protocolo institucional).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Seleccionar y preparar catéter</div>
+          <div class="step-desc">Catéter rígido de punta ancha (Yankauer) para vómito grueso, sangre o secreciones espesas. Catéter flexible para secreciones más delgadas o acceso a nasofaringe.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Introducir sin succión activa</div>
+          <div class="step-desc">Introducir el catéter sin ocluir el orificio de control. Activar la succión sólo al retirar, con movimiento rotatorio. Limitar cada ciclo a 10–15 segundos en adulto.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Preoxigenar antes y ventilar después</div>
+          <div class="step-desc">Si el paciente ventila, administrar O₂ antes del procedimiento. Si no ventila, ventilar con BVM inmediatamente después de cada ciclo de aspiración antes de repetir.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">Verificar resultado</div>
+          <div class="step-desc">Confirmar que el gorgoteo ha cedido y que la vía aérea está permeable. Si persiste el material, repetir. Si la cantidad de material supera la capacidad de aspiración, considerar posición de decúbito lateral si el trauma lo permite.</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <h3>Dispositivos supraglóticos</h3>
+
+    <div class="module-link">
+      <div class="module-link-icon">↗</div>
+      <div class="module-link-text">
+        <div class="module-link-label">Módulo complementario</div>
+        <div class="module-link-title">El manejo completo de dispositivos supraglóticos (i-gel, King LT, LMA), sus indicaciones, tallas, técnica de inserción y verificación está desarrollado en el Módulo 1: <strong>Dispositivos de Vía Aérea Supraglóticos</strong>. Consultar ese módulo para el contenido específico.</div>
+      </div>
+    </div>
+
+    <p>En el flujo de manejo de la vía aérea, los dispositivos supraglóticos representan el <strong>tercer escalón</strong>, después de maniobras manuales y cánulas, cuando la vía aérea no puede mantenerse permeable con adjuntos simples, o cuando el paciente está en paro cardiorrespiratorio y se requiere una vía aérea que permita ventilación efectiva y libere las manos del rescatador.</p>
+
+    <div class="socratic">
+      <p class="q">Un paciente de 55 años, inconsciente, GCS 6, sin evidencia de trauma de cuello. Abres la vía aérea con head-tilt chin-lift y el ronquido cesa, pero al colocar la cánula orofaríngea el paciente hace arcadas. ¿Cuál es tu siguiente paso?</p>
+      <button class="toggle-hint" onclick="toggleHint(this)">Ver respuesta esperada</button>
+      <div class="hint-content">
+        <p>Retirar la cánula orofaríngea inmediatamente — el reflejo nauseoso presente es contraindicación absoluta para ese dispositivo. Colocar cánula nasofaríngea de talla adecuada: este paciente tolera ese dispositivo porque el reflejo nauseoso está activo pero tiene nivel de alerta comprometido. Mantener la maniobra manual mientras se coloca la cánula nasofaríngea.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 5: B — VENTILACIÓN -->
+<div id="ventilacion" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-title">B — Ventilación y respiración</div>
+    </div>
+
+    <p>Una vía aérea permeable no garantiza ventilación adecuada. El paciente puede tener la vía aérea abierta y seguir muriendo de hipoxia si la mecánica ventilatoria está comprometida. La evaluación de B responde: <strong>¿está respirando? ¿está respirando de forma adecuada?</strong></p>
+
+    <h3>Evaluación de B: Ver, Oír, Sentir</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">V</div>
+        <div class="step-body">
+          <div class="step-title">Ver — Expansión torácica</div>
+          <div class="step-desc">Observar expansión torácica bilateral, simétrica. Asimetría sugiere neumotórax, volet costal o intubación selectiva. Observar también uso de músculos accesorios (tiraje intercostal, supraclavicular, supraesternal) — signo de dificultad respiratoria significativa.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">O</div>
+        <div class="step-body">
+          <div class="step-title">Oír — Murmullo vesicular y calidad de la respiración</div>
+          <div class="step-desc">Sin estetoscopio: escuchar si hay ruidos audibles sin auscultación (estridor, sibilancias, gorgoteo residual). Con estetoscopio: auscultación bilateral. Evaluar frecuencia respiratoria (FR normal adulto: 12–20/min).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">S</div>
+        <div class="step-body">
+          <div class="step-title">Sentir — Flujo de aire y pulso de oxímetro</div>
+          <div class="step-desc">Sentir flujo de aire en nariz y boca. Colocar oxímetro de pulso lo antes posible — SpO₂ &lt;94% en adulto es indicación de O₂ suplementario; &lt;90% indica compromiso significativo que puede requerir apoyo ventilatorio activo.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Parámetro</th>
+            <th>Normal (adulto)</th>
+            <th>Preocupante</th>
+            <th>Crítico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>FR (respiraciones/min)</td>
+            <td>12–20</td>
+            <td>&lt;10 o &gt;25</td>
+            <td>&lt;8 o &gt;30 / apnea</td>
+          </tr>
+          <tr>
+            <td>SpO₂</td>
+            <td>≥95%</td>
+            <td>90–94%</td>
+            <td>&lt;90%</td>
+          </tr>
+          <tr>
+            <td>Expansión torácica</td>
+            <td>Bilateral simétrica</td>
+            <td>Reducida unilateral</td>
+            <td>Ausente / paradójica</td>
+          </tr>
+          <tr>
+            <td>Uso de accesorios</td>
+            <td>Ausente</td>
+            <td>Leve</td>
+            <td>Severo / agotamiento</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="divider">
+    <h3>Oxígeno suplementario</h3>
+
+    <p>Administrar O₂ suplementario cuando SpO₂ &lt;94% o en cualquier paciente con compromiso clínico significativo aunque la oximetría sea normal (choque, trauma severo, alteración de conciencia). Los dos dispositivos en el alcance del TAMP Básico son:</p>
+
+    <div class="o2-card">
+      <div class="o2-card-header">
+        <div class="o2-card-name">Puntas nasales (cánula nasal)</div>
+        <div class="o2-flow">1–6 L/min · 24–44% FiO₂</div>
+      </div>
+      <ul>
+        <li><strong>Indicación:</strong> Hipoxia leve a moderada, paciente que respira espontáneamente, tolera mal la mascarilla</li>
+        <li><strong>Ventaja:</strong> Bien tolerada, permite hablar y comer, no contraindica el uso de la boca</li>
+        <li><strong>Limitación:</strong> No entrega FiO₂ alta. Ineficaz si el paciente respira por la boca. A flujos &gt;4 L/min puede resecar la mucosa nasal</li>
+        <li><strong>Flujo máximo útil:</strong> 6 L/min. Más flujo no aumenta significativamente la FiO₂; sí aumenta la incomodidad</li>
+      </ul>
+    </div>
+
+    <div class="o2-card">
+      <div class="o2-card-header">
+        <div class="o2-card-name">Mascarilla facial simple</div>
+        <div class="o2-flow">5–10 L/min · 35–60% FiO₂</div>
+      </div>
+      <ul>
+        <li><strong>Indicación:</strong> Hipoxia moderada a severa, paciente que requiere FiO₂ mayor que la que ofrecen las puntas nasales</li>
+        <li><strong>Flujo mínimo:</strong> 5 L/min para purgar el CO₂ del reservorio de la mascarilla. Nunca usar a flujos menores</li>
+        <li><strong>Ventaja:</strong> FiO₂ significativamente mayor que puntas nasales con el mismo gas</li>
+        <li><strong>Limitación:</strong> Menos tolerada, interfiere con la comunicación verbal. No entrega O₂ de alta concentración (para eso se necesita mascarilla con reservorio)</li>
+      </ul>
+    </div>
+
+    <div class="conditional">
+      <div class="conditional-label">⚡ Mascarilla con reservorio (no rebreather)</div>
+      <p style="margin:0;">Entrega hasta 90–95% FiO₂ a 10–15 L/min. Aunque no siempre se menciona en el nivel básico, está disponible en muchas unidades prehospitalarias y es el dispositivo de elección en pacientes con SpO₂ severamente comprometida que aún ventilan espontáneamente. Asegurarse de que el reservorio esté inflado antes de colocarla.</p>
+    </div>
+
+    <hr class="divider">
+    <h3>Ventilación con BVM</h3>
+
+    <p>La BVM (Bolsa-Válvula-Mascarilla) es el dispositivo de ventilación asistida de elección en el nivel prehospitalario básico. Se indica cuando la ventilación espontánea es <strong>ausente, insuficiente (FR &lt;8/min o apnea) o ineficaz</strong>.</p>
+
+    <div class="warn-box">
+      <div class="label">Concepto crítico — No confundir</div>
+      <p style="margin:0;">La BVM <strong>ventila</strong> (mueve aire hacia los pulmones). No es lo mismo que administrar O₂ suplementario, que sólo apoya la ventilación espontánea del paciente. Si el paciente no respira, el O₂ solo no lo ventila.</p>
+    </div>
+
+    <div class="bvm-step">
+      <div class="bvm-step-num">1</div>
+      <div class="bvm-step-content">
+        <div class="bvm-step-title">Conectar O₂ y llenar reservorio</div>
+        <div class="bvm-step-detail">Flujo de O₂: 15 L/min. Esperar a que el reservorio se llene antes de ventilar. Sin O₂, la BVM entrega aire ambiental (~21% FiO₂), con O₂ entrega ~80–95%.</div>
+      </div>
+    </div>
+    <div class="bvm-step">
+      <div class="bvm-step-num">2</div>
+      <div class="bvm-step-content">
+        <div class="bvm-step-title">Posición de la vía aérea</div>
+        <div class="bvm-step-detail">Asegurar que la vía aérea esté abierta antes de ventilar. Si hay cánula orofaríngea o nasofaríngea colocada, mantenerla. La mejor ventilación con BVM es la que parte de una vía aérea ya abierta.</div>
+      </div>
+    </div>
+    <div class="bvm-step">
+      <div class="bvm-step-num">3</div>
+      <div class="bvm-step-content">
+        <div class="bvm-step-title">Sellado hermético con técnica C-E</div>
+        <div class="bvm-step-detail">Pulgar e índice forman una "C" sobre la mascarilla para sellado. Dedos medio, anular y meñique forman una "E" bajo el mentón para tracción mandibular. El sellado es el punto de falla más frecuente — sin sello, no hay ventilación.</div>
+      </div>
+    </div>
+    <div class="bvm-step">
+      <div class="bvm-step-num">4</div>
+      <div class="bvm-step-content">
+        <div class="bvm-step-title">Volumen y frecuencia</div>
+        <div class="bvm-step-detail">Comprimir suficiente para producir <strong>expansión torácica visible</strong>. Adulto con pulso: 10–12 ventilaciones/min (cada 5–6 segundos). En RCP: 30:2 (compresiones:ventilaciones) sin dispositivo avanzado; con dispositivo, 1 ventilación cada 6 segundos sin pausar compresiones.</div>
+      </div>
+    </div>
+    <div class="bvm-step">
+      <div class="bvm-step-num">5</div>
+      <div class="bvm-step-content">
+        <div class="bvm-step-title">Verificar efectividad</div>
+        <div class="bvm-step-detail">Ver expansión torácica bilateral con cada ventilación. Monitorear SpO₂. Si no hay expansión: verificar sellado, reposicionar vía aérea, revisar obstrucción residual. Si el operador es uno solo, considerar dispositivo supraglótico para liberar manos.</div>
+      </div>
+    </div>
+
+    <div class="ok-box">
+      <div class="label">Dos operadores — Siempre preferible</div>
+      <p style="margin:0;">Cuando hay dos rescatadores disponibles: uno mantiene sellado y vía aérea con ambas manos (cuatro dedos en técnica C-E bilateral), el otro comprime la bolsa. Esta técnica mejora significativamente el sellado y el volumen corriente entregado.</p>
+    </div>
+
+    <div class="socratic">
+      <p class="q">Estás ventilando a un paciente con BVM y notas que el tórax no se expande en cada compresión de la bolsa. Enumera en orden las posibles causas y cómo las descartarías.</p>
+      <button class="toggle-hint" onclick="toggleHint(this)">Ver respuesta esperada</button>
+      <div class="hint-content">
+        <ol style="padding-left:20px; color:var(--text-muted);">
+          <li style="margin-bottom:6px;"><strong style="color:var(--text);">Sellado de mascarilla deficiente</strong> — La causa más frecuente. Verificar técnica C-E, ajustar talla de mascarilla, aplicar mayor presión de sellado.</li>
+          <li style="margin-bottom:6px;"><strong style="color:var(--text);">Vía aérea no abierta</strong> — Reposicionar: head-tilt chin-lift o jaw thrust. Verificar que la cánula esté bien colocada y en la talla correcta.</li>
+          <li style="margin-bottom:6px;"><strong style="color:var(--text);">Obstrucción residual</strong> — Si hay gorgoteo visible o audible, retirar y aspirar antes de continuar.</li>
+          <li style="margin-bottom:6px;"><strong style="color:var(--text);">Volumen insuficiente</strong> — Comprimir la bolsa más completamente. El volumen corriente objetivo es el que produce expansión torácica visible, no un número fijo.</li>
+          <li style="margin-bottom:6px;"><strong style="color:var(--text);">Neumotórax / patología torácica</strong> — Si se corrigen las causas anteriores y sigue sin haber expansión, o hay asimetría marcada, considerar patología torácica subyacente (fuera del alcance del manejo básico, pero importante para el reporte al nivel avanzado).</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 6: ERRORES COMUNES -->
+<div id="errores" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div class="section-title">Errores comunes</div>
+    </div>
+
+    <p>Los errores en el manejo de escena, vía aérea y ventilación son predecibles. Conocerlos de antemano es la forma más eficiente de evitarlos.</p>
+
+    <div class="warn-box">
+      <div class="label">Error 1 — Ingresar a la escena sin evaluarla</div>
+      <p style="margin:0;">El urgentismo — la prisa por llegar al paciente — es el mecanismo más común de este error. El rescatador ve a alguien en el suelo y corre. La evaluación de la escena requiere detenerse, observar y tomar una decisión consciente antes de moverse. Cinco segundos de evaluación pueden evitar un segundo paciente.</p>
+    </div>
+
+    <div class="warn-box">
+      <div class="label">Error 2 — No solicitar refuerzo cuando se necesita</div>
+      <p style="margin:0;">Solicitar refuerzo tarde (cuando el paciente ya se está deteriorando) en vez de temprano (cuando se evalúa el incidente). El refuerzo solicitado tarda en llegar; si se solicita cuando ya es urgente, llegará demasiado tarde.</p>
+    </div>
+
+    <div class="warn-box">
+      <div class="label">Error 3 — Colocar cánula orofaríngea con reflejo nauseoso presente</div>
+      <p style="margin:0;">El resultado es vómito activo en la vía aérea que hay que manejar urgentemente. Si hay duda sobre si el reflejo está presente, estimular suavemente la orofaringe antes de insertar. Ante duda, usar cánula nasofaríngea.</p>
+    </div>
+
+    <div class="warn-box">
+      <div class="label">Error 4 — Confundir O₂ suplementario con ventilación asistida</div>
+      <p style="margin:0;">Un paciente en apnea con puntas nasales al 6 L/min no está siendo ventilado. Está recibiendo O₂ que no entra a sus pulmones. Si no hay movimiento ventilatorio espontáneo, la única forma de oxigenar al paciente es con BVM o dispositivo de vía aérea avanzada.</p>
+    </div>
+
+    <div class="warn-box">
+      <div class="label">Error 5 — Hiperinflación con BVM</div>
+      <p style="margin:0;">Comprimir la bolsa con volúmenes excesivos y/o frecuencias mayores a las indicadas causa inflación gástrica, aumenta el riesgo de broncoaspiración y puede comprometer el retorno venoso en paro cardiorrespiratorio. El objetivo es expansión torácica visible, no una bolsa completamente comprimida en cada ciclo.</p>
+    </div>
+
+    <div class="warn-box">
+      <div class="label">Error 6 — Olvidar aspirar antes de ventilar</div>
+      <p style="margin:0;">Ventilar sobre una vía aérea con gorgoteo activo (sangre, vómito) empuja ese material hacia los bronquios. Si hay gorgoteo, aspirar primero — siempre.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 7: CASO INTEGRADOR -->
+<div id="caso" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div class="section-title">Caso integrador</div>
+    </div>
+
+    <p>Los siguientes tres casos presentan el mismo tipo de problema con complejidad creciente. Léelos en orden e intenta responder cada pregunta antes de revelar la respuesta esperada.</p>
+
+    <!-- Caso 1 -->
+    <div class="case-level">
+      <div class="case-header" onclick="toggleCase(this)">
+        <div class="case-header-left">
+          <span class="case-level-badge">Nivel 1 · Básico</span>
+          <span class="case-title">Masculino, 40 años, caída de su propio plano de sustentación</span>
+        </div>
+        <span class="case-chevron">▼</span>
+      </div>
+      <div class="case-body">
+        <div class="case-scenario">
+          Recibes el aviso: "hombre caído en la banqueta, inconsciente, sin trauma aparente". Al llegar, la escena es una calle residencial, no hay tráfico, el paciente está en decúbito supino en la banqueta. No hay otros lesionados visibles. EPP puesto.
+        </div>
+        <div class="case-question">P1 — ¿Cuál es tu primera acción al llegar?</div>
+        <button class="reveal-btn" onclick="toggleReveal(this)">Revelar respuesta esperada</button>
+        <div class="reveal-content">
+          <p>Evaluación de la escena desde la unidad o al acercarte: confirmar que no haya riesgos adicionales (cables, vehículos, fluidos). Un solo paciente, escena estática aparentemente segura, recursos suficientes para el número de víctimas. Acercarte al paciente.</p>
+        </div>
+        <div class="case-question">P2 — Al llegar al paciente, no responde al estímulo verbal. ¿Qué evaluás en los próximos 10–15 segundos?</div>
+        <button class="reveal-btn" onclick="toggleReveal(this)">Revelar respuesta esperada</button>
+        <div class="reveal-content">
+          <p>Impresión general (apariencia, trabajo respiratorio, color/perfusión). Luego iniciar ABCDE: A — ¿hay ruidos respiratorios? ¿gorgoteo, ronquido?. Si sí: abrir vía aérea con head-tilt chin-lift (sin mecanismo de trauma de cuello), evaluar si cesa el ruido.</p>
+        </div>
+        <div class="case-question">P3 — Al abrir la vía aérea, escuchas ronquido que cede. FR 10/min, SpO₂ 89%. ¿Qué haces con B?</div>
+        <button class="reveal-btn" onclick="toggleReveal(this)">Revelar respuesta esperada</button>
+        <div class="reveal-content">
+          <p>SpO₂ 89% con FR 10/min: ventilación espontánea presente pero con compromiso significativo. Administrar O₂ con mascarilla facial a 8–10 L/min o mascarilla con reservorio a 15 L/min. Monitorear SpO₂. Si FR cae a &lt;8/min o el paciente deja de respirar: iniciar ventilación asistida con BVM.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Caso 2 -->
+    <div class="case-level">
+      <div class="case-header" onclick="toggleCase(this)">
+        <div class="case-header-left">
+          <span class="case-level-badge">Nivel 2 · Intermedio</span>
+          <span class="case-title">Femenino, 28 años, accidente de motocicleta</span>
+        </div>
+        <span class="case-chevron">▼</span>
+      </div>
+      <div class="case-body">
+        <div class="case-scenario">
+          Paciente encontrada junto a su motocicleta, con casco. Al llegar, está en decúbito lateral, respondiendo a estímulo verbal con palabras inapropiadas (GCS motor: localiza). Se observa líquido oscuro en la zona oral visible. La calle tiene tráfico activo en un carril. Son dos rescatadores.
+        </div>
+        <div class="case-question">P1 — ¿Qué elementos de la escena debes atender antes de tocar a la paciente?</div>
+        <button class="reveal-btn" onclick="toggleReveal(this)">Revelar respuesta esperada</button>
+        <div class="reveal-content">
+          <p>Riesgo de tráfico activo: señalizar o solicitar apoyo para control de tráfico antes de ingresar completamente a la vía. Un rescatador debe coordinar el control de la escena mientras el otro realiza la evaluación inicial. Mecanismo de lesión: motocicleta — trauma de alta energía, sospecha de lesión cervical.</p>
+        </div>
+        <div class="case-question">P2 — Al evaluar A: hay líquido oscuro en la boca (probable vómito) y la paciente hace un intento ventilatorio con gorgoteo audible. ¿Cuál es tu secuencia exacta para manejar A?</div>
+        <button class="reveal-btn" onclick="toggleReveal(this)">Revelar respuesta esperada</button>
+        <div class="reveal-content">
+          <p>1) Aspiración de secreciones inmediata (gorgoteo = líquido en vía aérea). 2) Apertura de vía aérea con jaw thrust (trauma de alta energía = sospecha de lesión cervical; no usar head-tilt). 3) Evaluar si colocar adjunto: la paciente responde a estímulo verbal — tiene algún nivel de alerta. Probar cánula nasofaríngea (tolerada con reflejo presente). La cánula orofaríngea está contraindicada si el reflejo nauseoso está presente, lo cual es probable dado que ya vomitó.</p>
+        </div>
+        <div class="case-question">P3 — Después de aspirar y abrir la vía aérea, FR 14/min, SpO₂ 91%, expansión torácica bilateral simétrica. ¿Cuál es tu plan para B?</div>
+        <button class="reveal-btn" onclick="toggleReveal(this)">Revelar respuesta esperada</button>
+        <div class="reveal-content">
+          <p>SpO₂ 91% con FR adecuada y expansión simétrica: ventilación espontánea presente con hipoxia moderada. Indicación de O₂ suplementario: mascarilla facial a 8–10 L/min (o mascarilla con reservorio si disponible). No es indicación de ventilación asistida en este momento. Monitorear SpO₂ de forma continua — cualquier deterioro cambia el plan.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Caso 3 -->
+    <div class="case-level">
+      <div class="case-header" onclick="toggleCase(this)">
+        <div class="case-header-left">
+          <span class="case-level-badge">Nivel 3 · Avanzado</span>
+          <span class="case-title">Masculino, 67 años, encontrado en su domicilio</span>
+        </div>
+        <span class="case-chevron">▼</span>
+      </div>
+      <div class="case-body">
+        <div class="case-scenario">
+          Familiar llama al servicio. Al llegar, el domicilio huele a gas LP. El paciente está en su recámara, en decúbito supino, sin respuesta verbal ni al dolor. La vecina comenta que "lo encontraron así hace como 15 minutos". Eres el único rescatador en la unidad básica.
+        </div>
+        <div class="case-question">P1 — El domicilio huele a gas. ¿Entras?</div>
+        <button class="reveal-btn" onclick="toggleReveal(this)">Revelar respuesta esperada</button>
+        <div class="reveal-content">
+          <p>No ingresas. Una fuga de gas LP activa es un peligro inmediato para el rescatador y puede causar ignición con cualquier chispa (incluidos los equipos médicos eléctricos). La acción correcta es: 1) no ingresar, 2) solicitar a la familia o vecinos que salgan del domicilio, 3) no encender o apagar ningún interruptor eléctrico, 4) contactar a bomberos o CFE para control del peligro, 5) una vez controlado el peligro por el recurso indicado, ingresar. Un paciente crítico sin rescatador funcional no recibe atención.</p>
+        </div>
+        <div class="case-question">P2 — El riesgo es controlado. Al evaluar al paciente: GCS 3 (no abre ojos, no responde, sin movimiento). Sin pulso palpable. ¿Cuál es tu secuencia inmediata solo?</div>
+        <button class="reveal-btn" onclick="toggleReveal(this)">Revelar respuesta esperada</button>
+        <div class="reveal-content">
+          <p>Paro cardiorrespiratorio confirmado. Iniciar RCP: 30 compresiones torácicas seguidas de 2 ventilaciones con BVM (30:2). Abrir vía aérea con head-tilt chin-lift antes de cada ventilación. Colocar cánula orofaríngea si el paciente no tiene reflejo nauseoso (GCS 3 sugiere ausencia). Activar el sistema de emergencias para soporte avanzado. Si hay DEA disponible, usarlo tan pronto sea posible. Con un solo rescatador, la calidad de las compresiones es la prioridad: minimizar las interrupciones.</p>
+        </div>
+        <div class="case-question">P3 — Tras 2 ciclos de RCP, recibe apoyo de un segundo rescatador. ¿Cómo reorganizan la ventilación?</div>
+        <button class="reveal-btn" onclick="toggleReveal(this)">Revelar respuesta esperada</button>
+        <div class="reveal-content">
+          <p>Con dos rescatadores y sin dispositivo de vía aérea avanzada: continuar 30:2. Uno realiza compresiones, el otro maneja la BVM con técnica C-E con ambas manos (mayor sello, menor fuga). Si tienen dispositivo supraglótico disponible y entrenamiento: colocar el dispositivo para permitir ventilaciones sin interrumpir compresiones (10 ventilaciones/min continuas). Turnarse en compresiones cada 2 minutos para mantener calidad.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 8: REFLEXIÓN -->
+<div id="reflexion" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div class="section-title">Preguntas de reflexión</div>
+    </div>
+
+    <div class="socratic">
+      <p class="q">¿En qué momento exacto termina la evaluación de la escena? ¿Existe ese momento?</p>
+      <button class="toggle-hint" onclick="toggleHint(this)">Ver respuesta esperada</button>
+      <div class="hint-content">
+        <p>La evaluación de la escena no tiene un punto de cierre. Es un proceso continuo que se mantiene activo durante toda la intervención. Una escena puede volverse insegura en cualquier momento: un vehículo en movimiento, una estructura que cede, una multitud que se vuelve hostil. El rescatador competente mantiene un nivel constante de atención periférica sobre la escena mientras atiende al paciente, sin que una cosa cancele la otra.</p>
+      </div>
+    </div>
+
+    <div class="socratic">
+      <p class="q">Un paciente en paro tiene la vía aérea obstruida por un cuerpo extraño. Tienes BVM disponible pero no puedes ventilar porque la obstrucción es total. ¿Qué haces antes de cualquier otra cosa?</p>
+      <button class="toggle-hint" onclick="toggleHint(this)">Ver respuesta esperada</button>
+      <div class="hint-content">
+        <p>Resolver la obstrucción antes de continuar. En adulto inconsciente: maniobra de extracción con dedo en gancho si el cuerpo extraño es visible y accesible; en adulto consciente que dejó de estarlo: secuencia de abdominalthrust hasta extracción o inconsciencia, luego extracción directa en cada apertura de boca. Las compresiones torácicas en paro también pueden desalojar cuerpos extraños. No intentar ventilar contra una obstrucción total — sólo aumenta la presión y puede forzar el objeto más adentro.</p>
+      </div>
+    </div>
+
+    <div class="socratic">
+      <p class="q">¿Qué diferencia clínica hay entre un paciente con SpO₂ de 88% que respira a 18/min y uno con SpO₂ de 88% que respira a 6/min? ¿Cambiaría tu manejo?</p>
+      <button class="toggle-hint" onclick="toggleHint(this)">Ver respuesta esperada</button>
+      <div class="hint-content">
+        <p>Ambos tienen hipoxia severa, pero el mecanismo es diferente. El primero (SpO₂ 88%, FR 18) tiene frecuencia adecuada pero intercambio gaseoso comprometido — puede indicar patología pulmonar (broncoespasmo, edema, neumotórax). El manejo es O₂ de alta concentración y evaluar la causa. El segundo (SpO₂ 88%, FR 6) tiene hipoventilación crítica — las pocas respiraciones no son suficientes para oxigenar ni eliminar CO₂. El manejo es ventilación asistida con BVM de forma inmediata. La saturación sola no dicta el manejo: la frecuencia y la calidad de la ventilación son igualmente relevantes.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN 9: AUTOEVALUACIÓN -->
+<div id="autoevaluacion" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-num">09</div>
+      <div class="section-title">Autoevaluación formativa</div>
+    </div>
+
+    <p>10 preguntas. Selecciona la respuesta que consideres correcta. Recibirás retroalimentación inmediata con explicación. Esta evaluación es formativa — no tiene consecuencias en tu calificación.</p>
+
+    <div id="quiz">
+
+      <!-- Q1 -->
+      <div class="quiz-q" data-correct="c">
+        <div class="quiz-q-num">ÍTEM 01 / 10</div>
+        <div class="quiz-q-text">Al llegar a una escena con un vehículo volcado y humo visible, ¿cuál es la acción correcta antes de bajar de la unidad?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" onclick="answer(this,&#39;a&#39;)"><span class="quiz-option-letter">A</span><span class="quiz-option-text">Bajar de inmediato para evaluar el número de víctimas</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;b&#39;)"><span class="quiz-option-letter">B</span><span class="quiz-option-text">Colocarse EPP dentro de la unidad y acercarse al vehículo</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;c&#39;)"><span class="quiz-option-letter">C</span><span class="quiz-option-text">Evaluar la escena desde la distancia, colocarse EPP y no ingresar hasta determinar si es seguro</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;d&#39;)"><span class="quiz-option-letter">D</span><span class="quiz-option-text">Solicitar refuerzo antes de cualquier otra acción</span></div>
+        </div>
+        <div class="quiz-feedback" id="fb1"></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-q" data-correct="b">
+        <div class="quiz-q-num">ÍTEM 02 / 10</div>
+        <div class="quiz-q-text">¿Cuál es el signo de vía aérea que indica la presencia de líquidos (sangre, vómito) y que requiere aspiración de secreciones como primera acción?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" onclick="answer(this,&#39;a&#39;)"><span class="quiz-option-letter">A</span><span class="quiz-option-text">Ronquido (snoring)</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;b&#39;)"><span class="quiz-option-letter">B</span><span class="quiz-option-text">Gorgoteo (gurgling)</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;c&#39;)"><span class="quiz-option-letter">C</span><span class="quiz-option-text">Estridor inspiratorio</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;d&#39;)"><span class="quiz-option-letter">D</span><span class="quiz-option-text">Silencio respiratorio</span></div>
+        </div>
+        <div class="quiz-feedback" id="fb2"></div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-q" data-correct="a">
+        <div class="quiz-q-num">ÍTEM 03 / 10</div>
+        <div class="quiz-q-text">Un paciente de 35 años inconsciente sin mecanismo de trauma cervical. Al evaluar A, hay ronquido. ¿Cuál es la maniobra de apertura de vía aérea indicada?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" onclick="answer(this,&#39;a&#39;)"><span class="quiz-option-letter">A</span><span class="quiz-option-text">Head-tilt chin-lift</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;b&#39;)"><span class="quiz-option-letter">B</span><span class="quiz-option-text">Jaw thrust exclusivamente</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;c&#39;)"><span class="quiz-option-letter">C</span><span class="quiz-option-text">Colocar cánula orofaríngea sin maniobra manual previa</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;d&#39;)"><span class="quiz-option-letter">D</span><span class="quiz-option-text">Aspiración de secreciones antes de la maniobra</span></div>
+        </div>
+        <div class="quiz-feedback" id="fb3"></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-q" data-correct="d">
+        <div class="quiz-q-num">ÍTEM 04 / 10</div>
+        <div class="quiz-q-text">¿Cuál es la contraindicación absoluta para el uso de cánula orofaríngea?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" onclick="answer(this,&#39;a&#39;)"><span class="quiz-option-letter">A</span><span class="quiz-option-text">Trauma facial con epistaxis activa</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;b&#39;)"><span class="quiz-option-letter">B</span><span class="quiz-option-text">Sospecha de fractura de base de cráneo</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;c&#39;)"><span class="quiz-option-letter">C</span><span class="quiz-option-text">Apertura oral limitada</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;d&#39;)"><span class="quiz-option-letter">D</span><span class="quiz-option-text">Reflejo nauseoso presente</span></div>
+        </div>
+        <div class="quiz-feedback" id="fb4"></div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-q" data-correct="b">
+        <div class="quiz-q-num">ÍTEM 05 / 10</div>
+        <div class="quiz-q-text">Para la talla correcta de la cánula nasofaríngea, ¿qué referencia se usa?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" onclick="answer(this,&#39;a&#39;)"><span class="quiz-option-letter">A</span><span class="quiz-option-text">Comisura labial al lóbulo del oído</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;b&#39;)"><span class="quiz-option-letter">B</span><span class="quiz-option-text">Punta de la nariz al lóbulo de la oreja</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;c&#39;)"><span class="quiz-option-letter">C</span><span class="quiz-option-text">Ángulo mandibular al mentón</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;d&#39;)"><span class="quiz-option-letter">D</span><span class="quiz-option-text">Narina al ángulo de la mandíbula</span></div>
+        </div>
+        <div class="quiz-feedback" id="fb5"></div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="quiz-q" data-correct="c">
+        <div class="quiz-q-num">ÍTEM 06 / 10</div>
+        <div class="quiz-q-text">Un paciente respira espontáneamente con FR 14/min pero SpO₂ 90%. ¿Cuál es el manejo correcto para B?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" onclick="answer(this,&#39;a&#39;)"><span class="quiz-option-letter">A</span><span class="quiz-option-text">Observar, la SpO₂ mejorará sola</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;b&#39;)"><span class="quiz-option-letter">B</span><span class="quiz-option-text">Iniciar ventilación asistida con BVM inmediatamente</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;c&#39;)"><span class="quiz-option-letter">C</span><span class="quiz-option-text">Administrar O₂ suplementario de alta concentración y monitorear</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;d&#39;)"><span class="quiz-option-letter">D</span><span class="quiz-option-text">Colocar puntas nasales a 2 L/min</span></div>
+        </div>
+        <div class="quiz-feedback" id="fb6"></div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="quiz-q" data-correct="a">
+        <div class="quiz-q-num">ÍTEM 07 / 10</div>
+        <div class="quiz-q-text">¿Cuál es el flujo mínimo recomendado de O₂ para una mascarilla facial simple y por qué?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" onclick="answer(this,&#39;a&#39;)"><span class="quiz-option-letter">A</span><span class="quiz-option-text">5 L/min, para purgar el CO₂ acumulado en el reservorio de la mascarilla</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;b&#39;)"><span class="quiz-option-letter">B</span><span class="quiz-option-text">2 L/min, el mismo flujo que para puntas nasales</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;c&#39;)"><span class="quiz-option-letter">C</span><span class="quiz-option-text">10 L/min, porque la mascarilla no tiene válvula unidireccional</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;d&#39;)"><span class="quiz-option-letter">D</span><span class="quiz-option-text">1 L/min, porque la mascarilla ya concentra el O₂ disponible</span></div>
+        </div>
+        <div class="quiz-feedback" id="fb7"></div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="quiz-q" data-correct="d">
+        <div class="quiz-q-num">ÍTEM 08 / 10</div>
+        <div class="quiz-q-text">Durante ventilación con BVM, el tórax del paciente no se expande. ¿Cuál es la causa más frecuente?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" onclick="answer(this,&#39;a&#39;)"><span class="quiz-option-letter">A</span><span class="quiz-option-text">Neumotórax contralateral no diagnosticado</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;b&#39;)"><span class="quiz-option-letter">B</span><span class="quiz-option-text">Volumen tidal insuficiente</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;c&#39;)"><span class="quiz-option-letter">C</span><span class="quiz-option-text">Vía aérea mal posicionada</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;d&#39;)"><span class="quiz-option-letter">D</span><span class="quiz-option-text">Sellado deficiente entre mascarilla y cara</span></div>
+        </div>
+        <div class="quiz-feedback" id="fb8"></div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="quiz-q" data-correct="b">
+        <div class="quiz-q-num">ÍTEM 09 / 10</div>
+        <div class="quiz-q-text">En RCP sin dispositivo avanzado de vía aérea, ¿cuál es la relación compresiones:ventilaciones para adulto?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" onclick="answer(this,&#39;a&#39;)"><span class="quiz-option-letter">A</span><span class="quiz-option-text">15:2</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;b&#39;)"><span class="quiz-option-letter">B</span><span class="quiz-option-text">30:2</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;c&#39;)"><span class="quiz-option-letter">C</span><span class="quiz-option-text">30:1</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;d&#39;)"><span class="quiz-option-letter">D</span><span class="quiz-option-text">20:2</span></div>
+        </div>
+        <div class="quiz-feedback" id="fb9"></div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="quiz-q" data-correct="c">
+        <div class="quiz-q-num">ÍTEM 10 / 10</div>
+        <div class="quiz-q-text">Llegas a una escena con olor intenso a gas LP. El paciente está visible adentro, inconsciente. ¿Cuál es la acción correcta?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" onclick="answer(this,&#39;a&#39;)"><span class="quiz-option-letter">A</span><span class="quiz-option-text">Ingresar rápidamente para extraer al paciente antes de que el gas lo intoxique más</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;b&#39;)"><span class="quiz-option-letter">B</span><span class="quiz-option-text">Ingresar con EPP completo incluyendo guantes gruesos</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;c&#39;)"><span class="quiz-option-letter">C</span><span class="quiz-option-text">No ingresar; solicitar a los presentes que evacúen el lugar y contactar bomberos o CFE para control del peligro</span></div>
+          <div class="quiz-option" onclick="answer(this,&#39;d&#39;)"><span class="quiz-option-letter">D</span><span class="quiz-option-text">Abrir ventanas y puertas para ventilar el espacio y luego ingresar</span></div>
+        </div>
+        <div class="quiz-feedback" id="fb10"></div>
+      </div>
+
+    </div><!-- /quiz -->
+
+    <div class="score-box" id="scoreBox">
+      <div class="score-num" id="scoreNum">0/10</div>
+      <div class="score-label" id="scoreLabel"></div>
+      <button class="reset-btn" onclick="resetQuiz()">Reiniciar evaluación</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER / REFERENCIAS -->
+<div class="footer">
+  <div class="container">
+    <div class="footer-title">Créditos y declaración</div>
+    <p>Material Educativo — Evaluación Primaria: Seguridad de Escena, A y B · TAMP Básico</p>
+    <p>Instructor: José Manuel Caballero Martínez</p>
+    <p>Rol del instructor: Revisión, validación y edición de contenidos</p>
+    <p>Contenido basado en: AHA 2020, PHTLS 10.ª edición, NOM-034-SSA3-2013</p>
+    <p>Uso: Exclusivamente educativo para Instituto Educativo VIVE</p>
+    <p style="margin-top:8px; color:var(--text-dim); font-size:12px;">Este material fue desarrollado con asistencia de inteligencia artificial (Claude, Anthropic). El contenido fue revisado, validado y editado por el instructor responsable.</p>
+
+    <div class="refs" style="margin-top:32px">
+      <div class="footer-title">Referencias APA</div>
+
+      <div class="ref-item">American Heart Association. (2020). <em>2020 American Heart Association guidelines for cardiopulmonary resuscitation and emergency cardiovascular care.</em> Circulation, 142(16 Suppl 2), S337–S357. https://doi.org/10.1161/CIR.0000000000000916</div>
+
+      <div class="ref-item">National Association of Emergency Medical Technicians. (2023). <em>PHTLS: Prehospital trauma life support</em> (10.ª ed.). Jones &amp; Bartlett Learning.</div>
+
+      <div class="ref-item">Panchal, A. R., Bartos, J. A., Cabañas, J. G., Donnino, M. W., Drennan, I. R., Hirsch, K. G., Kudenchuk, P. J., Kurz, M. C., Lavonas, E. J., Morley, P. T., O'Neil, B. J., Peberdy, M. A., Rittenberger, J. C., Rodriguez, A. J., Sawyer, K. N., &amp; Berg, K. M. (2020). Part 3: Adult basic and advanced life support: 2020 American Heart Association guidelines for cardiopulmonary resuscitation and emergency cardiovascular care. <em>Circulation</em>, 142(16 Suppl 2), S366–S468. https://doi.org/10.1161/CIR.0000000000000918</div>
+
+      <div class="ref-item">Secretaría de Salud. (2013). <em>Norma Oficial Mexicana NOM-034-SSA3-2013, Regulación de los servicios de salud. Atención médica prehospitalaria.</em> Diario Oficial de la Federación. https://www.dof.gob.mx/nota_detalle.php?codigo=5301223&amp;fecha=24/09/2013</div>
+
+      <div class="ref-item">Soar, J., Böttiger, B. W., Carli, P., Couper, K., Deakin, C. D., Djärv, T., Lott, C., Olasveengen, T., Paal, P., Pellis, T., Perkins, G. D., Sandroni, C., &amp; Nolan, J. P. (2021). European Resuscitation Council guidelines 2021: Adult advanced life support. <em>Resuscitation</em>, 161, 115–151. https://doi.org/10.1016/j.resuscitation.2021.02.010</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // HAMBURGER MENU
+  function toggleMenu() {
+    const btn = document.getElementById('hamburgerBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  }
+
+  function closeMenu() {
+    document.getElementById('hamburgerBtn').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // TOGGLE HINT
+  function toggleHint(btn) {
+    const content = btn.nextElementSibling;
+    content.classList.toggle('open');
+    btn.textContent = content.classList.contains('open') ? 'Ocultar respuesta' : 'Ver respuesta esperada';
+  }
+
+  // TOGGLE CASE
+  function toggleCase(header) {
+    const body = header.nextElementSibling;
+    const chevron = header.querySelector('.case-chevron');
+    body.classList.toggle('open');
+    chevron.classList.toggle('open');
+  }
+
+  // TOGGLE REVEAL
+  function toggleReveal(btn) {
+    const content = btn.nextElementSibling;
+    content.classList.toggle('open');
+    btn.textContent = content.classList.contains('open') ? 'Ocultar' : 'Revelar respuesta esperada';
+  }
+
+  // QUIZ FEEDBACKS
+  const feedbacks = {
+    1: {
+      correct: "Correcto. La evaluación de la escena desde la distancia con EPP puesto antes de ingresar es el procedimiento estándar. La presencia de humo indica peligro activo que debe evaluarse antes de comprometer al rescatador.",
+      incorrect: "Incorrecto. Ante humo visible, la escena puede ser insegura por calor, gases tóxicos o riesgo de ignición. El procedimiento correcto es evaluar desde la distancia con EPP puesto y determinar si es seguro ingresar antes de hacerlo."
+    },
+    2: {
+      correct: "Correcto. El gorgoteo (gurgling) es el sonido producido por líquidos en la vía aérea. Es la indicación directa de aspiración de secreciones como acción inmediata.",
+      incorrect: "Incorrecto. El gorgoteo (gurgling) indica la presencia de líquidos en la vía aérea y requiere aspiración de secreciones. El ronquido indica obstrucción por tejidos blandos y se maneja con maniobra manual."
+    },
+    3: {
+      correct: "Correcto. Sin sospecha de trauma cervical, el head-tilt chin-lift es la técnica de elección para abrir la vía aérea. Es más efectiva y más fácil de mantener que el jaw thrust.",
+      incorrect: "Incorrecto. El jaw thrust se reserva para cuando hay sospecha de lesión cervical. Sin ese mecanismo, el head-tilt chin-lift es la técnica indicada. La cánula no reemplaza la maniobra manual — primero se abre la vía aérea, luego se coloca el adjunto."
+    },
+    4: {
+      correct: "Correcto. El reflejo nauseoso presente es contraindicación absoluta para la cánula orofaríngea. Colocarla en ese contexto desencadena vómito activo en la vía aérea.",
+      incorrect: "Incorrecto. La contraindicación absoluta de la cánula orofaríngea es el reflejo nauseoso presente. La fractura de base de cráneo contraindica la cánula nasofaríngea (relativa). La apertura oral limitada es una dificultad técnica, no contraindicación absoluta."
+    },
+    5: {
+      correct: "Correcto. La longitud de la cánula nasofaríngea se mide desde la punta de la nariz al lóbulo de la oreja. El calibre se estima por el diámetro del dedo meñique del paciente.",
+      incorrect: "Incorrecto. La referencia de comisura labial al lóbulo del oído es para la cánula orofaríngea. Para la nasofaríngea, la longitud correcta es punta de la nariz al lóbulo de la oreja."
+    },
+    6: {
+      correct: "Correcto. SpO₂ 90% con FR adecuada indica ventilación espontánea preservada con hipoxia que responde a O₂ suplementario. La ventilación asistida con BVM es para cuando la ventilación espontánea es ausente o insuficiente (FR <8/min).",
+      incorrect: "Incorrecto. Con FR 14/min, el paciente tiene ventilación espontánea presente. La SpO₂ 90% es la indicación de O₂ suplementario de alta concentración, no de ventilación asistida. Puntas nasales a 2 L/min son insuficientes para este nivel de hipoxia."
+    },
+    7: {
+      correct: "Correcto. La mascarilla facial simple tiene un reservorio sin válvula unidireccional donde se acumula CO₂ espirado. El flujo mínimo de 5 L/min es necesario para purgar ese CO₂ y evitar que el paciente lo reinhale.",
+      incorrect: "Incorrecto. El flujo mínimo de 5 L/min para la mascarilla facial simple tiene una razón fisiológica específica: purgar el CO₂ acumulado en el reservorio. A flujos menores, el paciente reinhala CO₂, lo cual puede agravar la hipercapnia."
+    },
+    8: {
+      correct: "Correcto. El sellado deficiente entre la mascarilla y la cara del paciente es la causa más frecuente de ventilación ineficaz con BVM. Verificar siempre la técnica C-E y el sello antes de considerar otras causas.",
+      incorrect: "Incorrecto. Aunque las otras opciones son posibles causas, el sellado deficiente es estadísticamente la más frecuente. Es siempre el primer punto a verificar cuando el tórax no expande durante ventilación con BVM."
+    },
+    9: {
+      correct: "Correcto. La relación 30:2 (30 compresiones, 2 ventilaciones) es el estándar AHA 2020 para RCP en adulto sin dispositivo avanzado de vía aérea.",
+      incorrect: "Incorrecto. La relación estándar AHA 2020 para RCP adulto sin dispositivo avanzado es 30:2. Con dispositivo avanzado colocado, la relación cambia: compresiones continuas a 100–120/min con 1 ventilación cada 6 segundos."
+    },
+    10: {
+      correct: "Correcto. Una fuga de gas LP activa es un peligro inmediato para el rescatador. No ingresar, evacuar a los presentes y solicitar el recurso capacitado (bomberos, CFE) para controlar el peligro. El rescatador que entra sin control del peligro se convierte en un segundo paciente.",
+      incorrect: "Incorrecto. Ingresar a un espacio con gas LP activo es un error grave. Cualquier chispa — incluyendo equipos médicos — puede causar ignición. Abrir ventanas y puertas tampoco es seguro: el movimiento puede generar chispa estática. La única acción correcta es no ingresar y solicitar el recurso especializado."
+    }
+  };
+
+  let answered = 0;
+  let correct = 0;
+  const total = 10;
+
+  function answer(option, selected) {
+    const qBlock = option.closest('.quiz-q');
+    if (qBlock.classList.contains('answered')) return;
+    qBlock.classList.add('answered');
+
+    const correctAnswer = qBlock.dataset.correct;
+    const qIndex = Array.from(document.querySelectorAll('.quiz-q')).indexOf(qBlock) + 1;
+    const fb = document.getElementById('fb' + qIndex);
+
+    const allOptions = qBlock.querySelectorAll('.quiz-option');
+    allOptions.forEach(opt => opt.classList.add('disabled'));
+
+    if (selected === correctAnswer) {
+      option.classList.add('correct');
+      fb.textContent = '✓ ' + feedbacks[qIndex].correct;
+      fb.className = 'quiz-feedback correct-fb';
+      correct++;
+    } else {
+      option.classList.add('incorrect');
+      fb.textContent = '✗ ' + feedbacks[qIndex].incorrect;
+      fb.className = 'quiz-feedback incorrect-fb';
+      allOptions.forEach(opt => {
+        const letter = opt.querySelector('.quiz-option-letter').textContent.toLowerCase();
+        if (letter === correctAnswer) opt.classList.add('correct');
+      });
+    }
+
+    answered++;
+    if (answered === total) showScore();
+  }
+
+  function showScore() {
+    const box = document.getElementById('scoreBox');
+    const num = document.getElementById('scoreNum');
+    const label = document.getElementById('scoreLabel');
+    num.textContent = correct + '/' + total;
+    const pct = (correct / total) * 100;
+    let msg = '';
+    if (pct >= 90) msg = 'Dominio sólido del contenido. Listo para la práctica.';
+    else if (pct >= 70) msg = 'Comprensión adecuada. Revisar los ítems incorrectos antes de la práctica.';
+    else if (pct >= 50) msg = 'Comprensión parcial. Se recomienda repasar el material antes de continuar.';
+    else msg = 'Se recomienda revisar el material completo nuevamente.';
+    label.textContent = msg;
+    box.classList.add('show');
+    box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function resetQuiz() {
+    answered = 0; correct = 0;
+    document.querySelectorAll('.quiz-q').forEach((q, i) => {
+      q.classList.remove('answered');
+      q.querySelectorAll('.quiz-option').forEach(o => {
+        o.classList.remove('correct','incorrect','disabled');
+      });
+      const fb = document.getElementById('fb' + (i+1));
+      if (fb) { fb.className = 'quiz-feedback'; fb.textContent = ''; }
+    });
+    document.getElementById('scoreBox').classList.remove('show');
+    document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
+  }
+
+function toggleNav(){document.getElementById('nav-links').classList.toggle('open')}
+
+</script>
+
+
+
+</body></html>
