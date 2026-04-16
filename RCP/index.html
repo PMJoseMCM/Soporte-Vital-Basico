@@ -837,44 +837,67 @@
 /* Home button tweaks when used inside nav */
 .nav .btn-home{margin:8px 12px 8px 0;padding:6px 12px;font-size:11px;border-radius:999px;}
 .mobile-menu .btn-home{margin:10px 20px;}
+
+/* ── NAV (Signos Vitales style) ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,17,23,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+.nav-brand {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+.nav-brand span {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: .5rem;
+}
+.hamburger{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+}
+.hamburger span{width:22px;height:2px;background:var(--text);display:block}
+.nav-links{display:flex;gap:.5rem;align-items:center}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:.75rem;padding:.3rem .6rem;border-radius:6px}
+.nav-links a:hover{color:var(--accent);background:rgba(79,209,197,.08)}
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .nav-links{display:none;position:fixed;top:56px;left:0;right:0;background:var(--surface2);flex-direction:column;padding:1rem}
+  .nav-links.open{display:flex}
+}
+
 </style>
 </head>
 <body>
 
-<!-- HAMBURGER (mobile) -->
-<div class="nav-hamburger" id="navHamburger">
-  <span class="nav-title-small">TAMP BÁSICO · SVB</span>
-  <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMenu()" aria-label="Menú">
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">VIVE <span>TAMP Básico — SVB</span></div>
+  <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </button>
-  <div class="mobile-menu" id="mobileMenu">
-<a class="btn-home" href="/Soporte-Vital-Basico/" aria-label="Ir al inicio">🏠 Home</a>
-    <a href="#intro" onclick="closeMenu()">01 · Introducción</a>
-    <a href="#cadena" onclick="closeMenu()">02 · Cadena de supervivencia</a>
-    <a href="#algoritmo" onclick="closeMenu()">03 · Algoritmo SVB</a>
-    <a href="#compresiones" onclick="closeMenu()">04 · Compresiones</a>
-    <a href="#ventilacion" onclick="closeMenu()">05 · Ventilación 30:2</a>
-    <a href="#dea" onclick="closeMenu()">06 · DEA</a>
-    <a href="#errores" onclick="closeMenu()">07 · Errores comunes</a>
-    <a href="#caso" onclick="closeMenu()">08 · Caso integrador</a>
-    <a href="#reflexion" onclick="closeMenu()">09 · Reflexión</a>
-    <a href="#autoevaluacion" onclick="closeMenu()">10 · Autoevaluación</a>
+  <div class="nav-links" id="nav-links">
+    <a class="btn-home" href="/Soporte-Vital-Basico/">🏠 Home</a>
+    <a href="#intro">Introducción</a>
+    <a href="#cadena">Cadena</a>
+    <a href="#algoritmo">Algoritmo</a>
+    <a href="#compresiones">Compresiones</a>
+    <a href="#ventilacion">Ventilación</a>
+    <a href="#dea">DEA</a>
+    <a href="#errores">Errores</a>
+    <a href="#caso">Caso</a>
+    <a href="#autoevaluacion">Autoevaluación</a>
   </div>
-</div>
-
-<!-- DESKTOP NAV -->
-<nav class="nav">
-<a class="btn-home" href="/Soporte-Vital-Basico/" aria-label="Ir al inicio">🏠 Home</a>
-  <a href="#intro">01 · Introducción</a>
-  <a href="#cadena">02 · Cadena de supervivencia</a>
-  <a href="#algoritmo">03 · Algoritmo SVB</a>
-  <a href="#compresiones">04 · Compresiones</a>
-  <a href="#ventilacion">05 · Ventilación 30:2</a>
-  <a href="#dea">06 · DEA</a>
-  <a href="#errores">07 · Errores comunes</a>
-  <a href="#caso">08 · Caso integrador</a>
-  <a href="#reflexion">09 · Reflexión</a>
-  <a href="#autoevaluacion">10 · Autoevaluación</a>
 </nav>
 
 <!-- HERO -->
@@ -1848,6 +1871,12 @@
     document.getElementById('scoreBox').classList.remove('show');
     document.getElementById('quiz').scrollIntoView({ behavior: 'smooth' });
   }
+
+/* ── Nav móvil ── */
+function toggleNav(){
+  document.getElementById('nav-links').classList.toggle('open');
+}
+
 </script>
 
 
