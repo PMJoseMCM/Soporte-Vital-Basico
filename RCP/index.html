@@ -55,7 +55,6 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
-<a href="../" class="btn-home">⬅ Inicio</a>
   /* HERO */
   .hero {
     background: linear-gradient(135deg, #0d0f12 0%, #140f1a 50%, #0d0f12 100%);
@@ -833,6 +832,10 @@
 
   .rhythm-title { font-weight: 600; color: var(--text); font-size: 14px; }
   .rhythm-detail { color: var(--text-muted); font-size: 13px; }
+
+/* Home button tweaks when used inside nav */
+.nav .btn-home{margin:8px 12px 8px 0;padding:6px 12px;font-size:11px;border-radius:999px;}
+.mobile-menu .btn-home{margin:10px 20px;}
 </style>
 </head>
 <body>
@@ -844,36 +847,39 @@
     <span></span><span></span><span></span>
   </button>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#intro" onclick="closeMenu()">01 · Introducción</a>
-    <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#cadena" onclick="closeMenu()">02 · Cadena de supervivencia</a>
-    <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#algoritmo" onclick="closeMenu()">03 · Algoritmo SVB</a>
-    <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#compresiones" onclick="closeMenu()">04 · Compresiones</a>
-    <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#ventilacion" onclick="closeMenu()">05 · Ventilación 30:2</a>
-    <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#dea" onclick="closeMenu()">06 · DEA</a>
-    <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#errores" onclick="closeMenu()">07 · Errores comunes</a>
-    <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#caso" onclick="closeMenu()">08 · Caso integrador</a>
-    <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#reflexion" onclick="closeMenu()">09 · Reflexión</a>
-    <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#autoevaluacion" onclick="closeMenu()">10 · Autoevaluación</a>
+ <a class="btn-home" href="index.html" onclick="closeMenu()" aria-label="Ir al inicio">🏠 Home</a>
+    <a href="#intro" onclick="closeMenu()">01 · Introducción</a>
+    <a href="#cadena" onclick="closeMenu()">02 · Cadena de supervivencia</a>
+    <a href="#algoritmo" onclick="closeMenu()">03 · Algoritmo SVB</a>
+    <a href="#compresiones" onclick="closeMenu()">04 · Compresiones</a>
+    <a href="#ventilacion" onclick="closeMenu()">05 · Ventilación 30:2</a>
+    <a href="#dea" onclick="closeMenu()">06 · DEA</a>
+    <a href="#errores" onclick="closeMenu()">07 · Errores comunes</a>
+    <a href="#caso" onclick="closeMenu()">08 · Caso integrador</a>
+    <a href="#reflexion" onclick="closeMenu()">09 · Reflexión</a>
+    <a href="#autoevaluacion" onclick="closeMenu()">10 · Autoevaluación</a>
   </div>
 </div>
 
 <!-- DESKTOP NAV -->
 <nav class="nav">
-  <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#intro">01 · Introducción</a>
-  <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#cadena">02 · Cadena de supervivencia</a>
-  <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#algoritmo">03 · Algoritmo SVB</a>
-  <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#compresiones">04 · Compresiones</a>
-  <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#ventilacion">05 · Ventilación 30:2</a>
-  <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#dea">06 · DEA</a>
-  <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#errores">07 · Errores comunes</a>
-  <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#caso">08 · Caso integrador</a>
-  <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#reflexion">09 · Reflexión</a>
-  <a href="file:///C:/Users/Cabal/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/LocalState/sessions/837585AD6FF2038040F2A7119A3E8CBDB541E017/transfers/2026-15/rcp_svb_alumno.html#autoevaluacion">10 · Autoevaluación</a>
+ <a class="btn-home" href="index.html" aria-label="Ir al inicio">🏠 Home</a>
+  <a href="#intro">01 · Introducción</a>
+  <a href="#cadena">02 · Cadena de supervivencia</a>
+  <a href="#algoritmo">03 · Algoritmo SVB</a>
+  <a href="#compresiones">04 · Compresiones</a>
+  <a href="#ventilacion">05 · Ventilación 30:2</a>
+  <a href="#dea">06 · DEA</a>
+  <a href="#errores">07 · Errores comunes</a>
+  <a href="#caso">08 · Caso integrador</a>
+  <a href="#reflexion">09 · Reflexión</a>
+  <a href="#autoevaluacion">10 · Autoevaluación</a>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-badge">TAMP Básico · Módulo 3</div>
+ <a class="btn-home" href="index.html" aria-label="Ir al inicio">🏠 Home</a>
   <h1>RCP en<br><em>SVB extrahospitalario</em></h1>
   <p class="hero-sub">Soporte Vital Básico para profesionales de la salud: cadena de supervivencia, compresiones de alta calidad, ventilación 30:2 con BVM y uso del DEA. Adulto. Sin medicamentos.</p>
   <div class="hero-meta">
@@ -1843,6 +1849,9 @@
   }
 </script>
 
+
+
+</body></html>
 
 
 </body></html>
