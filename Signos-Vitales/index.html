@@ -40,7 +40,26 @@
     min-height: 100vh;
   }
 
-  /* ── NAV ── */
+  
+/* ── HOME BUTTON ── */
+.btn-home {
+  display: inline-block;
+  margin: 0.25rem 0.75rem 0.25rem 0;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal);
+  border: 1px solid var(--teal-dim);
+  border-radius: 999px;
+  background: var(--teal-glow);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-home:hover { background: rgba(45,212,191,0.18); }
+
+/* ── NAV ── */
   nav {
     position: sticky;
     top: 0;
@@ -601,6 +620,7 @@
     <span></span><span></span><span></span>
   </button>
   <div class="nav-links" id="nav-links">
+  <a class="btn-home" href="/Soporte-Vital-Basico/">🏠 Home</a>
     <a href="#signos">Signos Vitales</a>
     <a href="#tabla">Tabla Resumen</a>
     <a href="#tecnica">Técnica</a>
@@ -613,6 +633,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-tag">Módulo Educativo · TUM Básico</div>
+  <a class="btn-home" href="/Soporte-Vital-Basico/">🏠 Home</a>
   <h1>Signos <em>Vitales</em><br>en el Entorno Prehospitalario</h1>
   <p>Parámetros fisiológicos medibles que reflejan el estado hemodinámico, ventilatorio y neurológico del paciente. Tu primera herramienta de evaluación en campo.</p>
   <div class="hero-pills">
@@ -1531,4 +1552,5 @@
   });
 </script>
 </body>
+</html>
 </html>
