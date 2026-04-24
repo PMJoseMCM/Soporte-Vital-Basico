@@ -31,7 +31,26 @@
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.7; min-height: 100vh; }
 
-  /* ── NAV ── */
+  
+/* ── HOME BUTTON ── */
+.btn-home {
+  display: inline-block;
+  margin: 0.25rem 0.75rem 0.25rem 0;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal);
+  border: 1px solid var(--teal-dim);
+  border-radius: 999px;
+  background: var(--teal-glow);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-home:hover { background: rgba(45,212,191,0.18); }
+
+/* ── NAV ── */
   nav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(13,17,23,0.92); backdrop-filter: blur(12px);
@@ -262,10 +281,11 @@
 <!-- NAV -->
 <nav>
   <div class="nav-brand">VIVE <span>TUM Básico — DEA</span></div>
-  <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleNav()">
+  <button type="button" class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleNav()">
     <span></span><span></span><span></span>
   </button>
   <div class="nav-links" id="nav-links">
+  <a class="btn-home" href="/Soporte-Vital-Basico/">🏠 Home</a>
     <a href="#introduccion">Introducción</a>
     <a href="#indicaciones">Indicaciones</a>
     <a href="#protocolo">Protocolo</a>
@@ -280,6 +300,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-tag">Módulo Educativo · TUM Básico</div>
+  <a class="btn-home" href="/Soporte-Vital-Basico/">🏠 Home</a>
   <h1>Desfibrilador Externo<br><em>Automático</em></h1>
   <p>El DEA es el único dispositivo que puede interrumpir una fibrilación ventricular en el entorno prehospitalario. Su uso oportuno, integrado a la cadena de supervivencia, es la intervención con mayor impacto en la sobrevida por paro cardíaco.</p>
   <div class="hero-pills">
@@ -1031,7 +1052,7 @@
   <strong>Desfibrilador Externo Automático — Módulo Educativo TUM Básico</strong><br>
   Instituto Educativo VIVE · Morelia, Michoacán · 2025<br>
   Basado en: AHA Guidelines 2020 · ILCOR 2020 · NOM-034-SSA3-2013<br><br>
-  <em>Declaración de uso:</em> Este material fue desarrollado bajo supervisión y validación clínico-pedagógica del cuerpo académico de VIVE.<br>
+  <em>Declaración de uso de IA:</em> Este material fue desarrollado con asistencia de inteligencia artificial (Claude, Anthropic) bajo supervisión y validación clínico-pedagógica del cuerpo académico de VIVE.<br>
   El contenido no sustituye la formación presencial ni el juicio clínico del respondedor capacitado.<br><br>
   <a href="#introduccion">↑ Volver al inicio</a>
 </footer>
