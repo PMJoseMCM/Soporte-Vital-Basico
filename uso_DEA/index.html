@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desfibrilador Externo Automático — Módulo TUM B | VIVE</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2330;
+    --border: #21262d;
+    --teal: #2dd4bf;
+    --teal-dim: #1a7a6e;
+    --teal-glow: rgba(45,212,191,0.12);
+    --amber: #f59e0b;
+    --red: #f87171;
+    --green: #4ade80;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --text-dim: #6e7681;
+    --radius: 10px;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-display: 'DM Serif Display', serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.7; min-height: 100vh; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,17,23,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    display: flex; align-items: center; justify-content: space-between; height: 56px;
+  }
+  .nav-brand { font-family: var(--font-display); font-size: 1.1rem; color: var(--teal); letter-spacing: 0.02em; }
+  .nav-brand span { color: var(--text-muted); font-family: var(--font-body); font-size: 0.75rem; font-weight: 400; margin-left: 0.5rem; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
+  .nav-links { display: flex; gap: 0.25rem; align-items: center; flex-wrap: wrap; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.65rem; border-radius: 6px; transition: all .2s; letter-spacing: 0.02em; }
+  .nav-links a:hover { color: var(--teal); background: var(--teal-glow); }
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links { display: none; position: fixed; top: 56px; left: 0; right: 0; background: var(--bg2); border-bottom: 1px solid var(--border); flex-direction: column; align-items: flex-start; padding: 1rem 1.5rem; gap: 0.15rem; }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 0.9rem; width: 100%; padding: 0.5rem 0.75rem; }
+  }
+
+  /* ── HERO ── */
+  .hero { background: linear-gradient(135deg, #0d1117 0%, #0f1f1e 60%, #0d1117 100%); border-bottom: 1px solid var(--border); padding: 4rem 2rem 3.5rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 600px; height: 300px; background: radial-gradient(ellipse, rgba(45,212,191,0.07) 0%, transparent 70%); pointer-events: none; }
+  .hero-tag { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); background: var(--teal-glow); border: 1px solid var(--teal-dim); padding: 0.3rem 0.9rem; border-radius: 20px; margin-bottom: 1.25rem; }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; color: var(--text); margin-bottom: 0.75rem; }
+  .hero h1 em { color: var(--teal); font-style: italic; }
+  .hero p { color: var(--text-muted); max-width: 580px; margin: 0 auto 2rem; font-size: 0.95rem; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+  .pill { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.3rem 0.8rem; border-radius: 20px; border: 1px solid; }
+  .pill-teal { color: var(--teal); border-color: var(--teal-dim); background: rgba(45,212,191,0.06); }
+  .pill-amber { color: var(--amber); border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+  .pill-red { color: var(--red); border-color: rgba(248,113,113,0.4); background: rgba(248,113,113,0.06); }
+  .pill-blue { color: var(--blue); border-color: rgba(96,165,250,0.4); background: rgba(96,165,250,0.06); }
+
+  /* ── CONTAINER / SECTION ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+  .section { padding: 3.5rem 0 2rem; border-bottom: 1px solid var(--border); }
+  .section:last-child { border-bottom: none; }
+  .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; }
+  .section-number { font-family: var(--font-display); font-size: 1.8rem; color: var(--teal); line-height: 1; min-width: 2rem; }
+  .section-title { font-family: var(--font-display); font-size: 1.5rem; color: var(--text); line-height: 1.2; }
+  .section-subtitle { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-top: 0.15rem; }
+
+  /* ── PROSE ── */
+  .prose { font-size: 0.9rem; color: var(--text-muted); line-height: 1.75; }
+  .prose p { margin-bottom: 0.9rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { color: var(--text); }
+  .prose em { color: var(--teal); font-style: italic; }
+
+  /* ── INFO CARDS (definición) ── */
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.25rem; align-items: start; }
+  @media (max-width: 500px) { .info-grid { grid-template-columns: 1fr; } }
+  .info-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; align-self: start; transition: border-color .2s, box-shadow .2s; }
+  .info-card:hover { border-color: var(--teal-dim); box-shadow: 0 0 0 1px var(--teal-dim), 0 4px 20px rgba(45,212,191,0.07); }
+  .info-card-header { display: flex; align-items: center; gap: 0.85rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
+  .info-icon { font-size: 1.4rem; line-height: 1; width: 2.2rem; text-align: center; flex-shrink: 0; }
+  .info-card-header h3 { font-family: var(--font-display); font-size: 1.05rem; color: var(--text); flex: 1; }
+  .info-card-header h3 small { display: block; font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; }
+  .info-chevron { color: var(--text-dim); font-size: 0.75rem; transition: transform .3s; flex-shrink: 0; }
+  .info-card.open .info-chevron { transform: rotate(180deg); }
+  .info-body { display: none; padding: 1.25rem; }
+  .info-card.open .info-body { display: block; }
+
+  .val-row { display: flex; justify-content: space-between; align-items: center; padding: 0.45rem 0.75rem; border-radius: 6px; margin-bottom: 0.3rem; font-size: 0.85rem; }
+  .val-row:last-child { margin-bottom: 0; }
+  .val-label { color: var(--text-muted); }
+  .val-value { font-weight: 600; font-family: monospace; font-size: 0.9rem; }
+  .val-normal { background: rgba(74,222,128,0.07); } .val-normal .val-value { color: var(--green); }
+  .val-warn   { background: rgba(245,158,11,0.07); }  .val-warn .val-value   { color: var(--amber); }
+  .val-danger { background: rgba(248,113,113,0.07); } .val-danger .val-value { color: var(--red); }
+  .val-info   { background: rgba(96,165,250,0.07); }  .val-info .val-value   { color: var(--blue); }
+  .val-neutral{ background: var(--bg3); }             .val-neutral .val-value{ color: var(--text); }
+
+  .sv-note { margin-top: 1rem; padding: 0.75rem 1rem; background: rgba(45,212,191,0.05); border-left: 3px solid var(--teal-dim); border-radius: 0 6px 6px 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+  .sv-note strong { color: var(--teal); }
+  .sv-def { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.1rem; line-height: 1.65; }
+  .sv-values-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.6rem; }
+
+  /* ── ALERTA BOX ── */
+  .alert-box { border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; font-size: 0.88rem; line-height: 1.65; }
+  .alert-red  { background: rgba(248,113,113,0.07); border: 1px solid rgba(248,113,113,0.3); color: var(--text-muted); }
+  .alert-red strong { color: var(--red); }
+  .alert-amber{ background: rgba(245,158,11,0.07);  border: 1px solid rgba(245,158,11,0.3);  color: var(--text-muted); }
+  .alert-amber strong { color: var(--amber); }
+  .alert-teal { background: rgba(45,212,191,0.05);  border: 1px solid var(--teal-dim); color: var(--text-muted); }
+  .alert-teal strong { color: var(--teal); }
+
+  /* ── TABLA RESUMEN ── */
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+  thead tr { background: var(--bg3); }
+  thead th { padding: 0.75rem 1rem; text-align: left; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); border-bottom: 1px solid var(--border); white-space: nowrap; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg3); }
+  tbody td { padding: 0.7rem 1rem; color: var(--text-muted); vertical-align: middle; }
+  tbody td:first-child { color: var(--text); font-weight: 600; }
+  .t-normal { color: var(--green)  !important; font-weight: 600; }
+  .t-alert  { color: var(--amber)  !important; font-weight: 600; }
+  .t-crit   { color: var(--red)    !important; font-weight: 600; }
+  .t-info   { color: var(--blue)   !important; font-weight: 600; }
+
+  /* ── PROTOCOLO STEP-BY-STEP ── */
+  .protocol-track { position: relative; padding-left: 2.5rem; }
+  .protocol-track::before { content: ''; position: absolute; left: 0.85rem; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--teal-dim), transparent); border-radius: 1px; }
+  .proto-step { position: relative; margin-bottom: 1.5rem; }
+  .proto-step:last-child { margin-bottom: 0; }
+  .proto-dot { position: absolute; left: -2.5rem; top: 0.1rem; width: 1.7rem; height: 1.7rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; flex-shrink: 0; }
+  .proto-dot-teal   { background: var(--teal-glow); border: 2px solid var(--teal-dim); color: var(--teal); }
+  .proto-dot-red    { background: rgba(248,113,113,0.12); border: 2px solid rgba(248,113,113,0.5); color: var(--red); }
+  .proto-dot-amber  { background: rgba(245,158,11,0.12);  border: 2px solid rgba(245,158,11,0.5);  color: var(--amber); }
+  .proto-dot-green  { background: rgba(74,222,128,0.12);  border: 2px solid rgba(74,222,128,0.5);  color: var(--green); }
+  .proto-dot-blue   { background: rgba(96,165,250,0.12);  border: 2px solid rgba(96,165,250,0.5);  color: var(--blue); }
+  .proto-title { font-weight: 700; font-size: 0.9rem; color: var(--text); margin-bottom: 0.2rem; }
+  .proto-desc  { font-size: 0.84rem; color: var(--text-muted); line-height: 1.6; }
+  .proto-desc strong { color: var(--text); }
+
+  /* ── INDICACIONES / CONTRAINDICACIONES ── */
+  .ic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  @media (max-width: 600px) { .ic-grid { grid-template-columns: 1fr; } }
+  .ic-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; }
+  .ic-box h4 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.85rem; }
+  .ic-box h4.ind  { color: var(--green); }
+  .ic-box h4.cont { color: var(--red); }
+  .ic-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+  .ic-list li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; }
+  .ic-list li::before { flex-shrink: 0; font-weight: 700; margin-top: 0.05rem; }
+  .ic-list.ind  li::before { content: '✓'; color: var(--green); }
+  .ic-list.cont li::before { content: '✗'; color: var(--red); }
+
+  /* ── ERRORES ── */
+  .errores-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; align-items: start; }
+  @media (max-width: 500px) { .errores-grid { grid-template-columns: 1fr; } }
+  .error-item { align-self: start; background: var(--bg2); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.9rem 1.1rem; }
+  .error-item h5 { font-size: 0.82rem; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.35rem; }
+  .error-item p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+  .error-item .fix { margin-top: 0.5rem; font-size: 0.8rem; color: var(--green); display: flex; gap: 0.4rem; align-items: flex-start; }
+  .error-item .fix::before { content: '✓'; flex-shrink: 0; }
+
+  /* ── CASO CLÍNICO ── */
+  .case-block { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.25rem; }
+  .case-block:last-child { margin-bottom: 0; }
+  .case-header { padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none; }
+  .case-badge { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 20px; border: 1px solid; flex-shrink: 0; }
+  .badge-basic    { color: var(--green);  border-color: rgba(74,222,128,0.4);  background: rgba(74,222,128,0.08); }
+  .badge-inter    { color: var(--amber);  border-color: rgba(245,158,11,0.4);  background: rgba(245,158,11,0.08); }
+  .badge-advanced { color: var(--red);    border-color: rgba(248,113,113,0.4); background: rgba(248,113,113,0.08); }
+  .case-title { font-weight: 600; font-size: 0.9rem; color: var(--text); flex: 1; }
+  .case-chevron { color: var(--text-dim); font-size: 0.7rem; transition: transform .3s; }
+  .case-block.open .case-chevron { transform: rotate(180deg); }
+  .case-body { display: none; padding: 1.25rem; }
+  .case-block.open .case-body { display: block; }
+  .case-scenario { background: var(--bg3); border-radius: 7px; padding: 1rem 1.1rem; font-size: 0.87rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; }
+  .case-scenario strong { color: var(--teal); }
+  .case-q { font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+  .case-a { font-size: 0.84rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 0.85rem; }
+  .case-a strong { color: var(--text); }
+  .case-a em { color: var(--teal); }
+
+  /* ── PREGUNTAS REFLEXIÓN ── */
+  .reflection-list { display: flex; flex-direction: column; gap: 0.85rem; }
+  .reflection-item { background: var(--bg2); border: 1px solid var(--border); border-left: 3px solid var(--purple); border-radius: 0 var(--radius) var(--radius) 0; padding: 0.85rem 1.1rem; font-size: 0.87rem; color: var(--text-muted); line-height: 1.6; }
+  .reflection-item::before { content: attr(data-n); font-family: var(--font-display); color: var(--purple); font-size: 1.1rem; margin-right: 0.5rem; }
+
+  /* ── AUTOEVALUACIÓN ── */
+  #quiz-form { display: flex; flex-direction: column; gap: 1.75rem; }
+  .q-block { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+  .q-text { font-size: 0.92rem; font-weight: 500; color: var(--text); margin-bottom: 1rem; line-height: 1.55; }
+  .q-num { font-family: var(--font-display); color: var(--teal); margin-right: 0.4rem; }
+  .q-opts { display: flex; flex-direction: column; gap: 0.5rem; }
+  .q-opt { display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 1rem; background: var(--bg3); border: 1px solid var(--border); border-radius: 7px; cursor: pointer; transition: all .2s; font-size: 0.86rem; color: var(--text-muted); }
+  .q-opt:hover { border-color: var(--teal-dim); color: var(--text); background: var(--teal-glow); }
+  .q-opt input[type=radio] { accent-color: var(--teal); }
+  .q-opt.correct   { border-color: var(--green); background: rgba(74,222,128,0.07); color: var(--green); }
+  .q-opt.incorrect { border-color: var(--red);   background: rgba(248,113,113,0.07); color: var(--red); }
+  .q-explanation { display: none; margin-top: 0.85rem; padding: 0.7rem 1rem; background: rgba(45,212,191,0.05); border-left: 3px solid var(--teal-dim); border-radius: 0 6px 6px 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+  .q-explanation.show { display: block; }
+  .q-explanation strong { color: var(--teal); }
+  .quiz-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn { padding: 0.7rem 1.6rem; border-radius: 7px; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; transition: all .2s; letter-spacing: 0.03em; }
+  .btn-teal  { background: var(--teal); color: #0d1117; } .btn-teal:hover { background: #5eead4; }
+  .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); } .btn-ghost:hover { border-color: var(--text-dim); color: var(--text); }
+  .quiz-result { display: none; padding: 1.25rem; border-radius: var(--radius); text-align: center; margin-top: 1rem; }
+  .quiz-result.show { display: block; }
+  .result-score { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .result-msg { font-size: 0.9rem; color: var(--text-muted); }
+
+  /* ── REFS ── */
+  .refs-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .refs-list li { padding: 0.65rem 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 7px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.55; }
+  .refs-list li::before { content: '›'; color: var(--teal); margin-right: 0.5rem; font-weight: 700; }
+
+  /* ── FOOTER ── */
+  footer { border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; text-align: center; color: var(--text-dim); font-size: 0.78rem; line-height: 1.8; }
+  footer strong { color: var(--text-muted); }
+  footer a { color: var(--teal); text-decoration: none; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+  /* ── DEA VISUAL — diagrama de parches ── */
+  .paddles-diagram {
+    display: flex; gap: 2rem; align-items: center; justify-content: center;
+    flex-wrap: wrap; margin: 1.25rem 0;
+  }
+  .body-silhouette {
+    position: relative; width: 140px; height: 200px; flex-shrink: 0;
+  }
+  .body-silhouette svg { width: 100%; height: 100%; }
+  .paddle-legend { display: flex; flex-direction: column; gap: 0.75rem; }
+  .paddle-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.83rem; color: var(--text-muted); }
+  .paddle-swatch { width: 32px; height: 22px; border-radius: 5px; flex-shrink: 0; border: 2px solid; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; }
+  .paddle-swatch.white { background: rgba(230,237,243,0.1); border-color: var(--blue); color: var(--blue); }
+  .paddle-swatch.red   { background: rgba(248,113,113,0.1); border-color: var(--red);  color: var(--red);  }
+</style>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('IhyLGxMD5wHfOWxU8');</script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">VIVE <span>TUM Básico — DEA</span></div>
+  <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="nav-links">
+    <a href="#introduccion">Introducción</a>
+    <a href="#indicaciones">Indicaciones</a>
+    <a href="#protocolo">Protocolo</a>
+    <a href="#errores">Errores Frecuentes</a>
+    <a href="#caso">Caso Clínico</a>
+    <a href="#reflexion">Reflexión</a>
+    <a href="#autoevaluacion">Autoevaluación</a>
+    <a href="#referencias">Referencias</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Módulo Educativo · TUM Básico</div>
+  <h1>Desfibrilador Externo<br><em>Automático</em></h1>
+  <p>El DEA es el único dispositivo que puede interrumpir una fibrilación ventricular en el entorno prehospitalario. Su uso oportuno, integrado a la cadena de supervivencia, es la intervención con mayor impacto en la sobrevida por paro cardíaco.</p>
+  <div class="hero-pills">
+    <span class="pill pill-red">Paro Cardiorrespiratorio</span>
+    <span class="pill pill-teal">FV · TVSP</span>
+    <span class="pill pill-amber">Cadena de Supervivencia</span>
+    <span class="pill pill-blue">Instituto Educativo VIVE</span>
+  </div>
+</section>
+
+<div class="container">
+
+<!-- SECCIÓN 1 — INTRODUCCIÓN CONCEPTUAL -->
+<section class="section" id="introduccion">
+  <div class="section-header">
+    <div><div class="section-number">01</div></div>
+    <div>
+      <div class="section-title">Introducción Conceptual</div>
+      <div class="section-subtitle">Fundamentos fisiopatológicos y cadena de supervivencia</div>
+    </div>
+  </div>
+
+  <div class="prose" style="margin-bottom:1.75rem;">
+    <p>El <strong>paro cardiorrespiratorio (PCR)</strong> es la interrupción brusca, inesperada y potencialmente reversible de la actividad mecánica cardíaca y de la respiración. Sin intervención inmediata, la muerte biológica ocurre en 4–6 minutos por hipoxia cerebral irreversible.</p>
+    <p>Los ritmos desfibrilables — <strong>fibrilación ventricular (FV)</strong> y <strong>taquicardia ventricular sin pulso (TVSP)</strong> — generan actividad eléctrica caótica que impide la contracción ventricular coordinada. El DEA analiza el ritmo cardíaco y administra una <em>descarga eléctrica controlada</em> (cardioversión no sincronizada) para despolarizar simultáneamente toda la masa miocárdica y permitir que el nodo sinusal retome el control.</p>
+    <p>La <strong>cadena de supervivencia</strong> de la AHA 2020 integra seis eslabones para el entorno extrahospitalario. El TUM-B actúa directamente en los eslabones 2, 3 y 4.</p>
+  </div>
+
+  <!-- Cadena de supervivencia visual -->
+  <div style="display:flex;flex-wrap:wrap;gap:0;margin-bottom:1.75rem;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+    <div style="flex:1;min-width:140px;padding:0.85rem 1rem;background:var(--bg2);border-right:1px solid var(--border);text-align:center;">
+      <div style="font-size:1.4rem;margin-bottom:0.3rem;">📞</div>
+      <div style="font-size:0.72rem;font-weight:700;color:var(--text-dim);letter-spacing:0.06em;text-transform:uppercase;">Eslabón 1</div>
+      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Reconocimiento y activación del SME</div>
+    </div>
+    <div style="flex:1;min-width:140px;padding:0.85rem 1rem;background:rgba(45,212,191,0.05);border-right:1px solid var(--border);text-align:center;border-top:2px solid var(--teal);">
+      <div style="font-size:1.4rem;margin-bottom:0.3rem;">🤲</div>
+      <div style="font-size:0.72rem;font-weight:700;color:var(--teal);letter-spacing:0.06em;text-transform:uppercase;">Eslabón 2</div>
+      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">RCP de alta calidad inmediata</div>
+    </div>
+    <div style="flex:1;min-width:140px;padding:0.85rem 1rem;background:rgba(45,212,191,0.05);border-right:1px solid var(--border);text-align:center;border-top:2px solid var(--teal);">
+      <div style="font-size:1.4rem;margin-bottom:0.3rem;">⚡</div>
+      <div style="font-size:0.72rem;font-weight:700;color:var(--teal);letter-spacing:0.06em;text-transform:uppercase;">Eslabón 3</div>
+      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Desfibrilación temprana con DEA</div>
+    </div>
+    <div style="flex:1;min-width:140px;padding:0.85rem 1rem;background:rgba(45,212,191,0.05);border-right:1px solid var(--border);text-align:center;border-top:2px solid var(--teal);">
+      <div style="font-size:1.4rem;margin-bottom:0.3rem;">🚑</div>
+      <div style="font-size:0.72rem;font-weight:700;color:var(--teal);letter-spacing:0.06em;text-transform:uppercase;">Eslabón 4</div>
+      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Soporte vital avanzado y traslado</div>
+    </div>
+    <div style="flex:1;min-width:140px;padding:0.85rem 1rem;background:var(--bg2);border-right:1px solid var(--border);text-align:center;">
+      <div style="font-size:1.4rem;margin-bottom:0.3rem;">🏥</div>
+      <div style="font-size:0.72rem;font-weight:700;color:var(--text-dim);letter-spacing:0.06em;text-transform:uppercase;">Eslabón 5</div>
+      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Cuidados post-reanimación</div>
+    </div>
+    <div style="flex:1;min-width:140px;padding:0.85rem 1rem;background:var(--bg2);text-align:center;">
+      <div style="font-size:1.4rem;margin-bottom:0.3rem;">♻️</div>
+      <div style="font-size:0.72rem;font-weight:700;color:var(--text-dim);letter-spacing:0.06em;text-transform:uppercase;">Eslabón 6</div>
+      <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Recuperación y rehabilitación</div>
+    </div>
+  </div>
+
+  <div class="alert-teal">
+    <strong>Dato crítico:</strong> Por cada minuto sin desfibrilación, la probabilidad de sobrevida disminuye entre un 7 y 10%. Si la RCP se administra de forma inmediata, esta reducción es de 3–4% por minuto (AHA, 2020). El acceso al DEA en los primeros 3–5 minutos puede elevar la supervivencia hasta el 50–70%.
+  </div>
+
+  <!-- Info cards: DEA y ritmos -->
+  <div class="info-grid" style="margin-top:1.75rem;">
+
+    <div class="info-card" id="card-dea">
+      <div class="info-card-header" onclick="toggleCard('card-dea')">
+        <div class="info-icon">⚡</div>
+        <h3>¿Qué es el DEA?<small>Definición y principio de funcionamiento</small></h3>
+        <span class="info-chevron">▼</span>
+      </div>
+      <div class="info-body">
+        <p class="sv-def">Dispositivo electromédico portátil que analiza automáticamente el ritmo cardíaco mediante electrodos adhesivos y, si detecta un ritmo desfibrilable, genera y administra una descarga eléctrica de alta energía (bifásica, 120–200 J) despolarizando simultáneamente el miocardio para permitir la recuperación del ritmo sinusal.</p>
+        <div class="sv-values-title">Tipos de DEA disponibles</div>
+        <div class="val-row val-normal"><span class="val-label">DEA totalmente automático</span><span class="val-value">Descarga autónoma</span></div>
+        <div class="val-row val-info"><span class="val-label">DEA semiautomático</span><span class="val-value">Operador presiona botón</span></div>
+        <div class="val-row val-neutral"><span class="val-label">DEA con retroalimentación de RCP</span><span class="val-value">Monitoriza compresiones</span></div>
+        <div class="sv-note"><strong>Tecnología bifásica:</strong> Los DEA modernos emplean onda bifásica truncada exponencial (BTE) o bifásica rectilínea (BRT), que requieren menos energía y generan menos daño miocárdico que los dispositivos monofásicos.</div>
+      </div>
+    </div>
+
+    <div class="info-card" id="card-fv">
+      <div class="info-card-header" onclick="toggleCard('card-fv')">
+        <div class="info-icon">📈</div>
+        <h3>Ritmos Desfibrilables<small>FV y TVSP — lo que el DEA puede tratar</small></h3>
+        <span class="info-chevron">▼</span>
+      </div>
+      <div class="info-body">
+        <p class="sv-def">El DEA únicamente puede revertir ritmos con actividad eléctrica desordenada pero presente. Los ritmos no desfibrilables (asistolia y AESP) no responden a descarga eléctrica y requieren RCP continua y soporte avanzado.</p>
+        <div class="sv-values-title">Clasificación de ritmos en PCR</div>
+        <div class="val-row val-danger"><span class="val-label">Fibrilación ventricular (FV)</span><span class="val-value">⚡ DEA indicado</span></div>
+        <div class="val-row val-danger"><span class="val-label">TV sin pulso (TVSP)</span><span class="val-value">⚡ DEA indicado</span></div>
+        <div class="val-row val-warn"><span class="val-label">Asistolia (línea isoeléctrica)</span><span class="val-value">✗ No desfibrilable</span></div>
+        <div class="val-row val-warn"><span class="val-label">AESP (actividad sin pulso)</span><span class="val-value">✗ No desfibrilable</span></div>
+        <div class="sv-note"><strong>Nota clínica:</strong> Aproximadamente el 25–60% de los PCR extrahospitalarios inician como FV. Este porcentaje disminuye con el tiempo sin intervención: la FV degenera a asistolia en 10–12 minutos. Por eso, cada segundo cuenta.</div>
+      </div>
+    </div>
+
+  </div><!-- /info-grid -->
+</section>
+
+<!-- SECCIÓN 2 — INDICACIONES Y CONTRAINDICACIONES -->
+<section class="section" id="indicaciones">
+  <div class="section-header">
+    <div><div class="section-number">02</div></div>
+    <div>
+      <div class="section-title">Indicaciones y Contraindicaciones</div>
+      <div class="section-subtitle">Uso correcto y situaciones especiales</div>
+    </div>
+  </div>
+
+  <div class="ic-grid" style="margin-bottom:1.5rem;">
+    <div class="ic-box">
+      <h4 class="ind">Indicaciones</h4>
+      <ul class="ic-list ind">
+        <li>Paciente inconsciente, sin respiración normal (apnea o respiración agónica)</li>
+        <li>Ausencia de pulso central confirmada</li>
+        <li>Ritmo desfibrilable detectado por el DEA (FV o TVSP)</li>
+        <li>Víctima de cualquier edad ≥ 1 año (con parches pediátricos si &lt;8 años o &lt;25 kg)</li>
+        <li>Paro cardíaco en presencia de agua o barro — tras retirar al paciente del medio</li>
+      </ul>
+    </div>
+    <div class="ic-box">
+      <h4 class="cont">Contraindicaciones relativas</h4>
+      <ul class="ic-list cont">
+        <li>Paciente consciente con pulso (nunca analizar ni descargar)</li>
+        <li>Menores de 1 año sin parches neonatales disponibles</li>
+        <li>Superficie mojada activa — secar el tórax antes de colocar parches</li>
+        <li>Superficie de metal conductora — mover al paciente</li>
+        <li>Parche transdérmico en la zona de colocación — retirar y secar la piel</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Situaciones especiales -->
+  <div class="sv-values-title" style="margin-bottom:0.75rem;">Consideraciones en poblaciones especiales</div>
+  <div class="info-grid">
+
+    <div class="info-card" id="card-embarazo">
+      <div class="info-card-header" onclick="toggleCard('card-embarazo')">
+        <div class="info-icon">🤱</div>
+        <h3>Paciente embarazada<small>No contraindicado — posición modificada</small></h3>
+        <span class="info-chevron">▼</span>
+      </div>
+      <div class="info-body">
+        <p class="sv-def">El DEA <strong>no está contraindicado</strong> en embarazo. La descarga es significativamente atenuada por los tejidos y no compromete al feto. La amenaza real es la hipoxia materna.</p>
+        <div class="sv-note"><strong>Técnica:</strong> Usar el DEA con la misma indicación. Si hay feto viable, inclinar a la madre 15–30° hacia la izquierda (desplazamiento uterino manual) para aliviar la compresión aortocava. Continuar RCP y activar traslado urgente.</div>
+      </div>
+    </div>
+
+    <div class="info-card" id="card-marcapaso">
+      <div class="info-card-header" onclick="toggleCard('card-marcapaso')">
+        <div class="info-icon">🔩</div>
+        <h3>Marcapasos / CDI implantado<small>No contraindicado — distancia mínima</small></h3>
+        <span class="info-chevron">▼</span>
+      </div>
+      <div class="info-body">
+        <p class="sv-def">Un dispositivo implantado <strong>no contraindica el uso del DEA</strong>. El riesgo es que la descarga dañe el dispositivo o que los electrodos estén sobre éste.</p>
+        <div class="sv-note"><strong>Técnica:</strong> Colocar los parches a una distancia mínima de 8 cm (3 pulgadas) del dispositivo. Si el CDI ya administró una descarga (paciente con contracciones visibles), aguardar 30–60 s antes de tocar. El bulto subclavicular o abdominal indica la posición del dispositivo.</div>
+      </div>
+    </div>
+
+    <div class="info-card" id="card-pediatrico">
+      <div class="info-card-header" onclick="toggleCard('card-pediatrico')">
+        <div class="info-icon">🧒</div>
+        <h3>Paciente pediátrico<small>Parches específicos para &lt;8 años o &lt;25 kg</small></h3>
+        <span class="info-chevron">▼</span>
+      </div>
+      <div class="info-body">
+        <p class="sv-def">Los parches pediátricos atenúan la descarga a un nivel apropiado para la masa miocárdica infantil. Si no se dispone de parches pediátricos en un menor de 8 años, se pueden utilizar los de adulto con la siguiente modificación posicional.</p>
+        <div class="val-row val-info" style="margin-bottom:0.5rem;"><span class="val-label">8 años o más / ≥25 kg</span><span class="val-value">Parches adulto, posición estándar</span></div>
+        <div class="val-row val-warn"><span class="val-label">Menos de 8 años / &lt;25 kg</span><span class="val-value">Parches pediátricos preferibles</span></div>
+        <div class="sv-note"><strong>Sin parches pediátricos:</strong> Colocar un parche en la parte anterior del tórax (zona precordial izquierda) y el otro en la espalda (interescapular), evitando la superposición. Esta posición anteroposterior evita que los campos eléctricos se interfieran.</div>
+      </div>
+    </div>
+
+    <div class="info-card" id="card-hipotermia">
+      <div class="info-card-header" onclick="toggleCard('card-hipotermia')">
+        <div class="info-icon">🧊</div>
+        <h3>Hipotermia severa<small>Desfibrilar — continuar RCP — traslado urgente</small></h3>
+        <span class="info-chevron">▼</span>
+      </div>
+      <div class="info-body">
+        <p class="sv-def">La hipotermia (T° central &lt;30°C) reduce la excitabilidad miocárdica y hace que la desfibrilación sea menos efectiva. Sin embargo, el corazón frío puede tolerar períodos prolongados de hipoperfusión.</p>
+        <div class="sv-note"><strong>Protocolo:</strong> Aplicar el DEA si hay FV. Si no hay conversión tras 1–3 descargas, <em>no repetir hasta T° &gt;30°C</em> (recalentamiento activo). Continuar RCP de alta calidad y trasladar. Recordar: "No está muerto hasta que está caliente y muerto."</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECCIÓN 3 — PROTOCOLO DE USO -->
+<section class="section" id="protocolo">
+  <div class="section-header">
+    <div><div class="section-number">03</div></div>
+    <div>
+      <div class="section-title">Protocolo de Uso</div>
+      <div class="section-subtitle">Secuencia integrada DEA + RCP — AHA 2020</div>
+    </div>
+  </div>
+
+  <div class="alert-red" style="margin-bottom:1.5rem;">
+    <strong>⚠ Recordatorio crítico:</strong> El DEA es un complemento de la RCP, no un sustituto. Las compresiones torácicas de alta calidad son la intervención de mayor impacto en la sobrevida. El tiempo sin flujo (no-flow time) debe minimizarse.
+  </div>
+
+  <!-- Diagrama de parches -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.75rem;">
+    <div class="sv-values-title" style="margin-bottom:1rem;">Posición estándar de parches — Adulto</div>
+    <div class="paddles-diagram">
+      <div class="body-silhouette">
+        <svg viewBox="0 0 140 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Silueta corporal -->
+          <ellipse cx="70" cy="22" rx="18" ry="20" fill="none" stroke="#3d444d" stroke-width="1.5"/>
+          <rect x="40" y="44" width="60" height="80" rx="10" fill="none" stroke="#3d444d" stroke-width="1.5"/>
+          <!-- Brazo izquierdo -->
+          <path d="M40,50 Q20,70 22,110" fill="none" stroke="#3d444d" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Brazo derecho -->
+          <path d="M100,50 Q120,70 118,110" fill="none" stroke="#3d444d" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Piernas -->
+          <path d="M55,124 Q52,160 50,190" fill="none" stroke="#3d444d" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M85,124 Q88,160 90,190" fill="none" stroke="#3d444d" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Parche subclavicular derecho (blanco/azul) — APEX = colocado bajo clavícula derecha -->
+          <rect x="53" y="50" width="26" height="18" rx="4" fill="rgba(96,165,250,0.18)" stroke="#60a5fa" stroke-width="1.5"/>
+          <text x="66" y="62" text-anchor="middle" font-size="7" fill="#60a5fa" font-family="sans-serif">─</text>
+          <!-- Parche apical izquierdo (rojo) — línea medioaxilar izquierda -->
+          <rect x="84" y="78" width="22" height="16" rx="4" fill="rgba(248,113,113,0.18)" stroke="#f87171" stroke-width="1.5"/>
+          <text x="95" y="89" text-anchor="middle" font-size="7" fill="#f87171" font-family="sans-serif">+</text>
+          <!-- Líneas de conexión -->
+          <line x1="66" y1="68" x2="84" y2="82" stroke="#3d444d" stroke-width="1" stroke-dasharray="3,2"/>
+        </svg>
+      </div>
+      <div class="paddle-legend">
+        <div class="paddle-item">
+          <div class="paddle-swatch white">─</div>
+          <div><strong style="color:var(--blue);">Parche subclavicular</strong> (negativo)<br>Debajo de la clavícula derecha,<br>lateral al esternón</div>
+        </div>
+        <div class="paddle-item">
+          <div class="paddle-swatch red">+</div>
+          <div><strong style="color:var(--red);">Parche apical</strong> (positivo)<br>Línea medioaxilar izquierda,<br>a nivel del 5.° espacio intercostal</div>
+        </div>
+        <div style="font-size:0.78rem;color:var(--text-dim);margin-top:0.5rem;padding-top:0.75rem;border-top:1px solid var(--border);">
+          ⚡ El campo eléctrico debe atravesar el <strong style="color:var(--text-muted);">eje del corazón</strong><br>de base a ápex para máxima eficacia
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Protocolo paso a paso -->
+  <div class="protocol-track">
+
+    <div class="proto-step">
+      <div class="proto-dot proto-dot-teal">1</div>
+      <div class="proto-title">Verificar seguridad de la escena</div>
+      <div class="proto-desc">Garantiza tu seguridad y la del equipo. Retira al paciente de superficies conductoras (metal, agua). <strong>No te conviertas en una segunda víctima.</strong></div>
+    </div>
+
+    <div class="proto-step">
+      <div class="proto-dot proto-dot-teal">2</div>
+      <div class="proto-title">Confirmar ausencia de consciencia, pulso y respiración</div>
+      <div class="proto-desc">Estimulación táctil y verbal ("¿Me escuchas? ¿Estás bien?"). Pulso carotídeo 5–10 segundos máximo. Respiración: observa, escucha, siente. <strong>Respiración agónica = sin respiración efectiva.</strong></div>
+    </div>
+
+    <div class="proto-step">
+      <div class="proto-dot proto-dot-red">3</div>
+      <div class="proto-title">Activar el servicio de emergencias y solicitar el DEA</div>
+      <div class="proto-desc">En entorno prehospitalario: coordinar con central. En espacio público: designar a alguien específico — <em>"Usted, con camisa roja, llame al 911 y traiga el DEA de la entrada."</em> Iniciar RCP inmediatamente mientras se obtiene el DEA.</div>
+    </div>
+
+    <div class="proto-step">
+      <div class="proto-dot proto-dot-amber">4</div>
+      <div class="proto-title">Iniciar RCP de alta calidad</div>
+      <div class="proto-desc">Compresiones: frecuencia 100–120/min, profundidad 5–6 cm, retroceso torácico completo, minimizar interrupciones (&lt;10 s). Ventilaciones 30:2 si hay dispositivo de barrera o BVM. <strong>No detener las compresiones hasta que el DEA esté listo para analizar.</strong></div>
+    </div>
+
+    <div class="proto-step">
+      <div class="proto-dot proto-dot-blue">5</div>
+      <div class="proto-title">Encender el DEA</div>
+      <div class="proto-desc">Abrir la tapa o presionar el botón de encendido. El DEA guiará por voz. <strong>Continuar las compresiones mientras se prepara el equipo.</strong></div>
+    </div>
+
+    <div class="proto-step">
+      <div class="proto-dot proto-dot-blue">6</div>
+      <div class="proto-title">Colocar los parches adhesivos</div>
+      <div class="proto-desc">Secar la piel si está húmeda. Retirar vello excesivo si es necesario (rasuradora de emergencia en algunos DEA). Posición estándar: subclavicular derecho y apical izquierdo (ver diagrama). Conectar el conector al DEA si no está preconectado.</div>
+    </div>
+
+    <div class="proto-step">
+      <div class="proto-dot proto-dot-amber">7</div>
+      <div class="proto-title">Análisis del ritmo — detener RCP y alejarse</div>
+      <div class="proto-desc"><strong>"¡Alejarse todos!"</strong> El DEA requiere ausencia de movimiento para analizar. Verificar visualmente que nadie contacte al paciente. El análisis dura 5–15 segundos. <strong>No tocar al paciente durante el análisis.</strong></div>
+    </div>
+
+    <div class="proto-step">
+      <div class="proto-dot proto-dot-red">8a</div>
+      <div class="proto-title">Ritmo desfibrilable → Carga y descarga</div>
+      <div class="proto-desc">El DEA anuncia "ritmo desfibrilable" y se carga automáticamente. Verificar que nadie contacte al paciente: <em>"¡Yo me aparto, tú te apartas, todos se apartan!"</em> En DEA semiautomático: presionar botón de descarga. Inmediatamente después: <strong>reanudar RCP sin verificar pulso.</strong></div>
+    </div>
+
+    <div class="proto-step">
+      <div class="proto-dot proto-dot-teal">8b</div>
+      <div class="proto-title">Ritmo no desfibrilable → Continuar RCP</div>
+      <div class="proto-desc">El DEA anuncia "no se recomienda descarga". <strong>Reanudar RCP de inmediato</strong> (2 min / 5 ciclos). No verificar pulso a menos que el paciente muestre signos de retorno de circulación espontánea (RCE): movimiento, respiración, tos.</div>
+    </div>
+
+    <div class="proto-step">
+      <div class="proto-dot proto-dot-green">9</div>
+      <div class="proto-title">Ciclos de 2 minutos de RCP + reanálisis</div>
+      <div class="proto-desc">Alternar ciclos de RCP (2 min) con reanálisis del DEA. Cambiar el reanimador de compresiones cada 2 minutos para mantener calidad. Continuar hasta: <strong>RCE confirmada</strong>, llegada de unidad con SVCA, o indicación médica de suspender la maniobra.</div>
+    </div>
+
+    <div class="proto-step">
+      <div class="proto-dot proto-dot-green">10</div>
+      <div class="proto-title">Retorno de circulación espontánea (RCE)</div>
+      <div class="proto-desc">Signos: movimiento, respiración regular, tos, apertura ocular. <strong>No retirar los parches del DEA</strong> — permite monitorización continua y nueva descarga si recurre el paro. Posición de recuperación si ventilación adecuada. Monitorización y traslado urgente.</div>
+    </div>
+
+  </div>
+
+  <div class="alert-amber" style="margin-top:1.75rem;">
+    <strong>Tiempo sin flujo:</strong> Cada interrupción de las compresiones reduce la presión de perfusión coronaria. Tarda 60–90 s de RCP continua en recuperarla. El tiempo ideal de pausa para análisis y descarga es &lt;10 segundos desde la última compresión.
+  </div>
+</section>
+
+<!-- SECCIÓN 4 — ERRORES FRECUENTES -->
+<section class="section" id="errores">
+  <div class="section-header">
+    <div><div class="section-number">04</div></div>
+    <div>
+      <div class="section-title">Errores Frecuentes</div>
+      <div class="section-subtitle">Fallas críticas y cómo evitarlas</div>
+    </div>
+  </div>
+
+  <div class="errores-grid">
+
+    <div class="error-item">
+      <h5>Detener RCP para buscar el DEA</h5>
+      <p>Abandonar las compresiones para ir por el DEA deja al paciente sin perfusión. El TUM-B debe continuar las compresiones mientras otro miembro del equipo obtiene el dispositivo.</p>
+      <div class="fix">Mantener RCP ininterrumpida. Delegar la búsqueda del DEA a un segundo respondedor. En rescate unipersonal: activar SME primero, luego iniciar RCP.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Pausas prolongadas en el análisis</h5>
+      <p>Tardarse en alejarse, no verificar que nadie contacte al paciente, o continuar tocando al paciente durante el análisis invalida el resultado y obliga a repetirlo.</p>
+      <div class="fix">Vocalizar la instrucción de alejamiento antes del análisis: "¡Alejarse todos!" y verificar visualmente 360°. Ser el último en alejarse, siendo el responsable de confirmar el despeje.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Verificar pulso tras la descarga</h5>
+      <p>Buscar pulso inmediatamente después de la descarga genera una pausa innecesaria. Incluso con RCE, el pulso puede no ser palpable en los primeros segundos por vasodilatación post-descarga.</p>
+      <div class="fix">Reanudar RCP inmediatamente tras la descarga. El propio DEA indicará cuando analizar de nuevo (2 min). Verificar pulso solo si el paciente muestra signos evidentes de RCE.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Parches mal posicionados o superpuestos</h5>
+      <p>Colocar los parches demasiado juntos, sobre el esternón, o lejos del corazón reduce la energía que atraviesa el miocardio y disminuye la eficacia de la descarga.</p>
+      <div class="fix">Seguir el diagrama de posicionamiento. El campo eléctrico debe atravesar el eje cardíaco. Verificar que los parches estén firmemente adheridos y sin pliegues.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Uso del DEA en paciente con pulso</h5>
+      <p>Aplicar el DEA a un paciente consciente o con pulso detectado es un error crítico. Una descarga en ritmo perfundido puede desencadenar FV.</p>
+      <div class="fix">Confirmar ausencia de pulso central (carotídeo) y ausencia de respiración antes de colocar los parches. El DEA es exclusivo para paciente en PCR confirmado.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Dejar los parches sobre piel mojada o con parche transdérmico</h5>
+      <p>La humedad en la piel genera un arco eléctrico superficial que desvía la corriente y puede quemar al operador. Los parches transdérmicos bloquean el contacto eléctrico.</p>
+      <div class="fix">Secar la piel con la tela o taza incluida en el DEA antes de colocar los electrodos. Retirar y limpiar la zona de cualquier parche medicado visible (nitroglicerina, fentanilo, etc.).</div>
+    </div>
+
+    <div class="error-item">
+      <h5>No cambiar al reanimador de compresiones</h5>
+      <p>Las compresiones de calidad se degradan significativamente tras 2 minutos de esfuerzo continuo, incluso sin que el reanimador lo perciba. La fatiga muscular produce compresiones más superficiales.</p>
+      <div class="fix">Cambiar el reanimador de compresiones cada 2 minutos (al momento del reanálisis del DEA). Rotar en el sentido contrario a las agujas del reloj para no interrumpir el flujo del equipo.</div>
+    </div>
+
+    <div class="error-item">
+      <h5>Retirar el DEA tras la RCE</h5>
+      <p>Quitar los parches o apagar el DEA al recuperar circulación deja al paciente sin monitorización. La FV puede recurrir en los minutos siguientes a la RCE.</p>
+      <div class="fix">Mantener los parches colocados y el DEA encendido durante todo el traslado. El dispositivo puede analizar y descargar nuevamente si recurre el PCR. Trasladar con monitorización continua.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECCIÓN 5 — CASO CLÍNICO INTEGRATIVO -->
+<section class="section" id="caso">
+  <div class="section-header">
+    <div><div class="section-number">05</div></div>
+    <div>
+      <div class="section-title">Caso Clínico Integrativo</div>
+      <div class="section-subtitle">Aplicación en escenario prehospitalario real</div>
+    </div>
+  </div>
+
+  <!-- Caso básico -->
+  <div class="case-block" id="case1">
+    <div class="case-header" onclick="toggleCase('case1')">
+      <span class="case-badge badge-basic">Nivel Básico</span>
+      <span class="case-title">Colapso en vía pública — desfibrilación exitosa</span>
+      <span class="case-chevron">▼</span>
+    </div>
+    <div class="case-body">
+      <div class="case-scenario">
+        <strong>Escenario:</strong> Unidad TUM-B responde a llamado de "persona inconsciente" en la entrada de un centro comercial. Al llegar (2:30 min): hombre de 58 años, Marcos R., tirado en el piso. Testigos refieren que colapsó súbitamente mientras caminaba. El personal del centro comercial ya conectó el DEA del establecimiento pero no saben operarlo. Evaluación inicial: sin respuesta al estímulo verbal ni táctil. Sin pulso carotídeo en 8 segundos. Sin respiración (movimientos agónicos ocasionales). Piel pálida y diaforética.
+      </div>
+      <div class="case-q">1. ¿Cuál es tu primera acción al llegar a la escena?</div>
+      <div class="case-a">Verificar seguridad de la escena (no hay riesgos eléctricos, no hay tráfico). Asignar roles al equipo: uno inicia RCP inmediata, el otro toma control del DEA. <em>No detener la RCP que quizás ya está haciendo alguien</em> — tomarla y mejorar su calidad.</div>
+      <div class="case-q">2. El DEA está encendido y los parches colocados. Anuncia "analizando ritmo". ¿Qué haces?</div>
+      <div class="case-a">Vocalizar <strong>"¡Alejarse todos!"</strong>, verificar visualmente que nadie contacte al paciente (360°), ser el último en retirar el contacto. No mover al paciente. El análisis dura ~10 segundos.</div>
+      <div class="case-q">3. El DEA anuncia "descarga recomendada — cargando". ¿Cuál es la secuencia exacta?</div>
+      <div class="case-a">Confirmar que nadie toca al paciente: <em>"¡Yo me aparto, tú te apartas, todos se apartan, aplicando descarga!"</em> En DEA semiautomático: presionar el botón parpadeante. Inmediatamente después de la descarga: <strong>reanudar RCP sin verificar pulso</strong>. Mantener 2 min de RCP antes del siguiente reanálisis.</div>
+      <div class="case-q">4. Tras el segundo ciclo, Marcos abre los ojos, tose y pregunta "¿qué pasó?". ¿Qué haces?</div>
+      <div class="case-a">RCE confirmada. <strong>No retirar los parches ni apagar el DEA</strong>. Evaluar vía aérea y respiración. Posición de recuperación si tolera. Iniciar monitorización de signos vitales. Activar traslado prioritario a hospital con capacidad de hemodinamia. Registrar hora de RCE. Comunicar a la unidad receptora.</div>
+    </div>
+  </div>
+
+  <!-- Caso intermedio -->
+  <div class="case-block" id="case2">
+    <div class="case-header" onclick="toggleCase('case2')">
+      <span class="case-badge badge-inter">Nivel Intermedio</span>
+      <span class="case-title">DEA no recomienda descarga — toma de decisiones</span>
+      <span class="case-chevron">▼</span>
+    </div>
+    <div class="case-body">
+      <div class="case-scenario">
+        <strong>Escenario:</strong> Unidad TUM-B atiende a Sofía E., 72 años, encontrada en cama por familiar. Antecedente de cardiopatía hipertensiva. Sin respuesta, sin pulso, sin respiración. Se inicia RCP y se coloca el DEA. Tras el análisis, el dispositivo anuncia: <em>"No se recomienda descarga."</em>
+      </div>
+      <div class="case-q">1. ¿Qué ritmos cardíacos podrían justificar este mensaje del DEA?</div>
+      <div class="case-a">Asistolia (ausencia de actividad eléctrica) o actividad eléctrica sin pulso (AESP). Ambos son ritmos <strong>no desfibrilables</strong>. El DEA no puede corregirlos porque no hay actividad eléctrica caótica que interrumpir — no hay masa miocárdica que despolarizar sincrónicamente.</div>
+      <div class="case-q">2. ¿Cuál es la acción correcta inmediata al escuchar "no se recomienda descarga"?</div>
+      <div class="case-a"><strong>Reanudar RCP inmediatamente</strong> sin demora. No perder tiempo buscando pulso ni esperando instrucción adicional del DEA. La RCP de alta calidad es la única intervención disponible para estos ritmos a nivel TUM-B.</div>
+      <div class="case-q">3. ¿Cuándo se puede suspender la maniobra de reanimación en el entorno prehospitalario?</div>
+      <div class="case-a">En México, la suspensión requiere indicación médica (vía radio o presencial), presencia de criterios de muerte biológica evidente (rigidez cadavérica, livideces fijas, decapitación), o norma institucional explícita. <em>El TUM-B no declara la muerte</em> — reporta el estado al médico coordinador y actúa conforme a su indicación.</div>
+    </div>
+  </div>
+
+  <!-- Caso avanzado -->
+  <div class="case-block" id="case3">
+    <div class="case-header" onclick="toggleCase('case3')">
+      <span class="case-badge badge-advanced">Nivel Avanzado</span>
+      <span class="case-title">Escenario de alta complejidad — marcapasos + piel húmeda</span>
+      <span class="case-chevron">▼</span>
+    </div>
+    <div class="case-body">
+      <div class="case-scenario">
+        <strong>Escenario:</strong> Responden a llamado en alberca. Carlos M., 65 años, extraído del agua por salvavidas. Inconsciente, sin pulso, sin respiración. El salvavidas ya realizó 2 ciclos de RCP. Al descubrir el tórax, notas: piel húmeda, cicatriz subclavicular izquierda (compatible con marcapasos implantado). El DEA está disponible.
+      </div>
+      <div class="case-q">1. Antes de colocar los parches, identifica al menos tres preparaciones necesarias.</div>
+      <div class="case-a">
+        <strong>(a) Secar el tórax</strong> con la tela o papel disponible — la humedad genera arco eléctrico superficial y quema al operador. <strong>(b) Identificar la posición del marcapasos</strong> por la cicatriz y el bulto subcutáneo — el parche debe quedar a mínimo 8 cm de distancia. <strong>(c) Continuar las compresiones</strong> mientras el compañero prepara el DEA. El tiempo de preparación no justifica pausar la RCP.
+      </div>
+      <div class="case-q">2. ¿Dónde colocas el parche subclavicular dado que el marcapasos está en la región subclavicular izquierda?</div>
+      <div class="case-a">El marcapasos en subclavicular izquierdo <em>no ocupa la posición subclavicular derecha</em> (posición estándar del parche negativo). Colocar el parche subclavicular en posición estándar (debajo de clavícula derecha, lateral al esternón). El parche apical va en la posición habitual (medioaxilar izquierda). Si el dispositivo estuviera en posición subclavicular derecha, se desplazaría el parche al menos 8 cm.</div>
+      <div class="case-q">3. Tras la descarga, el paciente recupera circulación. ¿Qué riesgo específico monitoreas en este paciente durante el traslado?</div>
+      <div class="case-a">La descarga del DEA puede haber <strong>dañado el marcapasos</strong> o alterado su programación. Monitorizar: pulso regular vs. irregular, signos de bradicardia severa (marcapasos disfuncional), y posible recurrencia del PCR. <em>No retirar los parches del DEA.</em> Comunicar al hospital la presencia del dispositivo implantado para evaluación del equipo de electrofisiología.</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- SECCIÓN 6 — PREGUNTAS DE REFLEXIÓN -->
+<section class="section" id="reflexion">
+  <div class="section-header">
+    <div><div class="section-number">06</div></div>
+    <div>
+      <div class="section-title">Preguntas de Reflexión</div>
+      <div class="section-subtitle">Pensamiento crítico aplicado al uso del DEA</div>
+    </div>
+  </div>
+
+  <div class="reflection-list">
+    <div class="reflection-item" data-n="1.">
+      Un testigo capacitado inicia RCP antes de tu llegada. Al llegar, notas que las compresiones son superficiales (~3 cm). ¿Interrumpes para corregir la técnica o esperas al siguiente ciclo? ¿Qué principio de la cadena de supervivencia guía tu decisión?
+    </div>
+    <div class="reflection-item" data-n="2.">
+      El DEA anuncia "descarga recomendada" pero uno de los parches se ha despegado parcialmente. ¿Descargas, repones el parche primero o pides al DEA que reanalice? ¿Cuál es el riesgo de cada decisión?
+    </div>
+    <div class="reflection-item" data-n="3.">
+      En un escenario de rescate unipersonal (sin equipo), ¿cómo priorizas la activación del SME, la RCP y el uso del DEA? ¿Cambia tu secuencia si el paciente es un lactante?
+    </div>
+    <div class="reflection-item" data-n="4.">
+      ¿Por qué el DEA no recomienda descarga para la asistolia, si en la televisión frecuentemente muestran que el desfibrilador "reactiva" un corazón plano? ¿Qué implicación tiene esto para la educación del público general?
+    </div>
+    <div class="reflection-item" data-n="5.">
+      Un familiar del paciente, desesperado, te pide que "hagas algo más" cuando el DEA indica ritmo no desfibrilable y llevas 15 minutos de RCP sin respuesta. ¿Cómo manejas esa situación emocionalmente y comunicativamente sin abandonar el protocolo?
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 7 — MATERIAL DE REFUERZO -->
+<section class="section" id="refuerzo">
+  <div class="section-header">
+    <div><div class="section-number">07</div></div>
+    <div>
+      <div class="section-title">Material de Refuerzo</div>
+      <div class="section-subtitle">Resumen integrado y puntos clave</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Concepto</th>
+          <th>Dato clave</th>
+          <th>Relevancia prehospitalaria</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ritmos desfibrilables</td>
+          <td class="t-crit">FV y TVSP</td>
+          <td>Únicos ritmos que responden al DEA</td>
+        </tr>
+        <tr>
+          <td>Ritmos no desfibrilables</td>
+          <td class="t-alert">Asistolia / AESP</td>
+          <td>RCP continua; buscar causas reversibles (Hs y Ts)</td>
+        </tr>
+        <tr>
+          <td>Energía descarga bifásica</td>
+          <td class="t-info">120–200 J</td>
+          <td>El dispositivo selecciona automáticamente</td>
+        </tr>
+        <tr>
+          <td>Pausa máxima pre-descarga</td>
+          <td class="t-crit">&lt;10 segundos</td>
+          <td>Cada segundo sin flujo reduce la sobrevida</td>
+        </tr>
+        <tr>
+          <td>Ciclos RCP entre análisis</td>
+          <td class="t-normal">2 minutos / 5 ciclos</td>
+          <td>Guiado por el DEA con retroalimentación de voz</td>
+        </tr>
+        <tr>
+          <td>Reducción sobrevida por minuto sin DEA</td>
+          <td class="t-crit">7–10% / min</td>
+          <td>Justifica acceso público al DEA (PAD)</td>
+        </tr>
+        <tr>
+          <td>Distancia mínima a marcapasos</td>
+          <td class="t-alert">8 cm (3 pulgadas)</td>
+          <td>No contraindica el uso, solo modifica posición</td>
+        </tr>
+        <tr>
+          <td>Parches pediátricos</td>
+          <td class="t-info">&lt;8 años / &lt;25 kg</td>
+          <td>Si no hay, usar adulto en posición anteroposterior</td>
+        </tr>
+        <tr>
+          <td>Embarazo</td>
+          <td class="t-normal">No contraindicado</td>
+          <td>Inclinar 15–30° izquierda + traslado urgente</td>
+        </tr>
+        <tr>
+          <td>Acción tras RCE</td>
+          <td class="t-normal">Mantener DEA activo</td>
+          <td>Riesgo de PCR recurrente en primeros minutos</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECCIÓN 8 — AUTOEVALUACIÓN -->
+<section class="section" id="autoevaluacion">
+  <div class="section-header">
+    <div><div class="section-number">08</div></div>
+    <div>
+      <div class="section-title">Autoevaluación Formativa</div>
+      <div class="section-subtitle">10 preguntas · No calificable · Sin penalización</div>
+    </div>
+  </div>
+
+  <!-- Datos del estudiante -->
+  <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-bottom:1.75rem;">
+    <div style="flex:1;min-width:220px;">
+      <label style="font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:0.4rem;">Nombre completo</label>
+      <input id="student-name" type="text" placeholder="Tu nombre" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:0.6rem 0.9rem;color:var(--text);font-family:var(--font-body);font-size:0.88rem;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--teal-dim)'" onblur="this.style.borderColor='var(--border)'">
+    </div>
+    <div style="flex:1;min-width:180px;">
+      <label style="font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:0.4rem;">Grupo / Generación</label>
+      <input id="student-group" type="text" placeholder="Ej. TUM B — G1 2025" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:0.6rem 0.9rem;color:var(--text);font-family:var(--font-body);font-size:0.88rem;outline:none;transition:border-color .2s;" onfocus="this.style.borderColor='var(--teal-dim)'" onblur="this.style.borderColor='var(--border)'">
+    </div>
+  </div>
+
+  <div id="quiz-form">
+
+    <!-- Q1 -->
+    <div class="q-block" data-correct="c">
+      <div class="q-text"><span class="q-num">1.</span> ¿Cuáles son los dos ritmos cardíacos que el DEA puede tratar mediante descarga eléctrica?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q1" value="a"> Asistolia y AESP</label>
+        <label class="q-opt"><input type="radio" name="q1" value="b"> Fibrilación ventricular y asistolia</label>
+        <label class="q-opt"><input type="radio" name="q1" value="c"> Fibrilación ventricular y taquicardia ventricular sin pulso</label>
+        <label class="q-opt"><input type="radio" name="q1" value="d"> AESP y taquicardia ventricular sin pulso</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: c.</strong> Solo la FV y la TVSP tienen actividad eléctrica caótica que puede interrumpirse con una descarga. La asistolia (sin actividad eléctrica) y la AESP (actividad sin contracción efectiva) no responden a desfibrilación — requieren RCP continua y manejo de causas reversibles.</div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-block" data-correct="b">
+      <div class="q-text"><span class="q-num">2.</span> ¿Cuál es la acción inmediata después de que el DEA administra una descarga?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q2" value="a"> Verificar el pulso carotídeo durante 10 segundos</label>
+        <label class="q-opt"><input type="radio" name="q2" value="b"> Reanudar RCP de inmediato sin verificar pulso</label>
+        <label class="q-opt"><input type="radio" name="q2" value="c"> Esperar a que el DEA vuelva a analizar el ritmo</label>
+        <label class="q-opt"><input type="radio" name="q2" value="d"> Retirar los parches y evaluar estado de consciencia</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: b.</strong> Reanudar RCP de inmediato. Incluso con RCE, el pulso puede no ser palpable en los primeros segundos post-descarga. Las compresiones mantienen la perfusión coronaria. El DEA indicará cuándo reanalizará (2 minutos). Solo se verifica pulso si hay signos evidentes de RCE (movimiento, tos, respiración).</div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-block" data-correct="d">
+      <div class="q-text"><span class="q-num">3.</span> Un paciente tiene un marcapasos implantado en la región subclavicular izquierda. ¿Dónde colocas el parche subclavicular del DEA?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q3" value="a"> El uso del DEA está contraindicado</label>
+        <label class="q-opt"><input type="radio" name="q3" value="b"> Directamente sobre el marcapasos para mejor conducción</label>
+        <label class="q-opt"><input type="radio" name="q3" value="c"> En la línea medioaxilar izquierda solamente</label>
+        <label class="q-opt"><input type="radio" name="q3" value="d"> Posición estándar subclavicular derecha — a ≥8 cm del dispositivo</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: d.</strong> El marcapasos en subclavicular izquierdo no afecta la posición estándar del parche negativo (subclavicular derecho). El DEA no está contraindicado. La restricción es mantener una distancia mínima de 8 cm del dispositivo implantado para evitar su daño y asegurar la eficacia de la descarga.</div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-block" data-correct="a">
+      <div class="q-text"><span class="q-num">4.</span> ¿En cuánto disminuye por minuto la probabilidad de sobrevida en FV sin desfibrilación, si NO hay RCP simultánea?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q4" value="a"> 7–10% por minuto</label>
+        <label class="q-opt"><input type="radio" name="q4" value="b"> 2–3% por minuto</label>
+        <label class="q-opt"><input type="radio" name="q4" value="c"> 15–20% por minuto</label>
+        <label class="q-opt"><input type="radio" name="q4" value="d"> Es constante hasta los 10 minutos</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: a.</strong> Sin RCP ni DEA, la sobrevida en FV disminuye 7–10% por minuto. Con RCP inmediata de alta calidad, esta reducción se atenúa a 3–4% por minuto. Esto fundamenta el eslabón de "desfibrilación temprana" y los programas de DEA de acceso público (PAD).</div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-block" data-correct="c">
+      <div class="q-text"><span class="q-num">5.</span> El DEA anuncia "no se recomienda descarga" en un paciente en PCR confirmado. ¿Cuál es la interpretación correcta?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q5" value="a"> El DEA está defectuoso — buscar otro dispositivo</label>
+        <label class="q-opt"><input type="radio" name="q5" value="b"> El paciente no está en paro — revaluar signos vitales</label>
+        <label class="q-opt"><input type="radio" name="q5" value="c"> Ritmo no desfibrilable (asistolia o AESP) — reanudar RCP de inmediato</label>
+        <label class="q-opt"><input type="radio" name="q5" value="d"> Esperar 30 segundos y pedir al DEA que reanalice</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: c.</strong> El mensaje indica que el DEA detectó un ritmo no desfibrilable (asistolia o AESP). Estos ritmos requieren RCP continua de alta calidad, no descarga. La acción es reanudar compresiones inmediatamente. El DEA reanalizará a los 2 minutos.</div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-block" data-correct="b">
+      <div class="q-text"><span class="q-num">6.</span> En un rescate en alberca, extraes a un paciente en PCR con piel completamente mojada. Antes de colocar los parches del DEA, ¿qué debes hacer?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q6" value="a"> Usar el DEA directamente — el agua no interfiere con la descarga</label>
+        <label class="q-opt"><input type="radio" name="q6" value="b"> Secar el tórax antes de colocar los parches</label>
+        <label class="q-opt"><input type="radio" name="q6" value="c"> Contraindicar el DEA hasta que el paciente esté completamente seco</label>
+        <label class="q-opt"><input type="radio" name="q6" value="d"> Aplicar los parches en la espalda solamente</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: b.</strong> La piel mojada genera un arco eléctrico superficial que desvía la corriente de la descarga, reduce la eficacia y puede quemar al operador. Secar rápidamente el tórax (toalla o la tela incluida en el kit del DEA) antes de aplicar los parches. No es necesario que el paciente esté completamente seco — solo la zona de colocación.</div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-block" data-correct="d">
+      <div class="q-text"><span class="q-num">7.</span> Al usar un DEA en un niño de 5 años, ¿cuál es la posición correcta si NO hay parches pediátricos disponibles?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q7" value="a"> No usar el DEA — esperar parches pediátricos</label>
+        <label class="q-opt"><input type="radio" name="q7" value="b"> Usar parches de adulto en posición estándar</label>
+        <label class="q-opt"><input type="radio" name="q7" value="c"> Colocar un parche en cada axila</label>
+        <label class="q-opt"><input type="radio" name="q7" value="d"> Posición anteroposterior: un parche en precordio izquierdo y otro en la espalda interescapular</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: d.</strong> Sin parches pediátricos en menores de 8 años, se usa posición anteroposterior: un parche anterior (precordio izquierdo) y uno posterior (zona interescapular). Esto evita que los campos eléctricos de parches en posición estándar se superpongan dado el menor tamaño torácico. No está contraindicado el uso del DEA.</div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-block" data-correct="a">
+      <div class="q-text"><span class="q-num">8.</span> ¿En qué eslabones de la cadena de supervivencia interviene directamente el TUM-B?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q8" value="a"> Eslabones 2, 3 y 4 (RCP, desfibrilación, SVA y traslado)</label>
+        <label class="q-opt"><input type="radio" name="q8" value="b"> Únicamente en el eslabón 3 (desfibrilación)</label>
+        <label class="q-opt"><input type="radio" name="q8" value="c"> Eslabones 1 y 2 (activación del SME y RCP básica)</label>
+        <label class="q-opt"><input type="radio" name="q8" value="d"> Todos los eslabones por igual</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: a.</strong> El TUM-B actúa en los eslabones 2 (RCP de alta calidad inmediata), 3 (desfibrilación temprana con DEA) y 4 (soporte vital y traslado oportuno a un centro hospitalario). El eslabón 1 involucra al público general o testigos, y los eslabones 5 y 6 corresponden al ámbito hospitalario.</div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-block" data-correct="c">
+      <div class="q-text"><span class="q-num">9.</span> Tras una descarga del DEA, el paciente recupera circulación espontánea (RCE). ¿Cuál es el manejo correcto respecto al DEA?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q9" value="a"> Retirar los parches y apagar el DEA — ya no es necesario</label>
+        <label class="q-opt"><input type="radio" name="q9" value="b"> Dejar los parches puestos pero apagar el DEA durante el traslado</label>
+        <label class="q-opt"><input type="radio" name="q9" value="c"> Mantener los parches y el DEA encendido durante todo el traslado</label>
+        <label class="q-opt"><input type="radio" name="q9" value="d"> Retirar los parches y colocar electrodos de monitorización estándar</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: c.</strong> Mantener los parches colocados y el DEA activo. La FV puede recurrir en los primeros minutos tras la RCE. El DEA permite monitorización continua del ritmo y administración inmediata de una nueva descarga si es necesario. No es momento de cambiar a monitorización estándar hasta llegar al hospital.</div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-block" data-correct="b">
+      <div class="q-text"><span class="q-num">10.</span> Durante el análisis del ritmo por el DEA, un familiar angustiado toca el hombro del paciente. El DEA está a punto de descargar. ¿Cuál es tu prioridad inmediata?</div>
+      <div class="q-opts">
+        <label class="q-opt"><input type="radio" name="q10" value="a"> Administrar la descarga de todos modos — el contacto es breve</label>
+        <label class="q-opt"><input type="radio" name="q10" value="b"> Retirar físicamente el contacto del familiar antes de la descarga y repetir la instrucción de alejamiento</label>
+        <label class="q-opt"><input type="radio" name="q10" value="c"> Cancelar la descarga y reiniciar el protocolo desde el inicio</label>
+        <label class="q-opt"><input type="radio" name="q10" value="d"> Ordenarle al familiar que se retire después de la descarga</label>
+      </div>
+      <div class="q-explanation"><strong>Correcto: b.</strong> Antes de cualquier descarga, garantizar que nadie contacte al paciente es una prioridad de seguridad absoluta. La corriente puede atravesar al familiar (sobre todo si hay humedad) causando quemaduras o arritmias. Retirar el contacto, repetir la instrucción de alejamiento y verificar visualmente 360° antes de autorizar la descarga.</div>
+    </div>
+
+  </div><!-- /quiz-form -->
+
+  <br>
+  <div class="quiz-actions">
+    <button class="btn btn-teal" id="btn-verificar" onclick="evaluarQuiz()">Verificar respuestas</button>
+    <button class="btn btn-ghost" id="btn-reiniciar" onclick="reiniciarQuiz()">Reiniciar</button>
+  </div>
+  <div class="quiz-result" id="quiz-result"></div>
+</section>
+
+<!-- SECCIÓN 9 — REFERENCIAS -->
+<section class="section" id="referencias">
+  <div class="section-header">
+    <div><div class="section-number">09</div></div>
+    <div>
+      <div class="section-title">Referencias</div>
+      <div class="section-subtitle">Fuentes APA 7ª edición</div>
+    </div>
+  </div>
+
+  <ul class="refs-list">
+    <li>American Heart Association. (2020). <em>2020 American Heart Association Guidelines for CPR and ECC</em>. Circulation, 142(16_suppl_2). https://doi.org/10.1161/CIR.0000000000000916</li>
+    <li>Panchal, A. R., Bartos, J. A., Cabañas, J. G., Donnino, M. W., Drennan, I. R., Hirsch, K. G., Kudenchuk, P. J., Kurz, M. C., Link, M. S., Morley, P. T., O'Neil, B. J., Peberdy, M. A., Rittenberger, J. C., Rodriguez, A. J., Sawyer, K. N., & Berg, K. M. (2019). Part 3: Adult basic and advanced life support. <em>Circulation, 140</em>(24_suppl_2), S366–S468.</li>
+    <li>International Liaison Committee on Resuscitation (ILCOR). (2020). <em>2020 International Consensus on Cardiopulmonary Resuscitation and Emergency Cardiovascular Care Science with Treatment Recommendations</em>. Resuscitation, 156, A1–A172.</li>
+    <li>Kleinman, M. E., Brennan, E. E., Goldberger, Z. D., Swor, R. A., Terry, M., Bobrow, B. J., Gazmuri, R. J., Travers, A. H., & Rea, T. (2015). Part 5: Adult basic life support and cardiopulmonary resuscitation quality. <em>Circulation, 132</em>(18_suppl_2), S414–S435.</li>
+    <li>Secretaría de Salud de México. (2013). <em>Norma Oficial Mexicana NOM-034-SSA3-2013, Regulación de los servicios de salud. Atención médica prehospitalaria</em>. Diario Oficial de la Federación.</li>
+    <li>Link, M. S., Berkow, L. C., Kudenchuk, P. J., Halperin, H. R., Hess, E. P., Moitra, V. K., Neumar, R. W., O'Neil, B. J., Paxton, J. H., Silvers, S. M., White, R. D., Yannopoulos, D., & Donnino, M. W. (2015). Part 7: Adult advanced cardiovascular life support. <em>Circulation, 132</em>(18_suppl_2), S444–S464.</li>
+    <li>Instituto Educativo VIVE. (2025). <em>Materiales de apoyo TUM Básico: Soporte Vital Básico y uso del DEA</em>. Morelia, Michoacán: VIVE.</li>
+  </ul>
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  <strong>Desfibrilador Externo Automático — Módulo Educativo TUM Básico</strong><br>
+  Instituto Educativo VIVE · Morelia, Michoacán · 2025<br>
+  Basado en: AHA Guidelines 2020 · ILCOR 2020 · NOM-034-SSA3-2013<br><br>
+  <em>Declaración de uso de IA:</em> Este material fue desarrollado con asistencia de inteligencia artificial (Claude, Anthropic) bajo supervisión y validación clínico-pedagógica del cuerpo académico de VIVE.<br>
+  El contenido no sustituye la formación presencial ni el juicio clínico del respondedor capacitado.<br><br>
+  <a href="#introduccion">↑ Volver al inicio</a>
+</footer>
+
+<script>
+  /* ── NAV ── */
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('nav-links').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    });
+  });
+
+  /* ── TARJETAS COLAPSABLES ── */
+  function toggleCard(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+
+  /* ── CASOS CLÍNICOS ── */
+  function toggleCase(id) {
+    const block = document.getElementById(id);
+    block.classList.toggle('open');
+  }
+
+  /* ── AUTOEVALUACIÓN ── */
+  let quizEnviado = false;
+
+  const PREGUNTAS = [
+    {
+      texto: 'Ritmos tratables con DEA',
+      opciones: { a:'Asistolia y AESP', b:'FV y asistolia', c:'FV y TVSP', d:'AESP y TVSP' }
+    },
+    {
+      texto: 'Acción inmediata tras descarga del DEA',
+      opciones: { a:'Verificar pulso carotídeo 10 s', b:'Reanudar RCP de inmediato sin verificar pulso', c:'Esperar a que el DEA reanalice', d:'Retirar parches y evaluar consciencia' }
+    },
+    {
+      texto: 'Parche subclavicular con marcapasos en región subclavicular izquierda',
+      opciones: { a:'DEA contraindicado', b:'Colocar sobre el marcapasos', c:'Solo en medioaxilar izquierda', d:'Posición estándar subclavicular derecha a ≥8 cm del dispositivo' }
+    },
+    {
+      texto: 'Reducción de sobrevida en FV por minuto sin DEA y sin RCP',
+      opciones: { a:'7–10% / min', b:'2–3% / min', c:'15–20% / min', d:'Es constante hasta 10 min' }
+    },
+    {
+      texto: 'DEA anuncia "no se recomienda descarga" en PCR confirmado',
+      opciones: { a:'DEA defectuoso', b:'Paciente no en paro', c:'Ritmo no desfibrilable — reanudar RCP', d:'Esperar 30 s y reanaliziar' }
+    },
+    {
+      texto: 'Acción previa a colocar parches del DEA en paciente extraído de alberca',
+      opciones: { a:'Usar DEA directamente — el agua no interfiere', b:'Secar el tórax antes de colocar los parches', c:'Contraindicar DEA hasta secado total', d:'Aplicar parches solo en la espalda' }
+    },
+    {
+      texto: 'Posición de parches en niño de 5 años sin parches pediátricos',
+      opciones: { a:'No usar DEA — esperar parches pediátricos', b:'Parches adulto en posición estándar', c:'Un parche en cada axila', d:'Anteroposterior: precordio + espalda interescapular' }
+    },
+    {
+      texto: 'Eslabones de la cadena de supervivencia en los que interviene el TUM-B',
+      opciones: { a:'Eslabones 2, 3 y 4', b:'Únicamente eslabón 3', c:'Eslabones 1 y 2', d:'Todos por igual' }
+    },
+    {
+      texto: 'Manejo del DEA tras RCE durante traslado',
+      opciones: { a:'Retirar parches y apagar DEA', b:'Dejar parches pero apagar DEA', c:'Mantener parches y DEA encendido durante traslado', d:'Cambiar a electrodos de monitorización estándar' }
+    },
+    {
+      texto: 'Un familiar toca al paciente justo antes de que el DEA descargue',
+      opciones: { a:'Administrar la descarga — el contacto es breve', b:'Retirar el contacto y repetir instrucción de alejamiento antes de descargar', c:'Cancelar descarga y reiniciar protocolo desde inicio', d:'Ordenar que se retire después de la descarga' }
+    }
+  ];
+
+  function evaluarQuiz() {
+    if (quizEnviado) return;
+
+    const nombre = document.getElementById('student-name').value.trim();
+    const grupo  = document.getElementById('student-group').value.trim();
+
+    if (!nombre) {
+      alert('Por favor ingresa tu nombre antes de verificar.');
+      document.getElementById('student-name').focus();
+      return;
+    }
+
+    const blocks = document.querySelectorAll('.q-block');
+    let correctas = 0, respondidas = 0;
+    const detalles = [];
+
+    blocks.forEach((block, idx) => {
+      const correct   = block.dataset.correct;
+      const selected  = block.querySelector('input[type=radio]:checked');
+      const explanation = block.querySelector('.q-explanation');
+      const opts      = block.querySelectorAll('.q-opt');
+
+      const respuestaTexto = selected ? PREGUNTAS[idx].opciones[selected.value] : '— Sin respuesta —';
+      const correctaTexto  = PREGUNTAS[idx].opciones[correct];
+      const esCorrecta     = selected && selected.value === correct;
+
+      detalles.push({ num: idx + 1, pregunta: PREGUNTAS[idx].texto, respuesta: respuestaTexto, correcta: correctaTexto, ok: esCorrecta });
+
+      if (!selected) return;
+      respondidas++;
+
+      opts.forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+        const val = opt.querySelector('input').value;
+        if (val === correct) opt.classList.add('correct');
+        else if (opt.querySelector('input').checked && val !== correct) opt.classList.add('incorrect');
+        opt.querySelector('input').disabled = true;
+      });
+
+      explanation.classList.add('show');
+      if (esCorrecta) correctas++;
+    });
+
+    if (respondidas < blocks.length) {
+      alert(`Faltan ${blocks.length - respondidas} pregunta(s) por responder.`);
+      return;
+    }
+
+    document.getElementById('student-name').disabled = true;
+    document.getElementById('student-group').disabled = true;
+
+    const pct = Math.round((correctas / blocks.length) * 100);
+    let color, msg;
+    if (pct >= 80)      { color = 'var(--green)'; msg = '¡Dominio sólido del tema! Estás listo para la práctica con el dispositivo.'; }
+    else if (pct >= 60) { color = 'var(--amber)'; msg = 'Buen avance. Repasa los conceptos marcados en rojo antes de la práctica.'; }
+    else                { color = 'var(--red)';   msg = 'Revisa el material y vuelve a intentarlo. Cada error es una oportunidad de aprendizaje.'; }
+
+    const result = document.getElementById('quiz-result');
+    const colorRGB = color === 'var(--green)' ? '74,222,128' : color === 'var(--amber)' ? '245,158,11' : '248,113,113';
+    const borderC  = color === 'var(--green)' ? 'rgba(74,222,128,0.3)' : color === 'var(--amber)' ? 'rgba(245,158,11,0.3)' : 'rgba(248,113,113,0.3)';
+    result.style.background = `rgba(${colorRGB},0.06)`;
+    result.style.border = `1px solid ${borderC}`;
+    result.innerHTML = `
+      <div class="result-score" style="color:${color}">${correctas} / ${blocks.length}</div>
+      <div class="result-msg">${pct}% de aciertos — ${msg}</div>
+      <div id="email-status" style="margin-top:0.75rem;font-size:0.8rem;color:var(--text-dim);">Enviando resultados…</div>
+    `;
+    result.classList.add('show');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    document.getElementById('btn-verificar').disabled = true;
+    document.getElementById('btn-verificar').style.opacity = '0.5';
+    document.getElementById('btn-reiniciar').disabled = true;
+    document.getElementById('btn-reiniciar').style.opacity = '0.4';
+    document.getElementById('btn-reiniciar').title = 'No disponible tras el envío';
+    quizEnviado = true;
+
+    const filas = detalles.map(d => `
+      <tr style="border-bottom:1px solid #21262d;">
+        <td style="padding:6px 10px;color:#8b949e;">${d.num}</td>
+        <td style="padding:6px 10px;color:#e6edf3;">${d.pregunta}</td>
+        <td style="padding:6px 10px;color:${d.ok ? '#4ade80' : '#f87171'};">${d.respuesta} ${d.ok ? '✓' : '✗'}</td>
+        <td style="padding:6px 10px;color:#4ade80;">${d.correcta}</td>
+      </tr>`).join('');
+
+    const tablaHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:13px;font-family:sans-serif;">
+        <thead>
+          <tr style="background:#161b22;">
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">#</th>
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">Pregunta (resumen)</th>
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">Respuesta del alumno</th>
+            <th style="padding:8px 10px;text-align:left;color:#6e7681;">Respuesta correcta</th>
+          </tr>
+        </thead>
+        <tbody>${filas}</tbody>
+      </table>`;
+
+    const ahora = new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City', dateStyle: 'full', timeStyle: 'short' });
+
+    emailjs.send('service_vxatras', 'template_w703bqs', {
+      student_name:  nombre || 'No especificado',
+      student_group: grupo  || 'No especificado',
+      module_name:   'Desfibrilador Externo Automático — TUM Básico',
+      score:         `${correctas} / ${blocks.length} (${pct}%)`,
+      timestamp:     ahora,
+      details_table: tablaHTML
+    }).then(() => {
+      document.getElementById('email-status').style.color = '#4ade80';
+      document.getElementById('email-status').textContent = '✓ Resultados enviados al instructor.';
+    }).catch(err => {
+      console.error('EmailJS error:', err);
+      document.getElementById('email-status').style.color = '#f87171';
+      document.getElementById('email-status').textContent = '⚠ No se pudo enviar el reporte. Toma captura de pantalla.';
+    });
+  }
+
+  function reiniciarQuiz() {
+    if (quizEnviado) return;
+    document.querySelectorAll('.q-block').forEach(block => {
+      block.querySelectorAll('input[type=radio]').forEach(inp => { inp.checked = false; inp.disabled = false; });
+      block.querySelectorAll('.q-opt').forEach(opt => opt.classList.remove('correct', 'incorrect'));
+      block.querySelector('.q-explanation').classList.remove('show');
+    });
+    const result = document.getElementById('quiz-result');
+    result.classList.remove('show');
+    result.innerHTML = '';
+  }
+
+  /* ── Abrir primera tarjeta por defecto ── */
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('card-dea')?.classList.add('open');
+    document.getElementById('case1')?.classList.add('open');
+  });
+</script>
+</body>
+</html>
